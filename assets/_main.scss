@@ -1,0 +1,19 @@
+@import "./font-loader";
+@import "./params";
+
+html {
+  padding: 0;
+  margin: 0;
+  font-size: 22px;
+  font-family: 'ABCOracle', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  line-height: 1rem;
+  font-size: .85rem;
+}
+
