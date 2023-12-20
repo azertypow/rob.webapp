@@ -187,7 +187,7 @@ const allCarouselImages = computed(() => {
 })
 
 const galleryIndex = ref(0)
-let intervalID = undefined
+let intervalID: number | undefined = undefined
 
 onMounted(() => {
     startInterval()
