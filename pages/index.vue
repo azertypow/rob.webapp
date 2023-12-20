@@ -69,7 +69,7 @@ import type {IApiImage, IApiImageOfProject, IApiProjectsInfo} from "~/server/api
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfoData = [
+const projectsInfoData: IApiProjectsInfo[] = [
     {
         slug: 'project-1',
         title: 'titre de projet premier',
@@ -173,7 +173,7 @@ const projectsInfoData = [
 
 
 const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData.data.value || []
+    projectsInfoData
 )
 
 const allCarouselImages = computed(() => {

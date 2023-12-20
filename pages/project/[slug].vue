@@ -7,14 +7,14 @@
         >
             <img
                 class="v-project-slug__header__cover"
-                :src="currentProject.imageCover.url"
+                :src="currentProject?.imageCover.url"
             />
         </div>
         <div
             class="v-project-slug__content"
         >
             <p>url: {{projectSlug}}</p>
-            <h1>{{currentProject.title}}</h1>
+            <h1>{{currentProject?.title}}</h1>
 
             <article>
                 <h1>Lorem Ipsum</h1>
@@ -69,13 +69,14 @@
 
 
 <script setup lang="ts">
-import {defineProps} from 'vue'
+import {type ComputedRef, defineProps} from 'vue'
+import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 const props = defineProps<{
     message?: string
 }>()
 
-const projectsInfoData = [
+const projectsInfoData: IApiProjectsInfo[] = [
     {
         slug: 'project-1',
         title: 'titre de projet premier',
@@ -179,12 +180,12 @@ const projectsInfoData = [
 
 
 const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData.data.value || []
+    projectsInfoData
 )
 
 const projectSlug = useRoute().params.slug
 
-const currentProject: ComputedRef<IApiProjectsInfo> = computed(() => {
+const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() => {
     return projectsInfo.value.find(project => project.slug === projectSlug)
 })
 
