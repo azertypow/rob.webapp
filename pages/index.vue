@@ -2,7 +2,7 @@
     <section class="v-index" >
         <div
             class="v-index__carousel"
-            v-if="projectsInfoData"
+            v-if="projectsInfo"
         >
             <div
                 class="v-index__carousel__nav-to-left"
@@ -69,11 +69,7 @@ import type {IApiImage, IApiImageOfProject, IApiProjectsInfo} from "~/server/api
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfoData = await useFetch('/api/projectsInfo')
-
-const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData.data.value || []
-)
+const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
 
 const allCarouselImages = computed(() => {
     return projectsInfo.value.reduce((previousValue, currentValue) => {

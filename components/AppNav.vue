@@ -2,7 +2,8 @@
     <section
         class="v-app-nav"
         :class="{
-            'color-for-image-is-black': colorForGallery === 'black'
+            'color-for-image-is-black': colorForGallery === 'black',
+            'is-home': useRouter().currentRoute.value.path === '/',
         }"
     >
         <div
@@ -21,13 +22,19 @@
         </div>
 
 
-        <div
+        <button
             class="v-app-nav__nav"
             @click="menuIsOpen = !menuIsOpen"
         >
-            <div v-if="menuIsOpen">x</div>
-            <div v-else>=</div>
-        </div>
+                <img alt="close menu"
+                     v-if="menuIsOpen"
+                     src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
+                />
+                <img alt="open menu"
+                     v-else
+                     src="../assets/ui/menu_FILL0_wght400_GRAD0_opsz24.svg"
+                />
+        </button>
     </section>
 </template>
 
@@ -49,7 +56,6 @@ const colorForGallery = useColorForGallery()
 
 <style lang="scss" scoped >
 .v-app-nav {
-    display: block;
     position: relative;
     width: 100%;
     box-sizing: border-box;
@@ -60,11 +66,19 @@ const colorForGallery = useColorForGallery()
     justify-content: space-between;
     align-items: center;
     user-select: none;
-    color: white;
+    color: black;
+    transition: background-position 1s ease-in-out;
+    background: linear-gradient(180deg, rgb(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0)) 0 0 no-repeat;
 
-    &.color-for-image-is-black {
-        color: black;
+    &.is-home {
+        color: white;
+        background-position: 0 calc(-1 * var(--rb-nav-height));
+
+        &.color-for-image-is-black {
+            color: black;
+        }
     }
+
 }
 
 .v-app-nav__nav {
@@ -75,6 +89,16 @@ const colorForGallery = useColorForGallery()
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+
+    > img {
+        height: 2rem;
+    }
 }
 
 .v-app-nav__left {

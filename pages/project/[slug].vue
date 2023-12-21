@@ -6,15 +6,16 @@
             class="v-project-slug__header"
         >
             <img
+                alt="cover image"
                 class="v-project-slug__header__cover"
-                :src="currentProject.imageCover.url"
+                :src="currentProject?.imageCover.url"
             />
         </div>
         <div
             class="v-project-slug__content"
         >
             <p>url: {{projectSlug}}</p>
-            <h1>{{currentProject.title}}</h1>
+            <h1>{{currentProject?.title}}</h1>
 
             <article>
                 <h1>Lorem Ipsum</h1>
@@ -70,21 +71,18 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue'
+import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 const props = defineProps<{
     message?: string
 }>()
 
-const projectsInfoData = await useFetch('/api/projectsInfo')
-
-const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData.data.value || []
-)
+const projectsInfo = useState<IApiProjectsInfo[] | undefined>('projectsInfo')
 
 const projectSlug = useRoute().params.slug
 
-const currentProject: ComputedRef<IApiProjectsInfo> = computed(() => {
-    return projectsInfo.value.find(project => project.slug === projectSlug)
+const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() => {
+    return projectsInfo.value?.find(project => project.slug === projectSlug)
 })
 
 </script>
@@ -105,13 +103,11 @@ const currentProject: ComputedRef<IApiProjectsInfo> = computed(() => {
 .v-project-slug__header {
     box-sizing: border-box;
     width: calc(100% / 24 * 16);
-    padding-left: var(--rb-gutter-half);
 }
 
 .v-project-slug__content {
     box-sizing: border-box;
     width: calc(100% / 24 * 16);
-    padding-left: var(--rb-gutter-half);
 }
 
 .v-project-slug__header__cover {
