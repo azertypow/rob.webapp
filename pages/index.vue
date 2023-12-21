@@ -86,18 +86,10 @@ const allCarouselImages = computed(() => {
 })
 
 const galleryIndex = ref(0)
-let intervalID: number | undefined = undefined
 
 onMounted(() => {
-    startInterval()
 })
 
-
-function startInterval() {
-    intervalID = window.setInterval(function() {
-        nextGalleryItem()
-    }, 5_000);
-}
 
 const previousGalleryIndex = computed(() => {
     const previousGalleryIndexToReturn = galleryIndex.value - 1
@@ -113,20 +105,16 @@ const nextGalleryIndex = computed(() => {
 
 // todo: code optimisation (click function for clearInterfvale and ducplication code)
 function nextGalleryItem() {
-    window.clearInterval(intervalID)
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
-    startInterval()
 }
 
 // todo: code optimisation (click function for clearInterfvale and ducplication code)
 function previousGalleryItem() {
-    window.clearInterval(intervalID)
     galleryIndex.value--
     if(galleryIndex.value < 0) galleryIndex.value = allCarouselImages.value.length - 1
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
-    startInterval()
 }
 
 </script>
