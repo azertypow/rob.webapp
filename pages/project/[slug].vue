@@ -6,6 +6,7 @@
             class="v-project-slug__header"
         >
             <img
+                alt="cover image"
                 class="v-project-slug__header__cover"
                 :src="currentProject?.imageCover.url"
             />
@@ -69,124 +70,19 @@
 
 
 <script setup lang="ts">
-import {type ComputedRef, defineProps} from 'vue'
+import {defineProps} from 'vue'
 import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 const props = defineProps<{
     message?: string
 }>()
 
-const projectsInfoData: IApiProjectsInfo[] = [
-    {
-        slug: 'project-1',
-        title: 'titre de projet premier',
-        imageCover: {
-            url: '/rob.webapp/images/compress/01.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        imageCoverForIndex: {
-            url: '/rob.webapp/images/compress/01.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        ArrayOfImagesProject: [
-            {
-                url: '/rob.webapp/images/compress/02.jpg',
-                titre: 'bonjour image 01 sans crédit',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/03.jpg',
-                credit: 'Paul Hero',
-                titre: '',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'black',
-                isFullWidth: true,
-            },
-        ],
-        ArrayOfImagesCarousel: [
-            {
-                url: '/rob.webapp/images/compress/04.jpg',
-                credit: 'Jasmine Dugens',
-                titre: 'Encore un titre',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/06.jpg',
-                credit: 'Nathalie Marko',
-                titre: 'Hello Hello',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-    },
-    {
-        slug: 'project-2',
-        title: 'titre du second projet',
-        imageCover: {
-            url: '/rob.webapp/images/compress/06.jpg',
-            titre: 'Titre',
-            parentProjectTitle: 'titre du second projet',
-            isFullWidth: true,
-            textColor: 'black',
-        },
-        imageCoverForIndex: {
-            url: '/rob.webapp/images/compress/06.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        ArrayOfImagesProject: [
-            {
-                url: '/rob.webapp/images/compress/07.jpg',
-                titre: 'bien bien',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-        ArrayOfImagesCarousel: [
-            {
-                url: '/rob.webapp/images/compress/07.jpg',
-                titre: 'hello titre',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'black',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/08.jpg',
-                titre: 'hello titre',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-    }
-]
-
-
-const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData
-)
+const projectsInfo = useState<IApiProjectsInfo[] | undefined>('projectsInfo')
 
 const projectSlug = useRoute().params.slug
 
 const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() => {
-    return projectsInfo.value.find(project => project.slug === projectSlug)
+    return projectsInfo.value?.find(project => project.slug === projectSlug)
 })
 
 </script>
@@ -207,13 +103,11 @@ const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() =>
 .v-project-slug__header {
     box-sizing: border-box;
     width: calc(100% / 24 * 16);
-    padding-left: var(--rb-gutter-half);
 }
 
 .v-project-slug__content {
     box-sizing: border-box;
     width: calc(100% / 24 * 16);
-    padding-left: var(--rb-gutter-half);
 }
 
 .v-project-slug__header__cover {

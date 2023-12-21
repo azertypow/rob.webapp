@@ -2,7 +2,7 @@
     <section class="v-index" >
         <div
             class="v-index__carousel"
-            v-if="projectsInfoData"
+            v-if="projectsInfo"
         >
             <div
                 class="v-index__carousel__nav-to-left"
@@ -69,112 +69,7 @@ import type {IApiImage, IApiImageOfProject, IApiProjectsInfo} from "~/server/api
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfoData: IApiProjectsInfo[] = [
-    {
-        slug: 'project-1',
-        title: 'titre de projet premier',
-        imageCover: {
-            url: '/rob.webapp/images/compress/01.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        imageCoverForIndex: {
-            url: '/rob.webapp/images/compress/01.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        ArrayOfImagesProject: [
-            {
-                url: '/rob.webapp/images/compress/02.jpg',
-                titre: 'bonjour image 01 sans crédit',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/03.jpg',
-                credit: 'Paul Hero',
-                titre: '',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'black',
-                isFullWidth: true,
-            },
-        ],
-        ArrayOfImagesCarousel: [
-            {
-                url: '/rob.webapp/images/compress/04.jpg',
-                credit: 'Jasmine Dugens',
-                titre: 'Encore un titre',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/06.jpg',
-                credit: 'Nathalie Marko',
-                titre: 'Hello Hello',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-    },
-    {
-        slug: 'project-2',
-        title: 'titre du second projet',
-        imageCover: {
-            url: '/rob.webapp/images/compress/06.jpg',
-            titre: 'Titre',
-            parentProjectTitle: 'titre du second projet',
-            isFullWidth: true,
-            textColor: 'black',
-        },
-        imageCoverForIndex: {
-            url: '/rob.webapp/images/compress/06.jpg',
-            credit: 'Jacques Martin',
-            titre: 'titre image 01',
-            parentProjectTitle: 'titre de projet',
-            textColor: 'white',
-            isFullWidth: true,
-        },
-        ArrayOfImagesProject: [
-            {
-                url: '/rob.webapp/images/compress/07.jpg',
-                titre: 'bien bien',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-        ArrayOfImagesCarousel: [
-            {
-                url: '/rob.webapp/images/compress/07.jpg',
-                titre: 'hello titre',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'black',
-                isFullWidth: true,
-            },
-            {
-                url: '/rob.webapp/images/compress/08.jpg',
-                titre: 'hello titre',
-                parentProjectTitle: 'titre du second projet',
-                textColor: 'white',
-                isFullWidth: true,
-            },
-        ],
-    }
-]
-
-
-const projectsInfo: ComputedRef<IApiProjectsInfo[]> = computed(() =>
-    projectsInfoData
-)
+const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
 
 const allCarouselImages = computed(() => {
     return projectsInfo.value.reduce((previousValue, currentValue) => {
