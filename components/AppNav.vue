@@ -1,40 +1,45 @@
 <template>
-    <section
-        class="v-app-nav"
+    <section class="v-app-nav"
         :class="{
             'color-for-image-is-black': colorForGallery === 'black',
             'is-home': useRouter().currentRoute.value.path === '/',
         }"
     >
-        <div
-            class="v-app-nav__left"
+        <div class="v-app-nav__left"
         >
-            <nuxt-link
-                class="v-app-nav__left__site-title"
+            <nuxt-link class="v-app-nav__left__site-title"
                 to="/"
             >Rob van Leijsen</nuxt-link>
-            <div
-                class="v-app-nav__left__project-title"
-                v-if="useRoute().params.slug"
+            <div class="v-app-nav__left__project-title"
             >
-                {{useRoute().params.slug}}
+                <template
+                    v-if="!useMenuIsOpen().value && currentProjectsInfo"
+                >
+                   {{ currentProjectsInfo.title }}
+                </template>
+                <template v-else-if="useMenuIsOpen().value">
+                    Graphic design
+                </template>
             </div>
         </div>
 
-
-        <button
-            class="v-app-nav__nav"
-            @click="menuIsOpen = !menuIsOpen"
+        <div class="v-app-nav__right"
         >
-                <img alt="close menu"
-                     v-if="menuIsOpen"
-                     src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
-                />
-                <img alt="open menu"
-                     v-else
-                     src="../assets/ui/menu_FILL0_wght400_GRAD0_opsz24.svg"
-                />
-        </button>
+            <nuxt-link href="/about"     >About</nuxt-link>
+            <nuxt-link href="/contact"   >Contact</nuxt-link>
+            <button class="v-app-nav__nav"
+                @click="menuIsOpen = !menuIsOpen"
+            >
+                    <img alt="close menu"
+                         v-if="menuIsOpen"
+                         src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                    <svg v-else
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="24" height="24"
+                         viewBox="0 -960 960 960" ><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+            </button>
+        </div>
     </section>
 </template>
 
@@ -43,10 +48,13 @@
 
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 const menuIsOpen = useMenuIsOpen()
 const colorForGallery = useColorForGallery()
+const currentProjectsInfo = useState<IApiProjectsInfo>('currentProjectsInfo')
+
+
 
 </script>
 
@@ -60,30 +68,38 @@ const colorForGallery = useColorForGallery()
     width: 100%;
     box-sizing: border-box;
     height: var(--rb-nav-height);
-    padding-left: var(--rb-gutter);
-    padding-right: var(--rb-gutter);
     display: flex;
     justify-content: space-between;
     align-items: center;
     user-select: none;
     color: black;
-    transition: background-position 1s ease-in-out;
+    transition: background-position 1s ease-in-out, color 1s 1s ease-in-out, stroke 1s 1s ease-in-out;
     background: linear-gradient(180deg, rgb(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0)) 0 0 no-repeat;
 
     &.is-home {
         color: white;
         background-position: 0 calc(-1 * var(--rb-nav-height));
 
+        svg * {
+            transition: fill 1s 1s ease-in-out;
+            fill: white !important;
+        }
+
         &.color-for-image-is-black {
             color: black;
+
+            svg * {
+                fill: black !important;
+            }
         }
     }
+
 
 }
 
 .v-app-nav__nav {
-    width: var(--rb-nav-height);
-    height: var(--rb-nav-height);
+    width: auto;
+    height: auto;
     cursor: pointer;
     user-select: none;
     display: flex;
@@ -91,25 +107,45 @@ const colorForGallery = useColorForGallery()
     justify-content: center;
     background: transparent;
     border: none;
-    position: absolute;
-    right: 0;
-    top: 0;
     padding: 0;
 
-    > img {
+    > img, > svg {
         height: 2rem;
+        width: auto;
     }
 }
 
 .v-app-nav__left {
-    display: grid;
-    grid-template-columns: calc(100fr / 12 * 4) calc(100fr / 12 * 8);
+    display: flex;
     width: 50%;
+}
+
+.v-app-nav__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+
+    > * {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 .v-app-nav__left__site-title {
     display: block;
     text-decoration: none;
     color: inherit;
+    width: calc(100% / 3 * 1);
+    box-sizing: border-box;
+    padding-left: 1rem;
+}
+
+.v-app-nav__left__project-title {
+    display: block;
+    width: calc(100% / 3 * 2);
+    white-space: nowrap;
+    box-sizing: border-box;
+    padding-left: 1rem;
 }
 </style>

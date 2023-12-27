@@ -2,67 +2,56 @@
     <section
         class="v-project-slug"
     >
-        <div
-            class="v-project-slug__header"
+        <div class="g-grid-box"
         >
-            <img
-                alt="cover image"
-                class="v-project-slug__header__cover"
-                :src="currentProject?.imageCover.url"
-            />
+            <div class="g-grid-box__col-start--5 g-grid-box__col-end--span-16"
+            >
+                <div
+                    class="v-project-slug__header"
+                >
+                    <img
+                        alt="cover image"
+                        class="v-project-slug__header__cover"
+                        :src="currentProject?.imageCover.url"
+                    />
+                </div>
+            </div>
+
+            <div class="g-grid-box__col-start--5 g-grid-box__col-end--span-16"
+            >
+                <div
+                    class="v-project-slug__content"
+                >
+                    <h1 >{{currentProject?.title}}</h1>
+
+                    <article class="v-project-slug__content__article"
+                             v-html="currentProject?.htmlContent"
+                    ></article>
+
+                    <div class="v-project-slug__content__list g-grid-box"
+                         v-for="liste of currentProject?.listOfDetails" >
+                        <div class="g-grid-box__col-end--span-12">{{liste.title}}</div>
+                        <div class="g-grid-box__col-end--span-12">{{liste.content}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="v-project-slug__gallery"
+                 v-for="imageProject of currentProject?.ArrayOfImagesProject"
+                :class="{
+                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16': !imageProject.isFullWidth,
+                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': imageProject.isFullWidth,
+                     'is-full': imageProject.isFullWidth,
+                 }"
+            >
+                <img class="v-project-slug__gallery__image"
+                     :src="imageProject.url"
+                     :alt="imageProject.credit"
+                />
+            </div>
+
         </div>
-        <div
-            class="v-project-slug__content"
-        >
-            <p>url: {{projectSlug}}</p>
-            <h1>{{currentProject?.title}}</h1>
 
-            <article>
-                <h1>Lorem Ipsum</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <h2>Lorem Ipsum</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <h3>Lorem Ipsum</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <h4>Lorem Ipsum</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <h5>Lorem Ipsum</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <h6>Lorem Ipsum</h6>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget felis congue ullamcorper. Integer sed dapibus turpis. Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.
-                </p>
-
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Sed ut purus eget felis congue ullamcorper.</li>
-                    <li>Integer sed dapibus turpis.</li>
-                    <li>Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.</li>
-                </ul>
-
-                <ol>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Sed ut purus eget felis congue ullamcorper.</li>
-                    <li>Integer sed dapibus turpis.</li>
-                    <li>Donec tristique mi eget eros tincidunt, id rutrum leo accumsan.</li>
-                </ol>
-            </article>
-        </div>
     </section>
 </template>
 
@@ -70,19 +59,23 @@
 
 
 <script setup lang="ts">
-import {defineProps} from 'vue'
+import {defineProps, type Ref} from 'vue'
 import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
+import type {IProjectContent} from "~/server/api/projectContentBySlug";
+import {useFetch} from "#app";
 
 const props = defineProps<{
     message?: string
 }>()
 
-const projectsInfo = useState<IApiProjectsInfo[] | undefined>('projectsInfo')
-
 const projectSlug = useRoute().params.slug
 
-const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() => {
-    return projectsInfo.value?.find(project => project.slug === projectSlug)
+const currentProject: Ref<null | IProjectContent> = ref(null)
+
+onMounted(async () => {
+    const projectInfo = await useFetch('/api/projectContentBySlug')
+
+    currentProject.value = projectInfo.data.value
 })
 
 </script>
@@ -94,51 +87,52 @@ const currentProject: ComputedRef<IApiProjectsInfo | undefined> = computed(() =>
 <style lang="scss" scoped >
 .v-project-slug {
     padding-top: var(--rb-nav-height);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-bottom: 50vh;
 }
 
 .v-project-slug__header {
     box-sizing: border-box;
-    width: calc(100% / 24 * 16);
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem
 }
 
 .v-project-slug__content {
     box-sizing: border-box;
-    width: calc(100% / 24 * 16);
+
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+
+.v-project-slug__content__article {
+}
+
+.v-project-slug__content__list {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.v-project-slug__gallery {
+    margin-top: 1rem;
+
+    &:not(.is-full) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        &:last-child {
+            margin-bottom: 33vh;
+        }
+    }
+
+}
+
+.v-project-slug__gallery__image {
+    display: block;
+    width: 100%;
 }
 
 .v-project-slug__header__cover {
     display: block;
     width: 100%;
     height: auto;
-}
-
-h1 {
-    font-size: 2rem;
-    line-height: 2rem;
-}
-
-h2 {
-    font-size: 1.75rem;
-    line-height: 1.75rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-}
-
-h4 {
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 600;
-}
-
-h5 {
-    font-size: 2rem;
-    line-height: 2rem;
 }
 </style>
