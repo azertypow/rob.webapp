@@ -7,6 +7,7 @@
             <div
                 class="v-index__carousel__nav-to-left"
                 @click="previousGalleryItem"
+                @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
                  :src="allCarouselImages[previousGalleryIndex].url"
@@ -15,11 +16,12 @@
 
             <div class="v-index__carousel__nav-to-right"
                  @click="nextGalleryItem"
-
+                 @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
                  :src="allCarouselImages[nextGalleryIndex].url"
                  alt="preview of next gallery image"
+                 :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
 
             <transition name="v-transition-mask-slide"
@@ -88,6 +90,8 @@ const colorForGallery = useColorForGallery()
 
 const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
 
+const forceToHiddenNav = ref(false)
+
 const allCarouselImages = computed(() => {
     return projectsInfo.value.reduce((previousValue, currentValue) => {
         return previousValue.concat(
@@ -121,6 +125,8 @@ function nextGalleryItem() {
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
+
+    forceToHiddenNav.value = true
 }
 
 // todo: code optimisation (click function for clearInterfvale and ducplication code)
@@ -128,6 +134,8 @@ function previousGalleryItem() {
     galleryIndex.value--
     if(galleryIndex.value < 0) galleryIndex.value = allCarouselImages.value.length - 1
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
+
+    forceToHiddenNav.value = true
 }
 
 </script>
@@ -180,6 +188,11 @@ function previousGalleryItem() {
     }
 }
 
+.v-index__carousel--force-to-hidden {
+    //opacity: 0 !important;
+    //user-select: none;
+}
+
 .v-index__carousel__image-preview-box {
     z-index: 500;
     position: absolute;
@@ -195,10 +208,10 @@ function previousGalleryItem() {
     opacity: 0;
 }
 .v-index__carousel__image-preview-box--previous {
-    mask-image: linear-gradient(90deg,#000 0,#000 0%,transparent calc(100% / 24 * 4),transparent);
+    mask-image: linear-gradient(90deg,#000 0,#000 calc(100% / 24 * 4),transparent calc(100% / 24 * 4),transparent);
 }
 .v-index__carousel__image-preview-box--next {
-    mask-image: linear-gradient(-90deg,#000 0,#000 0%,transparent calc(100% / 24 * 4),transparent);
+    mask-image: linear-gradient(-90deg,#000 0,#000 calc(100% / 24 * 4),transparent calc(100% / 24 * 4),transparent);
 }
 
 .v-index__carousel__item {

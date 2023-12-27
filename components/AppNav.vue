@@ -17,7 +17,7 @@
                 >
                    {{ currentProjectsInfo.title }}
                 </template>
-                <template v-else-if="useMenuIsOpen().value">
+                <template v-else-if="useMenuIsOpen().value || useRouter().currentRoute.value.path === '/about'">
                     Graphic design
                 </template>
             </div>

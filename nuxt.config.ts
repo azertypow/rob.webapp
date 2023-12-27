@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     baseURL: '/rob.webapp/',
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   nitro: {
     output: {
