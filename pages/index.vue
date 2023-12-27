@@ -7,40 +7,57 @@
             <div
                 class="v-index__carousel__nav-to-left"
                 @click="previousGalleryItem"
-                :style="{
-                     backgroundImage: `url(${allCarouselImages[previousGalleryIndex].url})`
-                 }"
-            >left {{previousGalleryIndex}}
-                / {{galleryIndex}}
-                / {{nextGalleryIndex}}
-            </div>
+            ></div>
+            <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
+                 :src="allCarouselImages[previousGalleryIndex].url"
+                 alt="preview of previous gallery image"
+            />
+
             <div class="v-index__carousel__nav-to-right"
                  @click="nextGalleryItem"
-                 :style="{
-                     backgroundImage: `url(${allCarouselImages[nextGalleryIndex].url})`
-                 }"
-            >righ</div>
 
-            <div
-                class="v-index__carousel__title"
-                :style="{
-                    color: colorForGallery,
-                }"
-            >{{allCarouselImages[galleryIndex].parentProjectTitle}}</div>
+            ></div>
+            <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
+                 :src="allCarouselImages[nextGalleryIndex].url"
+                 alt="preview of next gallery image"
+            />
 
-            <div
-                class="v-index__carousel__counter"
-                :style="{
-                    color: colorForGallery,
-                }"
-            >{{galleryIndex + 1}} / {{allCarouselImages.length + 1}}</div>
+            <transition name="v-transition-mask-slide"
+                        class="v-transition-mask-slide"
+                        mode="out-in"
+                        duration="1000"
+            >
+                <div
+                    class="v-index__carousel__title"
+                    :style="{
+                        color: colorForGallery,
+                    }"
+                    :key="galleryIndex"
+                >
+                    {{ allCarouselImages[galleryIndex].parentProjectTitle }}
+                </div>
+            </transition>
+
+            <transition name="v-transition-mask-slide"
+                        class="v-transition-mask-slide"
+                        mode="out-in"
+                        duration="1000"
+            >
+                <div
+                    :key="galleryIndex"
+                    class="v-index__carousel__counter"
+                    :style="{
+                        color: colorForGallery,
+                    }"
+                >{{ galleryIndex + 1 }} / {{ allCarouselImages.length + 1 }}
+                </div>
+            </transition>
 
 
             <template
                 v-for="(carouselImage, index) of allCarouselImages"
             >
-                <transition
-                    name="gallery"
+                <transition name="gallery"
                 >
                     <div
                         class="v-index__carousel__item"
@@ -143,12 +160,9 @@ function previousGalleryItem() {
     z-index: 1000;
     cursor: pointer;
     user-select: none;
-    background-size: cover;
-    background-position: left center;
-    //mix-blend-mode: multiply;
-    opacity: 0;
-    &:hover {
-        opacity: 1;
+
+    &:hover+.v-index__carousel__image-preview-box--previous {
+        opacity: .75;
     }
 }
 .v-index__carousel__nav-to-right {
@@ -160,13 +174,31 @@ function previousGalleryItem() {
     z-index: 1000;
     cursor: pointer;
     user-select: none;
-    //mix-blend-mode: exclusion;
-    background-size: cover;
-    background-position: right center;
-    opacity: 0;
-    &:hover {
-        opacity: 1;
+
+    &:hover+.v-index__carousel__image-preview-box--next {
+        opacity: .75;
     }
+}
+
+.v-index__carousel__image-preview-box {
+    z-index: 500;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+}
+.v-index__carousel__image-preview-box--previous {
+    mask-image: linear-gradient(90deg,#000 0,#000 0%,transparent calc(100% / 24 * 4),transparent);
+}
+.v-index__carousel__image-preview-box--next {
+    mask-image: linear-gradient(-90deg,#000 0,#000 0%,transparent calc(100% / 24 * 4),transparent);
 }
 
 .v-index__carousel__item {
@@ -185,6 +217,13 @@ function previousGalleryItem() {
     color: white;
     z-index: 10;
     font-weight: 400;
+
+    .v-index__carousel__title__value {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+    }
 }
 
 .v-index__carousel__counter {

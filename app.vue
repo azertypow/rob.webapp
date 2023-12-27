@@ -19,8 +19,6 @@
 
 <style lang="scss" scoped>
 .v-app {
-    padding-left: var(--rb-gutter);
-    padding-right: var(--rb-gutter);
 }
 
 .v-app__nav-box {
@@ -44,11 +42,28 @@
 
 <script lang="ts" setup>
 import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
+import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
+const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
+const currentProjectsInfo = useCurrentProjectsInfo()
 
 onMounted(async () => {
     const projectInfo = await useFetch('/api/projectsInfo')
 
     useState<IApiProjectsInfo[]>('projectsInfo', () => {return projectInfo.data.value || []})
+})
+
+useRouter().beforeEach((to, from, next) => {
+    const slug = to.params.slug
+
+    if(typeof slug === "string") {
+        currentProjectsInfo.value = findProjectInfoBySlug(projectsInfo.value, slug) || null
+    } else {
+        currentProjectsInfo.value = null
+    }
+
+    useMenuIsOpen().value = false
+
+    next()
 })
 
 
