@@ -14,6 +14,10 @@
                         class="v-project-slug__header__cover"
                         :src="currentProject?.imageCover.url"
                     />
+                    <div class="v-project-slug__header__info">
+                        <div>{{ currentProject?.imageCover.title }}</div>
+                        <div v-if="currentProject?.imageCover.credit" >©{{currentProject?.imageCover.credit}}</div>
+                    </div>
                 </div>
             </div>
 
@@ -37,17 +41,28 @@
             </div>
 
             <div class="v-project-slug__gallery"
-                 v-for="imageProject of currentProject?.ArrayOfImagesProject"
+                 v-for="itemOfGalleryProject of currentProject?.galleryProject"
                 :class="{
-                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': !imageProject.isFullWidth,
-                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': imageProject.isFullWidth,
-                     'is-full': imageProject.isFullWidth,
+                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': !itemOfGalleryProject.isFullWidth,
+                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.isFullWidth,
+                     'is-full': itemOfGalleryProject.isFullWidth,
                  }"
             >
-                <img class="v-project-slug__gallery__image"
-                     :src="imageProject.url"
-                     :alt="imageProject.credit"
-                />
+                <template v-if="itemOfGalleryProject.url">
+                    <img class="v-project-slug__gallery__image"
+                         :src="itemOfGalleryProject.url"
+                         :alt="itemOfGalleryProject.credit"
+                    />
+                </template>
+                <template v-else-if="itemOfGalleryProject.videoID">
+                    <vimeo
+                        :video-i-d="itemOfGalleryProject.videoID"
+                    />
+                </template>
+                <div class="v-project-slug__gallery__info" >
+                    <div>{{ itemOfGalleryProject.title }}</div>
+                    <div v-if="itemOfGalleryProject.credit" >©{{itemOfGalleryProject.credit}}</div>
+                </div>
             </div>
 
         </div>
@@ -96,6 +111,11 @@ onMounted(async () => {
     padding-right: 1rem
 }
 
+.v-project-slug__header__info {
+    display: flex;
+    justify-content: space-between;
+}
+
 .v-project-slug__content {
     box-sizing: border-box;
 
@@ -113,6 +133,7 @@ onMounted(async () => {
 
 .v-project-slug__gallery {
     margin-top: 1rem;
+    position: relative;
 
     &:not(.is-full) {
         padding-left: 1rem;
@@ -123,6 +144,24 @@ onMounted(async () => {
         }
     }
 
+}
+
+.v-project-slug__gallery__info {
+    display: flex;
+    justify-content: space-between;
+
+    .is-full & {
+        box-sizing: border-box;
+        padding: 0 var(--rb-gutter-half);
+    }
+
+    .is-full img+& {
+        position: absolute;
+        bottom: var(--rb-gutter-half);
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
 }
 
 .v-project-slug__gallery__image {

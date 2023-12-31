@@ -12,7 +12,7 @@ export interface IApiProjectsInfo {
 export interface IApiImage {
     url: string
     credit?: string
-    titre: string
+    title: string
 }
 
 export interface IApiImageOfProject extends IApiImage {
@@ -32,7 +32,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/01.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -41,7 +41,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/04.jpg',
                     credit: 'Jasmine Dugens',
-                    titre: 'Encore un titre',
+                    title: 'Encore un titre',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -49,7 +49,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/06.jpg',
                     credit: 'Nathalie Marko',
-                    titre: 'Hello Hello',
+                    title: 'Hello Hello',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -65,7 +65,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/06.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -73,14 +73,14 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             ArrayOfImagesCarousel: [
                 {
                     url: '/images/compress/07.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'black',
                     isFullWidth: true,
                 },
                 {
                     url: '/images/compress/08.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -96,7 +96,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/01.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -105,7 +105,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/04.jpg',
                     credit: 'Jasmine Dugens',
-                    titre: 'Encore un titre',
+                    title: 'Encore un titre',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -113,7 +113,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/06.jpg',
                     credit: 'Nathalie Marko',
-                    titre: 'Hello Hello',
+                    title: 'Hello Hello',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -129,7 +129,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/06.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -137,14 +137,14 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             ArrayOfImagesCarousel: [
                 {
                     url: '/images/compress/07.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'black',
                     isFullWidth: true,
                 },
                 {
                     url: '/images/compress/08.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -160,7 +160,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/01.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -169,7 +169,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/04.jpg',
                     credit: 'Jasmine Dugens',
-                    titre: 'Encore un titre',
+                    title: 'Encore un titre',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -177,7 +177,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
                 {
                     url: '/images/compress/06.jpg',
                     credit: 'Nathalie Marko',
-                    titre: 'Hello Hello',
+                    title: 'Hello Hello',
                     parentProjectTitle: 'titre de projet',
                     textColor: 'white',
                     isFullWidth: true,
@@ -193,7 +193,7 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             imageCoverForIndex: {
                 url: '/images/compress/06.jpg',
                 credit: 'Jacques Martin',
-                titre: 'titre image 01',
+                title: 'titre image 01',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -201,14 +201,14 @@ export default defineEventHandler((event): IApiProjectsInfo[] => {
             ArrayOfImagesCarousel: [
                 {
                     url: '/images/compress/07.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'black',
                     isFullWidth: true,
                 },
                 {
                     url: '/images/compress/08.jpg',
-                    titre: 'hello titre',
+                    title: 'hello titre',
                     parentProjectTitle: 'titre du second projet',
                     textColor: 'white',
                     isFullWidth: true,
