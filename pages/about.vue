@@ -4,7 +4,7 @@
     >
         <div class="g-grid-box"
         >
-            <div class="g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22"
+            <div class="g-grid-box__col-start--5 g-grid-box__col-end--span-14 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-18 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22"
             >
                 <div
                     class="v-about__content"

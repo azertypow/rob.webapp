@@ -2,16 +2,15 @@ import {IApiImageOfProject, IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 export interface IProjectContent extends IApiProjectsInfo {
     imageCover:             IApiImageOfProject  // image
-    ArrayOfImagesProject:   IApiImageOfProject[]
-    arrayOfVideo:  IApiVideo[] // image for home
+    galleryProject:   (IApiImageOfProject | IApiVideo)[]
     htmlContent: string
     listOfDetails: {title: string, content: string}[]
 }
 
 export interface IApiVideo {
     videoID: string,
-    credit: string,
-    titre: string,
+    credit?: string,
+    title: string,
     parentProjectTitle: string,
     textColor: 'black' | 'white'
     isFullWidth: boolean,
@@ -41,7 +40,7 @@ export default defineEventHandler((event): IProjectContent => {
         imageCover: {
             url: '/images/compress/01.jpg',
             credit: 'Jacques Martin',
-            titre: 'titre image 01',
+            title: 'titre image 01',
             parentProjectTitle: 'titre de projet',
             textColor: 'white',
             isFullWidth: true,
@@ -49,15 +48,15 @@ export default defineEventHandler((event): IProjectContent => {
         imageCoverForIndex: {
             url: '/images/compress/01.jpg',
             credit: 'Jacques Martin',
-            titre: 'titre image 01',
+            title: 'titre image 01',
             parentProjectTitle: 'titre de projet',
             textColor: 'white',
             isFullWidth: true,
         },
-        ArrayOfImagesProject: [
+        galleryProject: [
             {
                 url: '/images/compress/02.jpg',
-                titre: 'bonjour image 01 sans crédit',
+                title: 'bonjour image 01 sans crédit',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -65,17 +64,32 @@ export default defineEventHandler((event): IProjectContent => {
             {
                 url: '/images/compress/03.jpg',
                 credit: 'Paul Hero',
-                titre: '',
+                title: 'autre titre de l\'image',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'black',
                 isFullWidth: false,
+            },
+            {
+                videoID: '268407434',
+                credit: 'Nathalie Marko',
+                title: 'Hello Hello titre',
+                parentProjectTitle: 'titre de projet',
+                textColor: 'white',
+                isFullWidth: false,
+            },
+            {
+                videoID: '259824601',
+                title: 'Hello Hello',
+                parentProjectTitle: 'titre de projet',
+                textColor: 'white',
+                isFullWidth: true,
             },
         ],
         ArrayOfImagesCarousel: [
             {
                 url: '/images/compress/04.jpg',
                 credit: 'Jasmine Dugens',
-                titre: 'Encore un titre',
+                title: 'Encore un titre',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
@@ -83,30 +97,11 @@ export default defineEventHandler((event): IProjectContent => {
             {
                 url: '/images/compress/06.jpg',
                 credit: 'Nathalie Marko',
-                titre: 'Hello Hello',
+                title: 'Hello Hello',
                 parentProjectTitle: 'titre de projet',
                 textColor: 'white',
                 isFullWidth: true,
             },
         ],
-        arrayOfVideo: [
-            {
-                videoID: '268407434',
-                credit: 'Nathalie Marko',
-                titre: 'Hello Hello',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: false,
-            },
-            {
-                videoID: '259824601',
-                credit: 'Nathalie Marko',
-                titre: 'Hello Hello',
-                parentProjectTitle: 'titre de projet',
-                textColor: 'white',
-                isFullWidth: true,
-            }
-        ]
-
     }
 })
