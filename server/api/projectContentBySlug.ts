@@ -1,4 +1,4 @@
-import {IApiImageOfProject, IApiProjectsInfo} from "~/server/api/projectsInfo";
+import { type IApiImageOfProject, type IApiProjectsInfo} from "~/server/api/projectsInfo";
 
 export interface IProjectContent extends IApiProjectsInfo {
     imageCover:             IApiImageOfProject  // image
@@ -12,7 +12,6 @@ export interface IApiVideo {
     credit?: string,
     title: string,
     parentProjectTitle: string,
-    textColor: 'black' | 'white'
     isFullWidth: boolean,
 }
 
