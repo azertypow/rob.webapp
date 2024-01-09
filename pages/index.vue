@@ -27,7 +27,7 @@
             <transition name="v-transition-mask-slide"
                         class="v-transition-mask-slide"
                         mode="out-in"
-                        duration="1000"
+                        :duration="1000"
             >
                 <div
                     class="v-index__carousel__title"
@@ -43,7 +43,7 @@
             <transition name="v-transition-mask-slide"
                         class="v-transition-mask-slide"
                         mode="out-in"
-                        duration="1000"
+                        :duration="1000"
             >
                 <div
                     :key="galleryIndex"
@@ -92,7 +92,7 @@ const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
 
 const forceToHiddenNav = ref(false)
 
-const allCarouselImages = computed(() => {
+const allCarouselImages: ComputedRef<IApiImageOfProject[]> = computed(() => {
     return projectsInfo.value.reduce((previousValue, currentValue) => {
         return previousValue.concat(
             currentValue.ArrayOfImagesCarousel.reduce((previousValue1, currentValue1) => {

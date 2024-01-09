@@ -48,15 +48,15 @@
                      'is-full': itemOfGalleryProject.isFullWidth,
                  }"
             >
-                <template v-if="itemOfGalleryProject.url">
+                <template v-if="(itemOfGalleryProject as IApiImageOfProject).url">
                     <img class="v-project-slug__gallery__image"
-                         :src="itemOfGalleryProject.url"
+                         :src="(itemOfGalleryProject as IApiImageOfProject).url"
                          :alt="itemOfGalleryProject.credit"
                     />
                 </template>
-                <template v-else-if="itemOfGalleryProject.videoID">
+                <template v-else-if="(itemOfGalleryProject as IApiVideo).videoID">
                     <vimeo
-                        :video-i-d="itemOfGalleryProject.videoID"
+                        :video-i-d="(itemOfGalleryProject as IApiVideo).videoID"
                     />
                 </template>
                 <div class="v-project-slug__gallery__info" >
@@ -74,16 +74,10 @@
 
 
 <script setup lang="ts">
-import {defineProps, type Ref} from 'vue'
-import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
-import type {IProjectContent} from "~/server/api/projectContentBySlug";
+import {type Ref} from 'vue'
+import type {IApiImageOfProject} from "~/server/api/projectsInfo";
+import type {IApiVideo, IProjectContent} from "~/server/api/projectContentBySlug";
 import {useFetch} from "#app";
-
-const props = defineProps<{
-    message?: string
-}>()
-
-const projectSlug = useRoute().params.slug
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
 
