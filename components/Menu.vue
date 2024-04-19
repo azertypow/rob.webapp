@@ -34,6 +34,7 @@
                                     <div class="v-menu__list-box__item__title"
                                     >
                                         {{ project.title }}
+                                        {{ project.slug }}
                                     </div>
                                 </div>
 
@@ -42,7 +43,7 @@
                                     >
                                         <template v-for="(tag, index) of project.tags">
                                             <span v-if="index > 0"> + </span>
-                                            <button>{{ tag }}</button>
+                                            <button>{{ tag.title }}</button>
                                         </template>
                                     </div>
                                 </div>

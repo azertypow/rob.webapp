@@ -10,7 +10,7 @@
                 @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
-                 :src="allCarouselImages[previousGalleryIndex].url"
+                 :src="allCarouselImages[previousGalleryIndex]?.url"
                  alt="preview of previous gallery image"
             />
 
@@ -19,7 +19,7 @@
                  @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
-                 :src="allCarouselImages[nextGalleryIndex].url"
+                 :src="allCarouselImages[nextGalleryIndex]?.url"
                  alt="preview of next gallery image"
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
@@ -36,7 +36,7 @@
                     }"
                     :key="galleryIndex"
                 >
-                    {{ allCarouselImages[galleryIndex].parentProjectTitle }}
+                    {{ allCarouselImages[galleryIndex]?.parentProjectTitle }}
                 </div>
             </transition>
 
@@ -84,22 +84,28 @@
 <script lang="ts" setup>
 
 import type {ComputedRef} from "vue";
-import type {IApiImage, IApiImageOfProject, IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
+const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
 
 const forceToHiddenNav = ref(false)
 
 const allCarouselImages: ComputedRef<IApiImageOfProject[]> = computed(() => {
-    return projectsInfo.value.projects.reduce((previousValue, currentValue) => {
-        return previousValue.concat(
-            currentValue.ArrayOfImagesCarousel.reduce((previousValue1, currentValue1) => {
-                return previousValue1.concat(currentValue1);
-            }, [] as IApiImageOfProject[])
-        )
-    }, [] as IApiImageOfProject[])
+
+    const toReturn: IApiImageOfProject[] = []
+
+    if( projectsInfo.value === null ) return []
+
+    projectsInfo.value.projects.map((value) => {
+
+        value.arrayOfImagesCarousel.map(value1 => {
+            toReturn.push(value1)
+        })
+    })
+
+    return toReturn
 })
 
 const galleryIndex = ref(0)
