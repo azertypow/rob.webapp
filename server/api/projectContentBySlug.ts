@@ -1,6 +1,6 @@
-import { type IApiImageOfProject, type IApiProjectsInfo} from "~/server/api/projectsInfo";
+import {type IApiImageOfProject, type IApiProjectInfo} from "~/server/api/projectsInfo";
 
-export interface IProjectContent extends IApiProjectsInfo {
+export interface IProjectContent extends IApiProjectInfo {
     imageCover:             IApiImageOfProject  // image
     galleryProject:   (IApiImageOfProject | IApiVideo)[]
     htmlContent: string

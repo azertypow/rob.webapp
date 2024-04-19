@@ -48,11 +48,11 @@
 
 
 <script setup lang="ts">
-import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiProjectInfo} from "~/server/api/projectsInfo";
 
 const menuIsOpen = useMenuIsOpen()
 const colorForGallery = useColorForGallery()
-const currentProjectsInfo = useState<IApiProjectsInfo>('currentProjectsInfo')
+const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
 
 
 
