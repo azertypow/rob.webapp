@@ -4,31 +4,20 @@
     >
         <div class="g-grid-box"
         >
-            <div class= "
-                            g-grid-box__col-start--5        g-grid-box__col-end--span-16
-                            g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-20
-                            g-grid-box--sm__col-start--2    g-grid-box--sm__col-end--span-22
-                        "
+
+            <div class="g-grid-box__col-start--5 g-grid-box__col-end--span-14 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-18 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22"
             >
                 <div
-                    class="v-contact__content"
+                    class="v-about__content"
                 >
-                    <h1 >Contact</h1>
-                </div>
-            </div>
-            <div class= "
-                            g-grid-box__col-start--5        g-grid-box__col-end--span-8
-                            g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-10
-                            g-grid-box--sm__col-start--2    g-grid-box--sm__col-end--span-11
-                        ">
-                <div
-                    class="v-contact__content"
-                >
-                    <article class="v-contact__content__text"
+                    <h1>Contact</h1>
+
+                    <article class="v-about__content__article"
                              v-html="content"
                     ></article>
                 </div>
             </div>
+
             <div class= "
                             g-grid-box__col-start--13        g-grid-box__col-end--span-16
                             g-grid-box--reg__col-start--13  g-grid-box--reg__col-end--span-10
@@ -41,7 +30,7 @@
                         target="_blank"
                         href="https://www.google.com/maps/place/Rue+des+Vieux-Grenadiers+10,+1205+Gen%C3%A8ve/@46.1988881,6.1379562,17z/data=!4m6!3m5!1s0x478c64d53f755ff9:0x1ddd695830138867!8m2!3d46.1989327!4d6.1381708!16s%2Fg%2F11c5b46jtc?entry=ttu"
                     >
-
+                        image google map
                     </a>
                 </div>
             </div>
