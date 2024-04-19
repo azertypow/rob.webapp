@@ -84,16 +84,16 @@
 <script lang="ts" setup>
 
 import type {ComputedRef} from "vue";
-import type {IApiImage, IApiImageOfProject, IApiProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiImage, IApiImageOfProject, IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
+const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 
 const forceToHiddenNav = ref(false)
 
 const allCarouselImages: ComputedRef<IApiImageOfProject[]> = computed(() => {
-    return projectsInfo.value.reduce((previousValue, currentValue) => {
+    return projectsInfo.value.projects.reduce((previousValue, currentValue) => {
         return previousValue.concat(
             currentValue.ArrayOfImagesCarousel.reduce((previousValue1, currentValue1) => {
                 return previousValue1.concat(currentValue1);

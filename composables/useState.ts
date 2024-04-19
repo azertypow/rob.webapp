@@ -1,4 +1,4 @@
-import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
 
 export const useMenuIsOpen = () => {
     return useState('menuIsOpen', () => false)
@@ -9,5 +9,5 @@ export const useColorForGallery = () => {
 }
 
 export const useCurrentProjectsInfo = () => {
-    return useState('currentProjectsInfo', () => null as IApiProjectsInfo | null)
+    return useState('currentProjectsInfo', () => null as IApiProjectInfo | null)
 }

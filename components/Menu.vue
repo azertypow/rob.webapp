@@ -25,7 +25,7 @@
                              @mouseleave="projectSlugMouseOverInList = ''"
                         >
                             <nuxt-link
-                                v-for="project of projectsInfo"
+                                v-for="project of projectsInfo.projects"
                                 class="g-grid-box v-menu__list-box__item"
                                 :href="`/project/${project.slug}`"
                                 @mouseover="projectSlugMouseOverInList = project.slug"
@@ -66,15 +66,15 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import type {IApiProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
 
-const projectsInfo = useState<IApiProjectsInfo[]>('projectsInfo')
+const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
 
 const getHoverProjectInfo = computed(() => {
     if( projectSlugMouseOverInList.value.length < 1 ) return null
 
-    return findProjectInfoBySlug(projectsInfo.value, projectSlugMouseOverInList.value)
+    return findProjectInfoBySlug(projectsInfo.value.projects, projectSlugMouseOverInList.value)
 })
 
 </script>
