@@ -43,13 +43,16 @@
 <script lang="ts" setup>
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
 import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
+import {fetchApiGetProjects} from "~/fetchApi/fetchApiGetProjects";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const currentProjectsInfo = useCurrentProjectsInfo()
 
 onMounted(async () => {
-    const projectInfo = await useFetch('/api/projectsInfo')
+    const projectInfo = await fetchApiGetProjects()
 
-    useState<IApiListOfProjectsInfo>('projectsInfo', () => {return projectInfo.data.value || {projects: []}})
+    useState<IApiListOfProjectsInfo>('projectsInfo', () => {
+        return projectInfo || {projects: []}}
+    )
 })
 
 useRouter().beforeEach((to, from, next) => {

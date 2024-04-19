@@ -78,13 +78,12 @@ import {type Ref} from 'vue'
 import type {IApiImageOfProject} from "~/server/api/projectsInfo";
 import type {IApiVideo, IProjectContent} from "~/server/api/projectContentBySlug";
 import {useFetch} from "#app";
+import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGetProjects";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
 
 onMounted(async () => {
-    const projectInfo = await useFetch('/api/projectContentBySlug')
-
-    currentProject.value = projectInfo.data.value
+    currentProject.value = await fetchApiGetProjectByUID(useRoute().params.slug as string)
 })
 
 </script>
