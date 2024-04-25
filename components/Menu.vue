@@ -102,6 +102,7 @@ const getHoverProjectInfo = computed(() => {
 }
 
 .v-menu__list-box {
+    overflow: hidden;
 
     button {
         all: unset;
