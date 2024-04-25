@@ -47,6 +47,28 @@ export interface IApiImageOfProject extends IApiImage {
     isFullWidth: boolean  //todo: isFullWidth is not used in the template
 }
 
+export interface IApiBlockImage {
+    "content": {
+        "isfullwidth": "true" | "false"
+    },
+    "id": string,
+    "isHidden": boolean,
+    "type": "image",
+    "images": IApiImage[]
+}
+
+export interface IApiBlockVideo {
+    "content": {
+        "url": "https://vimeo.com/787533687",
+        "credit": "",
+        "title": "",
+        "isfullwidth": "true" | "false"
+    },
+    "id": "03274bd7-15c1-46ce-bf21-2b0f6645cd33",
+    "isHidden": false,
+    "type": "video"
+}
+
 
 
 
