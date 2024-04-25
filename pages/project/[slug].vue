@@ -1,6 +1,5 @@
 <template>
-    <section
-        class="v-project-slug"
+    <section class="v-project-slug"
     >
         <div class="g-grid-box"
         >
@@ -12,11 +11,11 @@
                     <img
                         alt="cover image"
                         class="v-project-slug__header__cover"
-                        :src="currentProject?.imageCover.url"
+                        :src="currentProject?.imageCover[0].url"
                     />
                     <div class="v-project-slug__header__info">
-                        <div>{{ currentProject?.imageCover.title }}</div>
-                        <div v-if="currentProject?.imageCover.credit" >©{{currentProject?.imageCover.credit}}</div>
+                        <div>{{ currentProject?.imageCover[0].title }}</div>
+                        <div v-if="currentProject?.imageCover[0].credit" >©{{currentProject?.imageCover[0].credit}}</div>
                     </div>
                 </div>
             </div>
@@ -34,8 +33,8 @@
 
                     <div class="v-project-slug__content__list g-grid-box"
                          v-for="liste of currentProject?.listOfDetails" >
-                        <div class="g-grid-box__col-end--span-12">{{liste.title}}</div>
-                        <div class="g-grid-box__col-end--span-12">{{liste.content}}</div>
+                        <div class="g-grid-box__col-end--span-12">{{liste.name}}</div>
+                        <div class="g-grid-box__col-end--span-12">{{liste.value}}</div>
                     </div>
                 </div>
             </div>
@@ -43,26 +42,26 @@
             <div class="v-project-slug__gallery"
                  v-for="itemOfGalleryProject of currentProject?.galleryProject"
                 :class="{
-                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': !itemOfGalleryProject.isFullWidth,
-                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.isFullWidth,
-                     'is-full': itemOfGalleryProject.isFullWidth,
+                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': itemOfGalleryProject.content.isfullwidth === 'false',
+                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'true',
+                     'is-full': itemOfGalleryProject.content.isfullwidth === 'true',
                  }"
             >
-                <template v-if="(itemOfGalleryProject as IApiImageOfProject).url">
+                <template v-if="itemOfGalleryProject.type === 'image'">
                     <img class="v-project-slug__gallery__image"
-                         :src="(itemOfGalleryProject as IApiImageOfProject).url"
-                         :alt="itemOfGalleryProject.credit"
+                         :src="itemOfGalleryProject.images[0]?.resize.xxl"
+                         :alt="itemOfGalleryProject.images[0]?.credit"
                     />
+                    <div class="v-project-slug__gallery__info" >
+                        <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
+                        <div v-if="itemOfGalleryProject.images[0]?.credit" >©{{itemOfGalleryProject.images[0].credit}}</div>
+                    </div>
                 </template>
-                <template v-else-if="(itemOfGalleryProject as IApiVideo).videoID">
+                <template v-else-if="itemOfGalleryProject.type === 'video'">
                     <vimeo
-                        :video-i-d="(itemOfGalleryProject as IApiVideo).videoID"
+                        :video-i-d="itemOfGalleryProject.content.url"
                     />
                 </template>
-                <div class="v-project-slug__gallery__info" >
-                    <div>{{ itemOfGalleryProject.title }}</div>
-                    <div v-if="itemOfGalleryProject.credit" >©{{itemOfGalleryProject.credit}}</div>
-                </div>
             </div>
 
         </div>
@@ -75,9 +74,8 @@
 
 <script setup lang="ts">
 import {type Ref} from 'vue'
-import type {IApiImageOfProject} from "~/server/api/projectsInfo";
+import type {IApiBlockImage, IApiImageOfProject} from "~/server/api/projectsInfo";
 import type {IApiVideo, IProjectContent} from "~/server/api/projectContentBySlug";
-import {useFetch} from "#app";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGetProjects";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
@@ -95,6 +93,7 @@ onMounted(async () => {
 <style lang="scss" scoped >
 .v-project-slug {
     padding-top: var(--rb-nav-height);
+    //padding-bottom: 50vh;
 }
 
 .v-project-slug__header {
@@ -122,6 +121,10 @@ onMounted(async () => {
 .v-project-slug__content__list {
     margin-top: .25rem;
     margin-bottom: .25rem;
+}
+
+.v-project-slug__details__item {
+    display: flex;
 }
 
 .v-project-slug__gallery {
