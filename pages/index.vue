@@ -10,7 +10,7 @@
                 @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
-                 :src="allCarouselImages[previousGalleryIndex]?.url"
+                 :src="allCarouselImages[previousGalleryIndex]?.resize.large"
                  alt="preview of previous gallery image"
             />
 
@@ -19,7 +19,7 @@
                  @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
-                 :src="allCarouselImages[nextGalleryIndex]?.url"
+                 :src="allCarouselImages[nextGalleryIndex]?.resize.large"
                  alt="preview of next gallery image"
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
@@ -68,7 +68,7 @@
                         <img
                             class="v-index__carousel__item__img"
                             alt=""
-                            :src="carouselImage.url"
+                            :src="carouselImage.resize?.large"
                         />
                     </div>
                 </transition>

@@ -11,7 +11,7 @@
                     <img
                         alt="cover image"
                         class="v-project-slug__header__cover"
-                        :src="currentProject?.imageCover[0].url"
+                        :src="currentProject?.imageCover[0].resize.xxl"
                     />
                     <div class="v-project-slug__header__info">
                         <div>{{ currentProject?.imageCover[0].title }}</div>
@@ -33,8 +33,8 @@
 
                     <div class="v-project-slug__content__list g-grid-box"
                          v-for="liste of currentProject?.listOfDetails" >
-                        <div class="g-grid-box__col-end--span-12">{{liste.name}}</div>
-                        <div class="g-grid-box__col-end--span-12">{{liste.value}}</div>
+                        <div class="g-grid-box__col-end--span-12 v-project-slug__content__list__item" v-html="liste.name" ></div>
+                        <div class="g-grid-box__col-end--span-12 v-project-slug__content__list__item" v-html="liste.value" ></div>
                     </div>
                 </div>
             </div>
@@ -169,5 +169,17 @@ onMounted(async () => {
     display: block;
     width: 100%;
     height: auto;
+}
+</style>
+
+<style lang="scss">
+.v-project-slug__content__list__item {
+    & > *:first-child {
+        margin-top: 0;
+    }
+
+    & > *:last-child {
+        margin-bottom: 0;
+    }
 }
 </style>

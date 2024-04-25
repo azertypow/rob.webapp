@@ -12,7 +12,7 @@
                             <img class="v-menu__img-box__img"
                                  alt="image cover of hover project in list"
                                  v-if="getHoverProjectInfo"
-                                 :src="getHoverProjectInfo?.imageCoverForIndex.url"
+                                 :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
                                  :key="getHoverProjectInfo?.imageCoverForIndex.url"
                             />
                         </transition>
