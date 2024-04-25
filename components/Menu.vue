@@ -48,9 +48,11 @@
                                     </div>
                                 </div>
                                 <div class="g-grid-box__col-end--span-4"
-                                     style="text-align: right"
                                 >
-                                    {{project.date}}
+                                    <div class="v-menu__list-box__item__date"
+                                    >
+                                        {{project.date}}
+                                    </div>
                                 </div>
                             </nuxt-link>
                         </div>
@@ -131,7 +133,16 @@ const getHoverProjectInfo = computed(() => {
             opacity: 0;
             user-select: none;
         }
+
+        .v-menu__list-box__item__date {
+            opacity: 0;
+            user-select: none;
+        }
     }
+}
+
+.v-menu__list-box__item__date {
+    text-align: right;
 }
 
 .v-menu__list-box__item__title {
