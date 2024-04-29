@@ -1,6 +1,6 @@
 <template>
     <section
-        class="v-about"
+        class="v-contact"
     >
         <div class="g-grid-box"
         >
@@ -10,11 +10,11 @@
                         g-grid-box--sm__col-start--2    g-grid-box--sm__col-end--span-22"
             >
                 <div
-                    class="v-about__content"
+                    class="v-contact__content"
                 >
                     <h1>Contact</h1>
 
-                    <article class="v-about__content__article"
+                    <article class="v-contact__content__article"
                              v-html="content?.data?.textcontact"
                     ></article>
                 </div>
@@ -26,9 +26,9 @@
                             g-grid-box--sm__col-start--2   g-grid-box--sm__col-end--span-22
                         ">
                 <div
-                    class="v-about__map"
+                    class="v-contact__map"
                 >
-                    <a class="v-about__map__link"
+                    <a class="v-contact__map__link"
                        target="_blank"
                        href="https://www.google.com/maps/place/Rue+des+Vieux-Grenadiers+10,+1205+Gen%C3%A8ve/@46.1988881,6.1379562,17z/data=!4m6!3m5!1s0x478c64d53f755ff9:0x1ddd695830138867!8m2!3d46.1989327!4d6.1381708!16s%2Fg%2F11c5b46jtc?entry=ttu"
                     >
@@ -65,28 +65,28 @@ onMounted(async () => {
 
 
 <style lang="scss" scoped >
-.v-about {
+.v-contact {
     padding-top: var(--rb-nav-height);
     padding-bottom: 50vh;
 }
 
-.v-about__header {
+.v-contact__header {
     box-sizing: border-box;
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem
 }
 
-.v-about__content {
+.v-contact__content {
     box-sizing: border-box;
 }
 
-.v-about__map {
+.v-contact__map {
     box-sizing: border-box;
     padding-top: 2rem;
 }
 
-.v-about__map__link {
+.v-contact__map__link {
     > img {
         display: block;
         width: 100%;
@@ -95,7 +95,7 @@ onMounted(async () => {
 </style>
 
 <style lang="scss">
-.v-about__content {
+.v-contact__content {
     & > *:first-child {
         margin-top: 0;
     }
