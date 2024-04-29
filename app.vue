@@ -45,7 +45,6 @@ import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/project
 import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
-const currentProjectsInfo = useCurrentProjectsInfo()
 
 onMounted(async () => {
     const projectInfo = await fetchApiGetProjects()
@@ -56,14 +55,6 @@ onMounted(async () => {
 })
 
 useRouter().beforeEach((to, from, next) => {
-    const slug = to.params.slug
-
-    if(typeof slug === "string") {
-        currentProjectsInfo.value = findProjectInfoBySlug(projectsInfo.value.projects, slug) || null
-    } else {
-        currentProjectsInfo.value = null
-    }
-
     useMenuIsOpen().value = false
 
     next()

@@ -8,10 +8,13 @@
                 <div
                     class="v-project-slug__header"
                 >
-                    <img
-                        alt="cover image"
-                        class="v-project-slug__header__cover"
-                        :src="currentProject?.imageCover[0].resize.large"
+                    <img class="v-project-slug__header__cover"
+                         alt="cover image"
+                         :src="currentProject?.imageCover[0].resize.large"
+                         v-if="currentProject"
+                    />
+                    <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
+                         v-else
                     />
                     <div class="v-project-slug__header__info">
                         <div>{{ currentProject?.imageCover[0].title }}</div>
@@ -49,7 +52,7 @@
             >
                 <template v-if="itemOfGalleryProject.type === 'image'">
                     <img class="v-project-slug__gallery__image"
-                         :src="itemOfGalleryProject.images[0]?.resize.xxl"
+                         :src="itemOfGalleryProject.images[0]?.resize.large"
                          :alt="itemOfGalleryProject.images[0]?.credit"
                     />
                     <div class="v-project-slug__gallery__info" >
@@ -162,6 +165,11 @@ onMounted(async () => {
     display: block;
     width: 100%;
     height: auto;
+
+    &.v-project-slug__header__cover--loader {
+        aspect-ratio: 3/2;
+        background: lightgray;
+    }
 }
 </style>
 
