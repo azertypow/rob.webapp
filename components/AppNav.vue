@@ -118,6 +118,12 @@ const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
 .v-app-nav__left {
     display: flex;
     width: 50%;
+
+    @media (max-width: 900px) {
+        background: red;
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
 .v-app-nav__right {
@@ -130,6 +136,10 @@ const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
         color: inherit;
         text-decoration: none;
     }
+
+    @media (max-width: 900px) {
+        align-items: flex-start;
+    }
 }
 
 .v-app-nav__left__site-title {
@@ -139,6 +149,10 @@ const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
     width: calc(100% / 3 * 1);
     box-sizing: border-box;
     padding-left: 1rem;
+
+    @media (max-width: 900px) {
+        width: auto;
+    }
 }
 
 .v-app-nav__left__project-title {
@@ -147,5 +161,6 @@ const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
     white-space: nowrap;
     box-sizing: border-box;
     padding-left: 1rem;
+    height: 1rem;
 }
 </style>
