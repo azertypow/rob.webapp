@@ -2,12 +2,11 @@
     <section
         class="v-contact"
     >
-        <div class="g-grid-box"
+        <div class="g-grid-box g-grid-box--with-gutter--sm"
         >
-
             <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-14
                         g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-18
-                        g-grid-box--sm__col-start--2    g-grid-box--sm__col-end--span-22"
+                        g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
             >
                 <div
                     class="v-contact__content"
@@ -19,11 +18,12 @@
                     ></article>
                 </div>
             </div>
-
+        </div>
+        <div class="g-grid-box">
             <div class= "
                             g-grid-box__col-start--5        g-grid-box__col-end--span-14
                             g-grid-box--reg__col-start--3  g-grid-box--reg__col-end--span-18
-                            g-grid-box--sm__col-start--2   g-grid-box--sm__col-end--span-22
+                            g-grid-box--sm__col-start--1   g-grid-box--sm__col-end--span-24
                         ">
                 <div
                     class="v-contact__map"
@@ -67,7 +67,11 @@ onMounted(async () => {
 <style lang="scss" scoped >
 .v-contact {
     padding-top: var(--rb-nav-height);
-    padding-bottom: 50vh;
+    padding-bottom: 1rem;
+
+    @media (max-width: 900px) {
+        padding-bottom: 0;
+    }
 }
 
 .v-contact__header {
