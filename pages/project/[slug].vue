@@ -99,8 +99,6 @@ onMounted(async () => {
 .v-project-slug__header {
     box-sizing: border-box;
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem
 }
 
 .v-project-slug__header__info {
@@ -110,9 +108,6 @@ onMounted(async () => {
 
 .v-project-slug__content {
     box-sizing: border-box;
-
-    padding-left: 1rem;
-    padding-right: 1rem
 }
 
 .v-project-slug__content__article {
@@ -132,8 +127,6 @@ onMounted(async () => {
     position: relative;
 
     &:not(.is-full) {
-        padding-left: 1rem;
-        padding-right: 1rem;
 
         &:last-child {
             margin-bottom: 33vh;

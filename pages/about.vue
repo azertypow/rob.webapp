@@ -9,7 +9,7 @@
                 <div
                     class="v-about__content"
                 >
-                    <h1 >About</h1>
+                    <h1>About</h1>
 
                     <article class="v-about__content__article"
                              v-if="content"
@@ -58,9 +58,6 @@ onMounted(async () => {
 
 .v-about__content {
     box-sizing: border-box;
-
-    padding-left: 1rem;
-    padding-right: 1rem
 }
 
 .v-about__content__article {
