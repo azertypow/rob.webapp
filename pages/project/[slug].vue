@@ -11,7 +11,7 @@
                     <img
                         alt="cover image"
                         class="v-project-slug__header__cover"
-                        :src="currentProject?.imageCover[0].resize.xxl"
+                        :src="currentProject?.imageCover[0].resize.large"
                     />
                     <div class="v-project-slug__header__info">
                         <div>{{ currentProject?.imageCover[0].title }}</div>
