@@ -105,7 +105,7 @@ const allCarouselImages: ComputedRef<IApiImageOfProject[]> = computed(() => {
         })
     })
 
-    return toReturn
+    return toReturn.reverse()
 })
 
 const galleryIndex = ref(0)
