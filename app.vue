@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
 import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
-import {fetchApiGetProjects} from "~/fetchApi/fetchApiGetProjects";
+import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const currentProjectsInfo = useCurrentProjectsInfo()
 

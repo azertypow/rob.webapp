@@ -1,4 +1,10 @@
-import {IApiBlockImage, IApiBlockVideo, type IApiImageOfProject, type IApiProjectInfo} from "~/server/api/projectsInfo";
+import {
+    IApiBlockImage,
+    IApiBlockVideo,
+    IApiImage,
+    type IApiImageOfProject,
+    type IApiProjectInfo
+} from "~/server/api/projectsInfo";
 
 export interface IProjectContent extends IApiProjectInfo {
     imageCover:             IApiImageOfProject[]
@@ -13,4 +19,19 @@ export interface IApiVideo {
     title: string,
     parentProjectTitle: string,
     isFullWidth: boolean,
+}
+
+export interface IApiAbout {
+    "error": string | null,
+    "data": {
+        "textabout": string
+    } | null
+}
+export interface IApiContact {
+    "error": string | null,
+    "data": {
+        "textcontact": string,
+        "mapImage": IApiImage | null
+    } | null
+
 }
