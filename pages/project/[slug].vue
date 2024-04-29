@@ -183,7 +183,7 @@ onMounted(async () => {
 <style lang="scss">
 .v-project-slug__content__list__item {
     & > *:first-child {
-        margin-top: 1rem;
+        margin-top: .25rem;
     }
 
     & > *:last-child {
