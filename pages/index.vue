@@ -173,7 +173,7 @@ function previousGalleryItem() {
     user-select: none;
 
     &:hover+.v-index__carousel__image-preview-box--previous {
-        opacity: .75;
+        opacity: 1;
     }
 }
 .v-index__carousel__nav-to-right {
@@ -187,7 +187,7 @@ function previousGalleryItem() {
     user-select: none;
 
     &:hover+.v-index__carousel__image-preview-box--next {
-        opacity: .75;
+        opacity: 1;
     }
 }
 
