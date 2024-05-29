@@ -59,19 +59,16 @@
             <template
                 v-for="(carouselImage, index) of allCarouselImages"
             >
-                <transition name="gallery"
+                <div
+                    class="v-index__carousel__item"
+                    v-if="index === galleryIndex"
                 >
-                    <div
-                        class="v-index__carousel__item"
-                        v-if="index === galleryIndex"
-                    >
-                        <img
-                            class="v-index__carousel__item__img"
-                            alt=""
-                            :src="carouselImage.resize?.large"
-                        />
-                    </div>
-                </transition>
+                    <img
+                        class="v-index__carousel__item__img"
+                        alt=""
+                        :src="carouselImage.resize?.large"
+                    />
+                </div>
             </template>
         </div>
     </section>
