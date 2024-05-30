@@ -207,7 +207,6 @@ function previousGalleryItem() {
     object-fit: cover;
     user-select: none;
     pointer-events: none;
-    transition: opacity .5s ease-in-out;
     opacity: 0;
 }
 .v-index__carousel__image-preview-box--previous {
