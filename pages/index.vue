@@ -157,7 +157,7 @@ function previousGalleryItem() {
 
 <style lang="scss" scoped >
 .v-index {
-    --rb-index__carousel-nav-width: calc(100% / 24 * 5);
+    --rb-index__carousel-nav-width: calc(100% / 24 * 4);
 
     position: relative;
     width: 100%;
