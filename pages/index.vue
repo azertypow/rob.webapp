@@ -149,7 +149,7 @@ function previousGalleryItem() {
 
 <style lang="scss" scoped >
 .v-index {
-    --rb-index__carousel-nav-width: calc(100% / 24 * 3);
+    --rb-index__carousel-nav-width: calc(100% / 24 * 5);
 
     position: relative;
     width: 100%;
@@ -210,10 +210,10 @@ function previousGalleryItem() {
     opacity: 0;
 }
 .v-index__carousel__image-preview-box--previous {
-    mask-image: linear-gradient(90deg,#000 0,#000 calc(100% / 24 * 4),transparent calc(100% / 24 * 4),transparent);
+    mask-image: linear-gradient(90deg,#000 0,#000 var(--rb-index__carousel-nav-width),transparent var(--rb-index__carousel-nav-width),transparent);
 }
 .v-index__carousel__image-preview-box--next {
-    mask-image: linear-gradient(-90deg,#000 0,#000 calc(100% / 24 * 4),transparent calc(100% / 24 * 4),transparent);
+    mask-image: linear-gradient(-90deg,#000 0,#000 var(--rb-index__carousel-nav-width),transparent var(--rb-index__carousel-nav-width),transparent);
 }
 
 .v-index__carousel__item {
