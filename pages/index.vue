@@ -10,7 +10,7 @@
                 @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
-                 :src="allCarouselImages[previousGalleryIndex]?.resize.large"
+                 :src="allCarouselImages[previousGalleryIndex]?.image.resize.large"
                  alt="preview of previous gallery image"
             />
 
@@ -19,7 +19,7 @@
                  @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
-                 :src="allCarouselImages[nextGalleryIndex]?.resize.large"
+                 :src="allCarouselImages[nextGalleryIndex]?.image.resize.large"
                  alt="preview of next gallery image"
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
@@ -66,7 +66,7 @@
                     <img
                         class="v-index__carousel__item__img"
                         alt=""
-                        :src="carouselImage.resize?.large"
+                        :src="carouselImage.image.resize?.large"
                     />
                 </div>
             </template>
@@ -89,16 +89,19 @@ const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
 
 const forceToHiddenNav = ref(false)
 
-const allCarouselImages: ComputedRef<IApiImageOfProject[]> = computed(() => {
+const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTitle: string}[]> = computed(() => {
 
-    const toReturn: IApiImageOfProject[] = []
+    const toReturn: {image: IApiImageOfProject, parentProjectTitle: string}[] = []
 
     if( projectsInfo.value === null ) return []
 
     projectsInfo.value.projects.map((value) => {
 
         value.arrayOfImagesCarousel.map(value1 => {
-            toReturn.push(value1)
+            toReturn.push({
+                image: value1,
+                parentProjectTitle: value.title
+            })
         })
     })
 
@@ -127,7 +130,7 @@ const nextGalleryIndex = computed(() => {
 function nextGalleryItem() {
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
-    colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
+    colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 
     forceToHiddenNav.value = true
 }
@@ -136,7 +139,7 @@ function nextGalleryItem() {
 function previousGalleryItem() {
     galleryIndex.value--
     if(galleryIndex.value < 0) galleryIndex.value = allCarouselImages.value.length - 1
-    colorForGallery.value = allCarouselImages.value[galleryIndex.value].textColor
+    colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 
     forceToHiddenNav.value = true
 }

@@ -42,7 +42,6 @@ export interface IApiImage {
 }
 
 export interface IApiImageOfProject extends IApiImage {
-    parentProjectTitle: string
     textColor: 'black' | 'white'
     isFullWidth: boolean  //todo: isFullWidth is not used in the template
 }
