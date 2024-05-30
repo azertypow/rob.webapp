@@ -34,7 +34,6 @@
                                     <div class="v-menu__list-box__item__title"
                                     >
                                         {{ project.title }}
-                                        {{ project.slug }}
                                     </div>
                                 </div>
 
