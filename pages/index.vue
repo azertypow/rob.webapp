@@ -248,7 +248,7 @@ function previousGalleryItem() {
     color: white;
     font-size: 1rem;
     line-height: 1rem;
-    z-index: 10;
+    z-index: 1000;
     font-weight: 400;
 }
 
