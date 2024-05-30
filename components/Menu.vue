@@ -21,7 +21,7 @@
                              @mouseleave="projectSlugMouseOverInList = ''"
                         >
                             <nuxt-link
-                                v-for="project of projectsInfo.projects"
+                                v-for="project of projectsReverse"
                                 class="g-grid-box v-menu__list-box__item"
                                 :href="`/project/${project.slug}`"
                                 @mouseover="projectSlugMouseOverInList = project.slug"
@@ -63,12 +63,16 @@
 
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import type {IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
+import {type ComputedRef, defineProps} from 'vue'
+import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
 import {formatDateFromString} from "~/utils/formatDateFromString";
 
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
+
+const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
+    return projectsInfo.value.projects.toReversed()
+})
 
 const getHoverProjectInfo = computed(() => {
     if( projectSlugMouseOverInList.value.length < 1 ) return null
