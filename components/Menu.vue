@@ -51,7 +51,7 @@
                                 >
                                     <div class="v-menu__list-box__item__date"
                                     >
-                                        {{project.date}}
+                                        {{formatDateFromString(project.date).year}}
                                     </div>
                                 </div>
                             </nuxt-link>
@@ -70,6 +70,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import type {IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
+import {formatDateFromString} from "~/utils/formatDateFromString";
 
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
