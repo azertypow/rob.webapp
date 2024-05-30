@@ -5,17 +5,13 @@
         >
             <div class="g-grid-box">
                 <div class="g-grid-box__col-end--span-5">
-                    <div class="v-menu__img-box" >
-                        <transition name="v-transition-mask-slide"
-                                    class="v-transition-mask-slide"
-                        >
-                            <img class="v-menu__img-box__img"
-                                 alt="image cover of hover project in list"
-                                 v-if="getHoverProjectInfo"
-                                 :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
-                                 :key="getHoverProjectInfo?.imageCoverForIndex.url"
-                            />
-                        </transition>
+                    <div class="v-menu__img-box">
+                        <img class="v-menu__img-box__img"
+                             alt="image cover of hover project in list"
+                             v-if="getHoverProjectInfo"
+                             :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
+                             :key="getHoverProjectInfo?.imageCoverForIndex.url"
+                        />
                     </div>
                 </div>
                 <div class="g-grid-box__col-start--7 g-grid-box__col-end--span-18"
