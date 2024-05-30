@@ -63,11 +63,15 @@
                     class="v-index__carousel__item"
                     v-if="index === galleryIndex"
                 >
-                    <img
-                        class="v-index__carousel__item__img"
-                        alt=""
-                        :src="carouselImage.image.resize?.large"
-                    />
+                    <nuxt-link
+                        :href="`/project/${carouselImage.projectSlug}`"
+                    >
+                        <img
+                            class="v-index__carousel__item__img"
+                            alt=""
+                            :src="carouselImage.image.resize?.large"
+                        />
+                    </nuxt-link>
                 </div>
             </template>
         </div>
@@ -89,9 +93,9 @@ const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
 
 const forceToHiddenNav = ref(false)
 
-const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTitle: string}[]> = computed(() => {
+const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTitle: string, projectSlug: string}[]> = computed(() => {
 
-    const toReturn: {image: IApiImageOfProject, parentProjectTitle: string}[] = []
+    const toReturn: {image: IApiImageOfProject, parentProjectTitle: string, projectSlug: string}[] = []
 
     if( projectsInfo.value === null ) return []
 
@@ -100,7 +104,8 @@ const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTi
         value.arrayOfImagesCarousel.map(value1 => {
             toReturn.push({
                 image: value1,
-                parentProjectTitle: value.title
+                parentProjectTitle: value.title,
+                projectSlug: value.slug
             })
         })
     })
