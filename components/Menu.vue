@@ -45,8 +45,15 @@
                                 <div class="g-grid-box__col-end--span-4"
                                 >
                                     <div class="v-menu__list-box__item__date"
+                                         v-if="formatDateFromString(project.date).year"
                                     >
                                         {{formatDateFromString(project.date).year}}
+                                    </div>
+                                    <div class="v-menu__list-box__item__date"
+                                         v-else
+                                         style="color: blue"
+                                    >
+                                        Ongoing
                                     </div>
                                 </div>
                             </nuxt-link>

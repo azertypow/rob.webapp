@@ -24,36 +24,24 @@
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
 
-            <transition name="v-transition-mask-slide"
-                        class="v-transition-mask-slide"
-                        mode="out-in"
-                        :duration="1000"
+            <div
+                class="v-index__carousel__title"
+                :style="{
+                    color: colorForGallery,
+                }"
+                :key="galleryIndex"
             >
-                <div
-                    class="v-index__carousel__title"
-                    :style="{
-                        color: colorForGallery,
-                    }"
-                    :key="galleryIndex"
-                >
-                    {{ allCarouselImages[galleryIndex]?.parentProjectTitle }}
-                </div>
-            </transition>
+                {{ allCarouselImages[galleryIndex]?.parentProjectTitle }}
+            </div>
 
-            <transition name="v-transition-mask-slide"
-                        class="v-transition-mask-slide"
-                        mode="out-in"
-                        :duration="1000"
-            >
-                <div
-                    :key="galleryIndex"
-                    class="v-index__carousel__counter"
-                    :style="{
-                        color: colorForGallery,
-                    }"
-                >{{ galleryIndex + 1 }} / {{ allCarouselImages.length + 1 }}
-                </div>
-            </transition>
+            <div
+                :key="galleryIndex"
+                class="v-index__carousel__counter"
+                :style="{
+                    color: colorForGallery,
+                }"
+            >{{ galleryIndex + 1 }} / {{ allCarouselImages.length + 1 }}
+            </div>
 
 
             <template
@@ -101,7 +89,7 @@ const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTi
 
     projectsInfo.value.projects.map((value) => {
 
-        value.arrayOfImagesCarousel.map(value1 => {
+        value.arrayOfImagesCarousel?.map(value1 => {
             toReturn.push({
                 image: value1,
                 parentProjectTitle: value.title,
@@ -238,7 +226,8 @@ function previousGalleryItem() {
     bottom: var(--rb-gutter);
     left: var(--rb-gutter);
     color: white;
-    z-index: 10;
+    z-index: 1000;
+    pointer-events: none;
     font-weight: 400;
 
     .v-index__carousel__title__value {
@@ -257,6 +246,7 @@ function previousGalleryItem() {
     font-size: 1rem;
     line-height: 1rem;
     z-index: 1000;
+    pointer-events: none;
     font-weight: 400;
 }
 

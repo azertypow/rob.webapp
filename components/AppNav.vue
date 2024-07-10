@@ -8,14 +8,15 @@
         <div class="v-app-nav__left"
         >
             <nuxt-link class="v-app-nav__left__site-title"
-                to="/"
+                       to="/"
+                       @click="() => useMenuIsOpen().value = false"
             >Rob van Leijsen</nuxt-link>
             <div class="v-app-nav__left__project-title"
             >
                 <template
                     v-if="!useMenuIsOpen().value && currentProjectsInfo"
                 >
-                   {{ currentProjectsInfo.title }}
+                   {{ useCurrentProjectsInfo().value.title }}
                 </template>
                 <template v-else-if="useMenuIsOpen().value || useRouter().currentRoute.value.path === '/about'">
                     Graphic design
@@ -48,11 +49,11 @@
 
 
 <script setup lang="ts">
-import type {IApiProjectInfo} from "~/server/api/projectsInfo";
+import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
 
 const menuIsOpen = useMenuIsOpen()
 const colorForGallery = useColorForGallery()
-const currentProjectsInfo = useState<IApiProjectInfo>('currentProjectsInfo')
+const currentProjectsInfo = useCurrentProjectsInfo()
 
 
 

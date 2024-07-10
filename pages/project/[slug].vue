@@ -92,6 +92,7 @@ const currentProject: Ref<null | IProjectContent> = ref(null)
 
 onMounted(async () => {
     currentProject.value = await fetchApiGetProjectByUID(useRoute().params.slug as string)
+    useCurrentProjectsInfo().value = currentProject.value
 })
 
 </script>
@@ -166,6 +167,8 @@ onMounted(async () => {
 .v-project-slug__gallery__image {
     display: block;
     width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
 }
 
 .v-project-slug__header__cover {

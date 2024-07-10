@@ -56,7 +56,7 @@ onMounted(async () => {
 
 useRouter().beforeEach((to, from, next) => {
     useMenuIsOpen().value = false
-
+    useCurrentProjectsInfo().value = null
     next()
 })
 

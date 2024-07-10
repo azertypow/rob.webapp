@@ -26,19 +26,19 @@
 // page transition
 .page-enter-active,
 .page-leave-active {
-  mask-position: 50% 0;
+  mask-position: 0 50%;
   mask-image: linear-gradient(90deg, #000 0%, #000 50%, #000 100%);
-  transition: mask-position 2s ease;
-  mask-size: 200% 100%;
+  transition: mask-position 1s ease;
+  mask-size: 100% 200%;
   mask-repeat: no-repeat;
 }
 .page-leave-active {
   mask-image: linear-gradient(-90deg, #000 0%, #000 50%, #000 100%);
 }
 .page-enter-from {
-  mask-position: 200% 0;
+  mask-position: 0 200%;
 }
 
 .page-leave-to {
-  mask-position: -200% 0;
+  mask-position: 0 -200%;
 }
