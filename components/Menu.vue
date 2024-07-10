@@ -16,7 +16,11 @@
                 </div>
                 <div class="g-grid-box__col-start--7 g-grid-box__col-end--span-18"
                 >
-                    <div class="v-menu__list-box" >
+                    <div class="v-menu__list-box"
+                         :class="{
+                            'v-menu__list-box--with-long-title': projectSlugMouseOverInList.length > 50
+                         }"
+                    >
                         <div class="v-menu__list-box__scroll"
                              @mouseleave="projectSlugMouseOverInList = ''"
                         >
@@ -37,7 +41,7 @@
                                     <div class="v-menu__list-box__item__tags"
                                     >
                                         <template v-for="(tag, index) of project.tags">
-                                            <span v-if="index > 0"> + </span>
+                                            <span v-if="index > 0">, </span>
                                             <button>{{ tag.title }}</button>
                                         </template>
                                     </div>
@@ -45,15 +49,8 @@
                                 <div class="g-grid-box__col-end--span-4"
                                 >
                                     <div class="v-menu__list-box__item__date"
-                                         v-if="formatDateFromString(project.date).year"
                                     >
-                                        {{formatDateFromString(project.date).year}}
-                                    </div>
-                                    <div class="v-menu__list-box__item__date"
-                                         v-else
-                                         style="color: blue"
-                                    >
-                                        Ongoing
+                                        {{formatDateFromString(project.date).year || 'Ongoing'}}
                                     </div>
                                 </div>
                             </nuxt-link>
@@ -138,12 +135,13 @@ const getHoverProjectInfo = computed(() => {
         }
 
         .v-menu__list-box__item__tags {
-            opacity: 0;
+            .v-menu__list-box--with-long-title & {
+                opacity: 0;
+            }
             user-select: none;
         }
 
         .v-menu__list-box__item__date {
-            opacity: 0;
             user-select: none;
         }
     }
