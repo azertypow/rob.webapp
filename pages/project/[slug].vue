@@ -12,7 +12,7 @@
                 >
                     <img class="v-project-slug__header__cover"
                          alt="cover image"
-                         :src="currentProject?.imageCover[0].resize.xxl"
+                         :src="currentProject?.imageCover[0].resize?.xxl"
                          v-if="currentProject"
                     />
                     <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
