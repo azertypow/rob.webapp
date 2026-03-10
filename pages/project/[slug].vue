@@ -12,7 +12,7 @@
                 >
                     <img class="v-project-slug__header__cover"
                          alt="cover image"
-                         :src="currentProject?.imageCover[0].resize.large"
+                         :src="currentProject?.imageCover[0].resize.xxl"
                          v-if="currentProject"
                     />
                     <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
@@ -62,7 +62,7 @@
                          :class="{
                           'is-verticale': (itemOfGalleryProject.images[0].width || 1) < (itemOfGalleryProject.images[0].height || 1)
                          }"
-                         :src="itemOfGalleryProject.images[0]?.resize?.large"
+                         :src="itemOfGalleryProject.images[0]?.resize?.xxl"
                          :alt="itemOfGalleryProject.images[0]?.credit"
                     />
                     <div class="v-project-slug__gallery__info" >

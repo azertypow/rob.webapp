@@ -33,7 +33,7 @@
                        href="https://www.google.com/maps/place/Rue+des+Vieux-Grenadiers+10,+1205+Gen%C3%A8ve/@46.1988881,6.1379562,17z/data=!4m6!3m5!1s0x478c64d53f755ff9:0x1ddd695830138867!8m2!3d46.1989327!4d6.1381708!16s%2Fg%2F11c5b46jtc?entry=ttu"
                     >
                         <img alt="image de carte pour représenter l\'emplacement de l\'atelier"
-                             :src="content?.data?.mapImage?.resize?.large"
+                             :src="content?.data?.mapImage?.resize?.xxl"
                         />
                     </a>
                 </div>

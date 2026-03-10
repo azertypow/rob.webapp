@@ -10,7 +10,7 @@
                 @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
-                 :src="allCarouselImages[previousGalleryIndex]?.image.resize.large"
+                 :src="allCarouselImages[previousGalleryIndex]?.image.resize?.xxl"
                  alt="preview of previous gallery image"
             />
 
@@ -19,7 +19,7 @@
                  @mouseleave="forceToHiddenNav = false"
             ></div>
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
-                 :src="allCarouselImages[nextGalleryIndex]?.image.resize.large"
+                 :src="allCarouselImages[nextGalleryIndex]?.image.resize?.xxl"
                  alt="preview of next gallery image"
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
@@ -57,7 +57,7 @@
                         <img
                             class="v-index__carousel__item__img"
                             alt=""
-                            :src="carouselImage.image.resize?.large"
+                            :src="carouselImage.image.resize?.xxl"
                         />
                     </nuxt-link>
                 </div>
