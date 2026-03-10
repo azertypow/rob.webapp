@@ -161,7 +161,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     width: calc(100% / 3 * 2);
     white-space: nowrap;
     box-sizing: border-box;
-    padding-left: 1rem;
     height: 1rem;
 }
 </style>
