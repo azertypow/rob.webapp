@@ -42,8 +42,8 @@
 
                     <div class="v-project-slug__content__list g-grid-box"
                          v-for="liste of currentProject?.listOfDetails" >
-                        <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-end--span-8   g-grid-box--sm__col-end--span-24    v-project-slug__content__list__item" v-html="liste.name" ></div>
-                        <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-end--span-16  g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item" v-html="liste.value" ></div>
+                        <div class="g-grid-box__col-end--span-8     g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.name" ></div>
+                        <div class="g-grid-box__col-end--span-16    g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.value" ></div>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,10 @@
             >
                 <template v-if="itemOfGalleryProject.type === 'image'">
                     <img class="v-project-slug__gallery__image"
-                         :src="itemOfGalleryProject.images[0]?.resize.large"
+                         :class="{
+                          'is-verticale': (itemOfGalleryProject.images[0].width || 1) < (itemOfGalleryProject.images[0].height || 1)
+                         }"
+                         :src="itemOfGalleryProject.images[0]?.resize?.large"
                          :alt="itemOfGalleryProject.images[0]?.credit"
                     />
                     <div class="v-project-slug__gallery__info" >
@@ -121,12 +124,16 @@ onMounted(async () => {
     box-sizing: border-box;
 }
 
-.v-project-slug__content__article {
-}
-
 .v-project-slug__content__list {
-    margin-top: .25rem;
-    margin-bottom: .25rem;
+    margin-top: .15rem;
+    margin-bottom: .15rem;
+
+  @media (max-width: 900px) {
+    margin: 0;
+    & + & {
+      margin-top: 1rem;
+    }
+  }
 }
 
 .v-project-slug__details__item {
@@ -167,8 +174,12 @@ onMounted(async () => {
 .v-project-slug__gallery__image {
     display: block;
     width: 100%;
-    max-height: 80vh;
     object-fit: contain;
+
+  &.is-verticale {
+    max-height: 80vh;
+    object-position: top left;
+  }
 }
 
 .v-project-slug__header__cover {
@@ -179,18 +190,6 @@ onMounted(async () => {
     &.v-project-slug__header__cover--loader {
         aspect-ratio: 3/2;
         background: lightgray;
-    }
-}
-</style>
-
-<style lang="scss">
-.v-project-slug__content__list__item {
-    & > *:first-child {
-        margin-top: .25rem;
-    }
-
-    & > *:last-child {
-        margin-bottom: 0;
     }
 }
 </style>
