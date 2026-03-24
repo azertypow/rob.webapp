@@ -121,7 +121,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     width: 50%;
 
     @media (max-width: 900px) {
-        background: red;
         align-items: flex-start;
         flex-direction: column;
     }
