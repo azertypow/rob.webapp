@@ -16,7 +16,7 @@
                 <template
                     v-if="!useMenuIsOpen().value && currentProjectsInfo"
                 >
-                   {{ useCurrentProjectsInfo().value.title }}
+                   {{ useCurrentProjectsInfo().value?.title }}
                 </template>
                 <template v-else-if="useMenuIsOpen().value || useRouter().currentRoute.value.path === '/about'">
                     Graphic design
@@ -149,6 +149,7 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     width: calc(100% / 3 * 1);
     box-sizing: border-box;
     padding-left: 1rem;
+    white-space: nowrap;
 
     @media (max-width: 900px) {
         width: auto;
