@@ -1,5 +1,6 @@
 <template>
     <section class="v-project-slug"
+             v-if="showContent"
     >
         <div class="g-grid-box"
         >
@@ -80,6 +81,14 @@
         </div>
 
     </section>
+
+    <div class="v-project-slug__close-panel">
+        <Menu :style="{
+                overflow: showContent ? 'hidden' : '',
+                pointerEvents: showContent ? 'none' : '',
+              }"
+        />
+    </div>
 </template>
 
 
@@ -92,10 +101,24 @@ import type {IApiVideo, IProjectContent} from "~/server/api/projectContentBySlug
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
+const router = useRouter()
+const showContent = ref(true)
+
+function handleScroll() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
+        showContent.value = false
+    }
+}
 
 onMounted(async () => {
     currentProject.value = await fetchApiGetProjectByUID(useRoute().params.slug as string)
     useCurrentProjectsInfo().value = currentProject.value
+    window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
 })
 
 </script>
@@ -107,7 +130,10 @@ onMounted(async () => {
 <style lang="scss" scoped >
 .v-project-slug {
     padding-top: var(--rb-nav-height);
-    //padding-bottom: 50vh;
+    margin-bottom: 100vh;
+    position: relative;
+    z-index: 1;
+    background: white;
 }
 
 .v-project-slug__header {
@@ -191,5 +217,17 @@ onMounted(async () => {
         aspect-ratio: 3/2;
         background: lightgray;
     }
+}
+
+.v-project-slug__close-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
