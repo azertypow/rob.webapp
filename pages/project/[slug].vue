@@ -177,7 +177,7 @@ onMounted(async () => {
     object-fit: contain;
 
   &.is-verticale {
-    max-height: 80vh;
+    width: 50%;
     object-position: top left;
   }
 }
