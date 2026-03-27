@@ -24,7 +24,7 @@ export interface IApiImage {
     url: string
     credit?: string
     title: string
-
+    focus: string,
     caption?: null,
     alt?: string,
     link?: string,

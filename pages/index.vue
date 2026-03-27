@@ -59,7 +59,7 @@
                             alt=""
                             :src="carouselImage.image.resize?.xxl"
                             :style="{
-                              // objectPosition: carouselImage.image.
+                              objectPosition: carouselImage.image.focus
                             }"
                         />
                     </nuxt-link>
