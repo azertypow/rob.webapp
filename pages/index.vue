@@ -58,6 +58,9 @@
                             class="v-index__carousel__item__img"
                             alt=""
                             :src="carouselImage.image.resize?.xxl"
+                            :style="{
+                              // objectPosition: carouselImage.image.
+                            }"
                         />
                     </nuxt-link>
                 </div>
