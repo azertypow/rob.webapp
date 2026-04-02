@@ -11,6 +11,7 @@ export interface IApiProjectInfo {
     tags: IApiTag[]
     selfInitiated: boolean
     date: string
+    date_start?: string
 }
 
 export interface IApiTag {

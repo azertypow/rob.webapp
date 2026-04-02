@@ -1,94 +1,93 @@
 <template>
-    <section class="v-project-slug"
-             v-if="showContent"
-    >
-        <div class="g-grid-box"
-        >
-            <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-16
-                        g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-20
-                        g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
+    <div class="v-project-slug">
+        <section class="v-project-slug__wrap" v-if="showContent">
+            <div class="g-grid-box"
             >
-                <div
-                    class="v-project-slug__header"
+                <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-16
+                            g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-20
+                            g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
                 >
-                    <img class="v-project-slug__header__cover"
-                         alt="cover image"
-                         :src="currentProject?.imageCover[0].resize?.xxl"
-                         v-if="currentProject"
-                    />
-                    <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
-                         v-else
-                    />
-                    <div class="v-project-slug__header__info">
-                        <div>{{ currentProject?.imageCover[0].title }}</div>
-                        <div v-if="currentProject?.imageCover[0].credit" >©{{currentProject?.imageCover[0].credit}}</div>
+                    <div
+                        class="v-project-slug__header"
+                    >
+                        <img class="v-project-slug__header__cover"
+                             alt="cover image"
+                             :src="currentProject?.imageCover[0].resize?.xxl"
+                             v-if="currentProject"
+                        />
+                        <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
+                             v-else
+                        />
+                        <div class="v-project-slug__header__info">
+                            <div>{{ currentProject?.imageCover[0].title }}</div>
+                            <div v-if="currentProject?.imageCover[0].credit" >©{{currentProject?.imageCover[0].credit}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="g-grid-box g-grid-box--with-gutter--sm">
+            <div class="g-grid-box g-grid-box--with-gutter--sm">
 
-            <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-16
-                        g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-20
-                        g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
-            >
-                <div
-                    class="v-project-slug__content"
+                <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-16
+                            g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-20
+                            g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
                 >
-                    <h1 >{{currentProject?.title}}</h1>
+                    <div
+                        class="v-project-slug__content"
+                    >
+                        <h1 >{{currentProject?.title}}</h1>
 
-                    <article class="v-project-slug__content__article"
-                             v-html="currentProject?.htmlContent"
-                    ></article>
+                        <article class="v-project-slug__content__article"
+                                 v-html="currentProject?.htmlContent"
+                        ></article>
 
-                    <div class="v-project-slug__content__list g-grid-box"
-                         v-for="liste of currentProject?.listOfDetails" >
-                        <div class="g-grid-box__col-end--span-8     g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.name" ></div>
-                        <div class="g-grid-box__col-end--span-16    g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.value" ></div>
+                        <div class="v-project-slug__content__list g-grid-box"
+                             v-for="liste of currentProject?.listOfDetails" >
+                            <div class="g-grid-box__col-end--span-8     g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.name" ></div>
+                            <div class="g-grid-box__col-end--span-16    g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.value" ></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="g-grid-box g-grid-box--with-gutter--sm">
-            <div class="v-project-slug__gallery"
-                 v-for="itemOfGalleryProject of currentProject?.galleryProject"
-                :class="{
-                     'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': itemOfGalleryProject.content.isfullwidth === 'false',
-                     'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'true',
-                     'is-full': itemOfGalleryProject.content.isfullwidth === 'true',
-                 }"
-            >
-                <template v-if="itemOfGalleryProject.type === 'image'">
-                    <img class="v-project-slug__gallery__image"
-                         :class="{
-                          'is-verticale': (itemOfGalleryProject.images[0].width || 1) < (itemOfGalleryProject.images[0].height || 1)
-                         }"
-                         :src="itemOfGalleryProject.images[0]?.resize?.xxl"
-                         :alt="itemOfGalleryProject.images[0]?.credit"
-                    />
-                    <div class="v-project-slug__gallery__info" >
-                        <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
-                        <div v-if="itemOfGalleryProject.images[0]?.credit" >©{{itemOfGalleryProject.images[0].credit}}</div>
-                    </div>
-                </template>
-                <template v-else-if="itemOfGalleryProject.type === 'video'">
-                    <vimeo
-                        :video-i-d="itemOfGalleryProject.content.url"
-                    />
-                </template>
+            <div class="g-grid-box g-grid-box--with-gutter--sm">
+                <div class="v-project-slug__gallery"
+                     v-for="itemOfGalleryProject of currentProject?.galleryProject"
+                    :class="{
+                         'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': itemOfGalleryProject.content.isfullwidth === 'false',
+                         'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'true',
+                         'is-full': itemOfGalleryProject.content.isfullwidth === 'true',
+                     }"
+                >
+                    <template v-if="itemOfGalleryProject.type === 'image'">
+                        <img class="v-project-slug__gallery__image"
+                             :class="{
+                              'is-verticale': (itemOfGalleryProject.images[0].width || 1) < (itemOfGalleryProject.images[0].height || 1)
+                             }"
+                             :src="itemOfGalleryProject.images[0]?.resize?.xxl"
+                             :alt="itemOfGalleryProject.images[0]?.credit"
+                        />
+                        <div class="v-project-slug__gallery__info" >
+                            <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
+                            <div v-if="itemOfGalleryProject.images[0]?.credit" >©{{itemOfGalleryProject.images[0].credit}}</div>
+                        </div>
+                    </template>
+                    <template v-else-if="itemOfGalleryProject.type === 'video'">
+                        <vimeo
+                            :video-i-d="itemOfGalleryProject.content.url"
+                        />
+                    </template>
+                </div>
+
             </div>
-
+        </section>
+        <div class="v-project-slug__close-panel">
+            <Menu :style="{
+                    overflow: showContent ? 'hidden' : '',
+                    pointerEvents: showContent ? 'none' : '',
+                  }"
+            />
         </div>
-
-    </section>
-
-    <div class="v-project-slug__close-panel">
-        <Menu :style="{
-                overflow: showContent ? 'hidden' : '',
-                pointerEvents: showContent ? 'none' : '',
-              }"
-        />
     </div>
+
 </template>
 
 
@@ -128,7 +127,7 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped >
-.v-project-slug {
+.v-project-slug__wrap {
     padding-top: var(--rb-nav-height);
     margin-bottom: 100vh;
     position: relative;

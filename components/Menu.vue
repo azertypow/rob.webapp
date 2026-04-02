@@ -6,12 +6,14 @@
             <div class="g-grid-box">
                 <div class="g-grid-box__col-end--span-5">
                     <div class="v-menu__img-box">
+                      <transition name="v-transition-mask-slide" mode="in-out">
                         <img class="v-menu__img-box__img"
                              alt="image cover of hover project in list"
                              v-if="getHoverProjectInfo"
                              :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
                              :key="getHoverProjectInfo?.imageCoverForIndex.url"
                         />
+                      </transition>
                     </div>
                 </div>
                 <div class="g-grid-box__col-start--7 g-grid-box__col-end--span-18"
@@ -75,7 +77,7 @@ const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
 
 const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
-    return projectsInfo.value.projects.toReversed()
+    return projectsInfo.value?.projects?.toReversed()
 })
 
 const getHoverProjectInfo = computed(() => {
@@ -169,8 +171,9 @@ const getHoverProjectInfo = computed(() => {
 }
 
 .v-menu__img-box {
-    position: relative;
     width: 100%;
+    position: sticky;
+    top: 0;
 }
 
 .v-menu__img-box__img {

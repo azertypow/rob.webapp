@@ -50,8 +50,8 @@ onMounted(async () => {
     const projectInfo = await fetchApiGetProjects()
 
     useState<IApiListOfProjectsInfo>('projectsInfo', () => {
-        return projectInfo || {projects: []}}
-    )
+        return projectInfo || {projects: []}
+    })
 })
 
 useRouter().beforeEach((to, from, next) => {
