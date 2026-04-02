@@ -14,9 +14,12 @@
                              alt="cover image"
                              :src="currentProject?.imageCover[0].resize?.xxl"
                              v-if="currentProject"
+                             :class="{'is-loaded': coverLoaded}"
+                             @load="coverLoaded = true"
                         />
                         <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
-                             v-else
+                             :class="{'is-loaded': coverLoaded}"
+                             v-if="!coverLoaded"
                         />
                         <div class="v-project-slug__header__info">
                             <div>{{ currentProject?.imageCover[0].title }}</div>
@@ -102,6 +105,7 @@ import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
 const currentProject: Ref<null | IProjectContent> = ref(null)
 const router = useRouter()
 const showContent = ref(true)
+const coverLoaded = ref(false)
 
 function handleScroll() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight
@@ -138,6 +142,7 @@ onUnmounted(() => {
 .v-project-slug__header {
     box-sizing: border-box;
     width: 100%;
+    position: relative;
 }
 
 .v-project-slug__header__info {
@@ -175,7 +180,6 @@ onUnmounted(() => {
             margin-bottom: 33vh;
         }
     }
-
 }
 
 .v-project-slug__gallery__info {
@@ -211,10 +215,27 @@ onUnmounted(() => {
     display: block;
     width: 100%;
     height: auto;
+    transition: opacity .5s ease-in-out;
+    top: 0;
+    left: 0;
+
+    &:not(.is-loaded) {
+        opacity: 0;
+        position: absolute;
+    }
 
     &.v-project-slug__header__cover--loader {
+        opacity: 1;
+        top: 0;
+        left: 0;
         aspect-ratio: 3/2;
         background: lightgray;
+        width: 100%;
+        position: relative;
+
+        &.is-loaded {
+            position: absolute;
+        }
     }
 }
 
