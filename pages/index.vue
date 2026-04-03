@@ -64,7 +64,6 @@
                             />
                         </template>
                         <template v-else>
-                            <img v-if="carouselImage." src="">
                             <img
                                 class="v-index__carousel__item__img"
                                 alt=""
