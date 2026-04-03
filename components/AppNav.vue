@@ -11,7 +11,7 @@
                        to="/"
                        @click="() => useMenuIsOpen().value = false"
             >Rob van Leijsen</nuxt-link>
-            <div class="v-app-nav__left__project-title"
+            <div class="v-app-nav__left__project-title g--sm__display-none"
             >
                 <template
                     v-if="!useMenuIsOpen().value && currentProjectsInfo"
@@ -136,10 +136,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
         color: inherit;
         text-decoration: none;
     }
-
-    @media (max-width: 900px) {
-        align-items: flex-start;
-    }
 }
 
 .v-app-nav__left__site-title {
@@ -157,7 +153,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
 }
 
 .v-app-nav__left__project-title {
-    display: block;
     width: calc(100% / 3 * 2);
     white-space: nowrap;
     box-sizing: border-box;

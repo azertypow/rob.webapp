@@ -54,14 +54,26 @@
                     <nuxt-link
                         :href="`/project/${carouselImage.projectSlug}`"
                     >
-                        <img
-                            class="v-index__carousel__item__img"
-                            alt=""
-                            :src="carouselImage.image.resize?.xxl"
-                            :style="{
-                              objectPosition: carouselImage.image.focus
-                            }"
-                        />
+                        <template v-if="carouselImage.image.url.endsWith('.mp4')">
+                            <video class="v-index__carousel__item__img"
+                                   autoplay
+                                   loop
+                                   muted
+                                   playsinline
+                                   :src="carouselImage.image.url"
+                            />
+                        </template>
+                        <template v-else>
+                            <img v-if="carouselImage." src="">
+                            <img
+                                class="v-index__carousel__item__img"
+                                alt=""
+                                :src="carouselImage.image.resize?.xxl"
+                                :style="{
+                                  objectPosition: carouselImage.image.focus
+                                }"
+                            />
+                        </template>
                     </nuxt-link>
                 </div>
             </template>

@@ -162,8 +162,6 @@
       padding-right: 1rem;
     }
 
-    .g-grid-box--sm__display-none {display: none}
-
     .g-grid-box--sm__col-start--1 { grid-column-start: 1; }
     .g-grid-box--sm__col-start--2 { grid-column-start: 2; }
     .g-grid-box--sm__col-start--3 { grid-column-start: 3; }
@@ -216,3 +214,4 @@
   }
 }
 
+.g--sm__display-none {display: none}

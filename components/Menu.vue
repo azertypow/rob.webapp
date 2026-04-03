@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g-grid-box--sm__display-none">
+                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g--sm__display-none">
                     <div class="v-menu__img-box">
                       <transition name="v-transition-mask-slide" mode="out-in" >
                         <img class="v-menu__img-box__img"
