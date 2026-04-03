@@ -11,8 +11,6 @@
                 <div
                     class="v-about__content"
                 >
-                    <h1>About</h1>
-
                     <article class="v-about__content__article"
                              v-if="content"
                              v-html="content.data?.textabout"

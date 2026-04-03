@@ -11,8 +11,6 @@
                 <div
                     class="v-contact__content"
                 >
-                    <h1>Contact</h1>
-
                     <article class="v-contact__content__article"
                              v-html="content?.data?.textcontact"
                     ></article>
