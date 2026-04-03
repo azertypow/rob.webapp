@@ -4,7 +4,7 @@
         <div class="v-menu__content"
         >
             <div class="g-grid-box">
-                <div class="g-grid-box__col-end--span-18"
+                <div class="g-grid-box__col-end--span-18 g-grid-box--reg__col-end--span-16"
                 >
                     <div class="v-menu__list-box">
                         <div class="v-menu__list-box__scroll"
@@ -19,7 +19,7 @@
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
                                      ref="refProjectLineContainer"
                                 >
-                                    <div class="g-grid-box__col-end--span-5"
+                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-5 g-grid-box--reg__order--1"
                                     >
                                         <div class="v-menu__list-box__item__wrapper__date"
                                         >
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-12">
+                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--3">
                                         <div class="v-menu__list-box__item__wrapper__title">
                                             <div class="v-menu__list-box__item__wrapper__title__text">
                                                 {{ project.title }}
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-7">
+                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--6 g-grid-box--reg__col-end--span-18 g-grid-box--reg__order--2">
                                         <div class="v-menu__list-box__item__wrapper__tags"
                                         >
                                             <div class="v-menu__list-box__item__wrapper__tags__text">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5">
+                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7">
                     <div class="v-menu__img-box">
                       <transition name="v-transition-mask-slide" mode="out-in" >
                         <img class="v-menu__img-box__img"
@@ -158,12 +158,20 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     color: inherit;
     margin-bottom: .25rem;
     white-space: nowrap;
+
+    &:hover {
+        color: var(--rb-nav-blue);
+    }
 }
 
 .v-menu__list-box__item__wrapper__title {
     position: relative;
     overflow: hidden;
     display: flex;
+
+    @media (max-width: 1200px) {
+        padding-bottom: 1rem;
+    }
 
     &.rb-has-long-text-child {
         &:before {
