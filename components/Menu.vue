@@ -19,7 +19,7 @@
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
                                      ref="refProjectLineContainer"
                                 >
-                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-5 g-grid-box--reg__order--1"
+                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-5 g-grid-box--reg__order--1 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-8"
                                     >
                                         <div class="v-menu__list-box__item__wrapper__date"
                                         >
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--6 g-grid-box--reg__col-end--span-18 g-grid-box--reg__order--2">
+                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--6 g-grid-box--reg__col-end--span-18 g-grid-box--reg__order--2 g-grid-box--sm__col-start--9 g-grid-box--sm__col-end--span-16">
                                         <div class="v-menu__list-box__item__wrapper__tags"
                                         >
                                             <div class="v-menu__list-box__item__wrapper__tags__text">
