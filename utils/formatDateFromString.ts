@@ -13,7 +13,7 @@ export function formatDateWithAndStart(dateStart?: string, dateEnd?: string): st
 
   if( !dateStartYear && !dateEndYear) return 'Ongoing'
   else if( !dateStartYear) return `${dateEndYear}`
-  else if( !dateEndYear) return `${dateStartYear} – ⁂`
+  else if( !dateEndYear) return `${dateStartYear} …`
   else if( dateStartYear === dateEndYear) return `${dateStartYear}`
   return `${dateStartYear} – ${dateEndYear.toString().slice(-2)}`
 }
