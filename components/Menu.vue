@@ -4,19 +4,7 @@
         <div class="v-menu__content"
         >
             <div class="g-grid-box">
-                <div class="g-grid-box__col-end--span-5">
-                    <div class="v-menu__img-box">
-                      <transition name="v-transition-mask-slide" mode="out-in" >
-                        <img class="v-menu__img-box__img"
-                             alt="image cover of hover project in list"
-                             v-if="getHoverProjectInfo"
-                             :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
-                             :key="getHoverProjectInfo?.imageCoverForIndex.url"
-                        />
-                      </transition>
-                    </div>
-                </div>
-                <div class="g-grid-box__col-start--7 g-grid-box__col-end--span-18"
+                <div class="g-grid-box__col-end--span-18"
                 >
                     <div class="v-menu__list-box"
                          :class="{
@@ -32,6 +20,14 @@
                                 :href="`/project/${project.slug}`"
                                 @mouseover="projectSlugMouseOverInList = project.slug"
                             >
+                                <div class="g-grid-box__col-end--span-5"
+                                >
+                                    <div class="v-menu__list-box__item__date"
+                                    >
+                                        {{ formatDateWithAndStart(project.date_start, project.date) }}
+                                    </div>
+                                </div>
+
                                 <div class="g-grid-box__col-end--span-12">
                                     <div class="v-menu__list-box__item__title"
                                     >
@@ -39,7 +35,7 @@
                                     </div>
                                 </div>
 
-                                <div class="g-grid-box__col-end--span-8">
+                                <div class="g-grid-box__col-end--span-7">
                                     <div class="v-menu__list-box__item__tags"
                                     >
                                         <template v-for="(tag, index) of project.tags">
@@ -48,15 +44,20 @@
                                         </template>
                                     </div>
                                 </div>
-                                <div class="g-grid-box__col-end--span-4"
-                                >
-                                    <div class="v-menu__list-box__item__date"
-                                    >
-                                        {{formatDateFromString(project.date).year || 'Ongoing'}}
-                                    </div>
-                                </div>
                             </nuxt-link>
                         </div>
+                    </div>
+                </div>
+                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5">
+                    <div class="v-menu__img-box">
+                      <transition name="v-transition-mask-slide" mode="out-in" >
+                        <img class="v-menu__img-box__img"
+                             alt="image cover of hover project in list"
+                             v-if="getHoverProjectInfo"
+                             :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
+                             :key="getHoverProjectInfo?.imageCoverForIndex.url"
+                        />
+                      </transition>
                     </div>
                 </div>
             </div>
@@ -71,7 +72,7 @@
 <script setup lang="ts">
 import {type ComputedRef, defineProps} from 'vue'
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
-import {formatDateFromString} from "~/utils/formatDateFromString";
+import {formatDateFromString, formatDateWithAndStart} from "~/utils/formatDateFromString";
 
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
@@ -147,10 +148,6 @@ const getHoverProjectInfo = computed(() => {
             user-select: none;
         }
     }
-}
-
-.v-menu__list-box__item__date {
-    text-align: right;
 }
 
 .v-menu__list-box__item__title {

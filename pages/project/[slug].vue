@@ -19,7 +19,6 @@
                         />
                         <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
                              :class="{'is-loaded': coverLoaded}"
-                             v-if="!coverLoaded"
                         />
                         <div class="v-project-slug__header__info">
                             <div>{{ currentProject?.imageCover[0].title }}</div>
@@ -215,7 +214,7 @@ onUnmounted(() => {
     display: block;
     width: 100%;
     height: auto;
-    transition: opacity .5s ease-in-out;
+    transition: opacity .5s .5s ease-in-out;
     top: 0;
     left: 0;
 
@@ -232,6 +231,7 @@ onUnmounted(() => {
         background: lightgray;
         width: 100%;
         position: relative;
+        z-index: -1;
 
         &.is-loaded {
             position: absolute;
