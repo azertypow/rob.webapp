@@ -4,7 +4,7 @@
         <div class="v-menu__content"
         >
             <div class="g-grid-box">
-                <div class="g-grid-box__col-end--span-18 g-grid-box--reg__col-end--span-16"
+                <div class="g-grid-box__col-end--span-18 g-grid-box--reg__col-end--span-16 g-grid-box--sm__col-end--span-24"
                 >
                     <div class="v-menu__list-box">
                         <div class="v-menu__list-box__scroll"
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7">
+                <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g-grid-box--sm__display-none">
                     <div class="v-menu__img-box">
                       <transition name="v-transition-mask-slide" mode="out-in" >
                         <img class="v-menu__img-box__img"
