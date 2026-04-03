@@ -6,42 +6,45 @@
             <div class="g-grid-box">
                 <div class="g-grid-box__col-end--span-18"
                 >
-                    <div class="v-menu__list-box"
-                         :class="{
-                            'v-menu__list-box--with-long-title': projectSlugMouseOverInList.length > 50
-                         }"
-                    >
+                    <div class="v-menu__list-box">
                         <div class="v-menu__list-box__scroll"
                              @mouseleave="projectSlugMouseOverInList = ''"
                         >
                             <nuxt-link
                                 v-for="project of projectsReverse"
-                                class="g-grid-box v-menu__list-box__item"
+                                class="v-menu__list-box__item__wrapper"
                                 :href="`/project/${project.slug}`"
                                 @mouseover="projectSlugMouseOverInList = project.slug"
                             >
-                                <div class="g-grid-box__col-end--span-5"
+                                <div class="g-grid-box v-menu__list-box__item__wrapper"
+                                     ref="refProjectLineContainer"
                                 >
-                                    <div class="v-menu__list-box__item__date"
+                                    <div class="g-grid-box__col-end--span-5"
                                     >
-                                        {{ formatDateWithAndStart(project.date_start, project.date) }}
+                                        <div class="v-menu__list-box__item__wrapper__date"
+                                        >
+                                            {{ formatDateWithAndStart(project.date_start, project.date) }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="g-grid-box__col-end--span-12">
-                                    <div class="v-menu__list-box__item__title"
-                                    >
-                                        {{ project.title }}
+                                    <div class="g-grid-box__col-end--span-12">
+                                        <div class="v-menu__list-box__item__wrapper__title">
+                                            <div class="v-menu__list-box__item__wrapper__title__text">
+                                                {{ project.title }}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="g-grid-box__col-end--span-7">
-                                    <div class="v-menu__list-box__item__tags"
-                                    >
-                                        <template v-for="(tag, index) of project.tags">
-                                            <span v-if="index > 0">, </span>
-                                            <button>{{ tag.title }}</button>
-                                        </template>
+                                    <div class="g-grid-box__col-end--span-7">
+                                        <div class="v-menu__list-box__item__wrapper__tags"
+                                        >
+                                            <div class="v-menu__list-box__item__wrapper__tags__text">
+                                                <template v-for="(tag, index) of project.tags">
+                                                    <span v-if="index > 0">, </span>
+                                                    <button>{{ tag.title }}</button>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </nuxt-link>
@@ -77,6 +80,8 @@ import {formatDateFromString, formatDateWithAndStart} from "~/utils/formatDateFr
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 const projectSlugMouseOverInList = ref('')
 
+const refProjectLineContainer: Ref<HTMLElement[]> = ref([])
+
 const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
     return projectsInfo.value?.projects?.toReversed()
 })
@@ -86,6 +91,37 @@ const getHoverProjectInfo = computed(() => {
 
     return findProjectInfoBySlug(projectsInfo.value.projects, projectSlugMouseOverInList.value)
 })
+
+onMounted(() => {
+    for(const line of refProjectLineContainer.value) {
+        setClassForLongText({
+            line,
+            containerSelector: '.v-menu__list-box__item__wrapper__title',
+            textSelector: '.v-menu__list-box__item__wrapper__title__text',
+        })
+        setClassForLongText({
+            line,
+            containerSelector: '.v-menu__list-box__item__wrapper__tags',
+            textSelector: '.v-menu__list-box__item__wrapper__tags__text',
+        })
+    }
+
+})
+
+function setClassForLongText({line, containerSelector, textSelector}: { line: HTMLElement, containerSelector: string, textSelector: string }) {
+
+        const titleContainer = line.querySelector(containerSelector)
+        const titleText = titleContainer?.querySelector(textSelector)
+
+        if(!(titleText instanceof HTMLElement) || !( titleContainer instanceof HTMLElement ) ) return
+
+        if(titleText.offsetWidth > titleContainer.offsetWidth) {
+            titleContainer.classList.add('rb-has-long-text-child')
+            titleContainer.style.setProperty('--rb-text-overflow-width', `${titleText.offsetWidth}`)
+            titleContainer.style.setProperty('--rb-title-container-width', `${titleContainer.offsetWidth}`)
+            titleContainer.appendChild(titleText.cloneNode(true))
+        }
+}
 
 </script>
 
@@ -102,10 +138,11 @@ const getHoverProjectInfo = computed(() => {
     padding: var(--rb-nav-height) var(--rb-gutter) var(--rb-gutter);
     overscroll-behavior: contain;
     overflow: scroll;
+    --v-menu-gradient-overflow-width: 2rem;
 }
 
 .v-menu__content {
-    padding-bottom: calc(100vh - 5rem);
+    padding-bottom: calc(50vh);
 }
 
 .v-menu__list-box {
@@ -114,56 +151,99 @@ const getHoverProjectInfo = computed(() => {
     button {
         all: unset;
     }
-
-    .v-menu__list-box__scroll {
-    }
 }
 
-.v-menu__list-box__item {
+.v-menu__list-box__item__wrapper {
     text-decoration: none;
     color: inherit;
     margin-bottom: .25rem;
     white-space: nowrap;
+}
 
-    &:hover {
-        color: var(--rb-nav-blue);
-        user-select: none;
+.v-menu__list-box__item__wrapper__title {
+    position: relative;
+    overflow: hidden;
+    display: flex;
 
-        .v-menu__list-box__item__title {
-            overflow: visible;
-
-            &:after {
-                content: none;
-            }
+    &.rb-has-long-text-child {
+        &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            width: var(--v-menu-gradient-overflow-width);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 10;
         }
-
-        .v-menu__list-box__item__tags {
-            .v-menu__list-box--with-long-title & {
-                opacity: 0;
-            }
-            user-select: none;
-        }
-
-        .v-menu__list-box__item__date {
-            user-select: none;
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            width: var(--v-menu-gradient-overflow-width);
+            background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 10;
         }
     }
 }
 
-.v-menu__list-box__item__title {
+.v-menu__list-box__item__wrapper__title__text {
+    padding-right: 5rem;
+
+    .rb-has-long-text-child & {
+        animation-name: v-title-overflow-animation;
+        animation-timing-function: linear;
+        animation-duration: calc(var(--rb-text-overflow-width) / 25 * 1s);
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+    }
+}
+
+.v-menu__list-box__item__wrapper__tags {
+    display: flex;
     position: relative;
     overflow: hidden;
 
-    &:after {
-        content: '';
-        position: absolute;
-        display: block;
-        height: 100%;
-        top: 0;
-        right: 0;
-        width: 5rem;
-        background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-        z-index: 10;
+    &.rb-has-long-text-child {
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 100%;
+            top: 0;
+            right: 0;
+            width: var(--v-menu-gradient-overflow-width);
+            background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 10;
+        }
+        .v-menu__list-box__item__wrapper:hover &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 100%;
+            top: 0;
+            left: 0;
+            width: var(--v-menu-gradient-overflow-width);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 10;
+        }
+    }
+
+}
+
+.v-menu__list-box__item__wrapper__tags__text {
+    padding-right: 5rem;
+
+    .v-menu__list-box__item__wrapper:hover .rb-has-long-text-child & {
+        animation-name: v-title-overflow-animation;
+        animation-timing-function: linear;
+        animation-duration: calc(var(--rb-text-overflow-width) / 25 * 1s);
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
     }
 }
 
@@ -177,5 +257,16 @@ const getHoverProjectInfo = computed(() => {
     display: block;
     width: 100%;
     position: absolute;
+}
+
+@keyframes v-title-overflow-animation {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        //transform: translateX( calc(-200% + (var(--rb-title-container-width) * 1px) ) );
+        transform: translateX(-100%);
+    }
 }
 </style>
