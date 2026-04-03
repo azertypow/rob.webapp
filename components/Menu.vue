@@ -6,7 +6,7 @@
             <div class="g-grid-box">
                 <div class="g-grid-box__col-end--span-5">
                     <div class="v-menu__img-box">
-                      <transition name="v-transition-mask-slide" mode="in-out">
+                      <transition name="v-transition-mask-slide" mode="out-in" >
                         <img class="v-menu__img-box__img"
                              alt="image cover of hover project in list"
                              v-if="getHoverProjectInfo"
