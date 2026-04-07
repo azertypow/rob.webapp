@@ -57,7 +57,7 @@
                 :style="{
                     color: colorForGallery,
                 }"
-            >{{ galleryIndex + 1 }} / {{ allCarouselImages.length + 1 }}
+            >{{ galleryIndex + 1 }} / {{ allCarouselImages.length }}
             </div>
 
 
