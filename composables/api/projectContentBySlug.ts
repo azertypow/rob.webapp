@@ -25,6 +25,7 @@ export interface IApiAbout {
     "error": string | null,
     "data": {
         "textabout": string
+        mapImage_about: IApiImage
     } | null
 }
 export interface IApiContact {

@@ -1,6 +1,9 @@
 <template>
     <section
         class="v-about"
+        :class="{
+            'with-map': content?.data?.mapImage_about,
+        }"
     >
         <div class="g-grid-box g-grid-box--with-gutter--sm"
         >
@@ -17,6 +20,17 @@
                     ></article>
                 </div>
             </div>
+        </div>
+        <div
+            class="v-about__map"
+            v-if="content?.data?.mapImage_about"
+        >
+            <img alt="image de l'atelier"
+                 :src="content.data.mapImage_about.resize?.xxl"
+                 :style="{
+                     objectPosition: content?.data?.mapImage_about.focus,
+                 }"
+            />
         </div>
 
     </section>
@@ -47,6 +61,12 @@ onMounted(async () => {
 <style lang="scss" scoped >
 .v-about {
     padding-top: var(--rb-nav-height);
+    background: white;
+    padding-bottom: 1rem;
+
+    &.with-map {
+        margin-bottom: 66vh;
+    }
 }
 
 .v-about__header {
@@ -91,5 +111,22 @@ onMounted(async () => {
     display: block;
     width: 100%;
     height: auto;
+}
+
+.v-about__map {
+    box-sizing: border-box;
+    position: fixed;
+    top: var(--rb-nav-height);
+    left: 0;
+    width: 100%;
+    height: calc( 100vh - var(--rb-nav-height));
+    z-index: -1;
+
+    > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 </style>
