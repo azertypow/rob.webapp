@@ -1,0 +1,27 @@
+{
+  "icon": {
+    "desktop": {
+      "regularIconTransformation": {
+        "type": "none"
+      },
+      "darkIconType": "none"
+    },
+    "touch": {
+      "transformation": {
+        "type": "none"
+      },
+      "appTitle": "rob vanleijsen"
+    },
+    "webAppManifest": {
+      "transformation": {
+        "type": "none"
+      },
+      "backgroundColor": "#ffffff",
+      "name": "rob vanleijsen",
+      "shortName": "rob",
+      "themeColor": "#ffffff"
+    }
+  },
+  "path": "/",
+  "skipMetadataInjection": false
+}
