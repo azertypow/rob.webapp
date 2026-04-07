@@ -1,10 +1,10 @@
 import {
-    IApiBlockImage,
-    IApiBlockVideo,
-    IApiImage,
+    type IApiBlockImage,
+    type IApiBlockVideo,
+    type IApiImage,
     type IApiImageOfProject,
     type IApiProjectInfo
-} from "~/server/api/projectsInfo";
+} from "~/composables/api/projectsInfo";
 
 export interface IProjectContent extends IApiProjectInfo {
     imageCover:             IApiImageOfProject[]

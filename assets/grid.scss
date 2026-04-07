@@ -214,4 +214,6 @@
   }
 }
 
-.g--sm__display-none {display: none}
+@media (max-width: 900px) {
+  .g--sm__display-none {display: none}
+}

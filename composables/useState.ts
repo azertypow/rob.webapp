@@ -1,4 +1,4 @@
-import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
 
 export const useMenuIsOpen = () => {
     return useState('menuIsOpen', () => false)

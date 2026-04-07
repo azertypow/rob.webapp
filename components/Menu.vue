@@ -19,7 +19,7 @@
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
                                      ref="refProjectLineContainer"
                                 >
-                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-5 g-grid-box--reg__order--1 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-8"
+                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-7 g-grid-box--reg__order--2 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-8"
                                     >
                                         <div class="v-menu__list-box__item__wrapper__date"
                                         >
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--3">
+                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--1">
                                         <div class="v-menu__list-box__item__wrapper__title">
                                             <div class="v-menu__list-box__item__wrapper__title__text">
                                                 {{ project.title }}
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--6 g-grid-box--reg__col-end--span-18 g-grid-box--reg__order--2 g-grid-box--sm__col-start--9 g-grid-box--sm__col-end--span-16">
+                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--8 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--3 g-grid-box--sm__col-start--9 g-grid-box--sm__col-end--span-16">
                                         <div class="v-menu__list-box__item__wrapper__tags"
                                         >
                                             <div class="v-menu__list-box__item__wrapper__tags__text">
@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import {type ComputedRef, defineProps} from 'vue'
-import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
 import {formatDateFromString, formatDateWithAndStart} from "~/utils/formatDateFromString";
 
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
@@ -164,14 +164,16 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     }
 }
 
+.v-menu__list-box__item__wrapper__date {
+    @media (max-width: 1200px) {
+        padding-bottom: 1rem;
+    }
+}
+
 .v-menu__list-box__item__wrapper__title {
     position: relative;
     overflow: hidden;
     display: flex;
-
-    @media (max-width: 1200px) {
-        padding-bottom: 1rem;
-    }
 
     &.rb-has-long-text-child {
         &:before {
@@ -252,6 +254,10 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
         animation-duration: calc(var(--rb-text-overflow-width) / 25 * 1s);
         animation-iteration-count: infinite;
         animation-direction: alternate;
+    }
+
+    @media (max-width: 1200px) {
+        padding-bottom: 1rem;
     }
 }
 

@@ -87,7 +87,7 @@
 <script lang="ts" setup>
 
 import type {ComputedRef} from "vue";
-import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
 
 const colorForGallery = useColorForGallery()
 

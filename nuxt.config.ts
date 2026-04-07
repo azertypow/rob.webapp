@@ -10,6 +10,6 @@ export default defineNuxtConfig({
       publicDir: './docs',
     },
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ["@/assets/_main.scss"],
 })

@@ -119,6 +119,12 @@ const currentProjectsInfo = useCurrentProjectsInfo()
 .v-app-nav__left {
     display: flex;
     width: 50%;
+    box-sizing: border-box;
+
+    @media (max-width: 1200px) {
+        padding-left: 1rem;
+        width: calc(100% / 24 * 15 + 1rem);
+    }
 
     @media (max-width: 900px) {
         align-items: flex-start;
@@ -147,6 +153,11 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     padding-left: 1rem;
     white-space: nowrap;
 
+    @media (max-width: 1200px) {
+        width: calc(100% / 24 * 7);
+        padding-left: 0;
+    }
+
     @media (max-width: 900px) {
         width: auto;
     }
@@ -157,5 +168,9 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     white-space: nowrap;
     box-sizing: border-box;
     height: 1rem;
+
+    @media (max-width: 1200px) {
+        width: calc(100% / 12 * 5);
+    }
 }
 </style>

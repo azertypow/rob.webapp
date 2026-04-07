@@ -41,7 +41,7 @@
 
 
 <script lang="ts" setup>
-import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
 import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
@@ -58,6 +58,46 @@ useRouter().beforeEach((to, from, next) => {
     useMenuIsOpen().value = false
     useCurrentProjectsInfo().value = null
     next()
+})
+
+useHead({
+    title: 'Rob van Leijsen',
+    meta: [
+        {
+            name: 'description',
+            content: 'Rob van Leijsen - ',
+        },
+        {
+            name: "apple-mobile-web-app-title",
+            content: "Rob van Leijsen",
+        },
+    ],
+    link: [
+        {
+            rel: "icon",
+            type: "image/png",
+            href: "/favicon-96x96.png",
+            sizes: "96x96",
+        },
+        {
+            rel: "icon",
+            type: "image/svg+xml",
+            href: "/favicon.svg",
+        },
+        {
+            rel: "shortcut icon",
+            href: "/favicon.ico",
+        },
+        {
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+            href: "/apple-touch-icon.png",
+        },
+        {
+            rel: "manifest",
+            href: "/site.webmanifest",
+        },
+    ],
 })
 
 

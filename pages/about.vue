@@ -29,7 +29,7 @@
 <script setup lang="ts">
 
 import {fetchApiGetAbout} from "~/fetchApi/fetchApiGET";
-import type {IApiAbout} from "~/server/api/projectContentBySlug";
+import type {IApiAbout} from "~/composables/api/projectContentBySlug";
 import type {Ref} from "vue";
 
 const content: Ref<null |IApiAbout> = ref(null)

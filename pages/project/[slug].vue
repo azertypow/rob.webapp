@@ -97,8 +97,8 @@
 
 <script setup lang="ts">
 import {type Ref} from 'vue'
-import type {IApiBlockImage, IApiImageOfProject} from "~/server/api/projectsInfo";
-import type {IApiVideo, IProjectContent} from "~/server/api/projectContentBySlug";
+import type {IApiBlockImage, IApiImageOfProject} from "~/composables/api/projectsInfo";
+import type {IApiVideo, IProjectContent} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)

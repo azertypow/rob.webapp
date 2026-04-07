@@ -1,6 +1,6 @@
-import type {IApiListOfProjectsInfo} from "~/server/api/projectsInfo";
+import type {IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
 import {apiBaseUrl} from "~/fetchApi/fetchApiConf";
-import {type IApiAbout, type IApiContact, type IProjectContent} from "~/server/api/projectContentBySlug";
+import {type IApiAbout, type IApiContact, type IProjectContent} from "~/composables/api/projectContentBySlug";
 
 export async function fetchApiGetProjects(): Promise<IApiListOfProjectsInfo> {
     return await (await fetch(`${apiBaseUrl}projects`)).json() as IApiListOfProjectsInfo

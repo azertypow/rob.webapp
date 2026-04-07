@@ -8,13 +8,18 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "create_favicon": "npx realfavicon generate public/favicon.svg favicon-settings.json output-data.json public/",
+    "create_html_markup_sample": "touch _favicon_html_sample.html && npx realfavicon inject output-data.json ./ _favicon_html_sample.html"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^4.0.0-alpha.3",
     "nuxt": "^3.8.1",
     "sass": "^1.69.5",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "realfavicon": "^0.8.0"
   }
 }

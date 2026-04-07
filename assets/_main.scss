@@ -1,7 +1,7 @@
-@import "./font-loader";
-@import "./params";
-@import "./grid";
-@import "./vue-transition";
+@use "./font-loader";
+@use "./params";
+@use "./grid";
+@use "./vue-transition";
 
 html {
   padding: 0;

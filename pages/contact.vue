@@ -46,7 +46,7 @@
 
 
 <script setup lang="ts">
-import type {IApiContact} from "~/server/api/projectContentBySlug";
+import type {IApiContact} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetContact} from "~/fetchApi/fetchApiGET";
 import type {Ref} from "vue";
 
