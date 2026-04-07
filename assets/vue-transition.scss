@@ -1,49 +1,69 @@
-// Default state: element fully visible
+// mask slide transition
 .v-transition-mask-slide {
     mask-position: 0 0;
 }
 
-// Active: define mask setup + transition
 .v-transition-mask-slide-enter-active,
 .v-transition-mask-slide-leave-active {
     mask-image: linear-gradient(180deg, #000 50%, transparent 50.001%);
-    mask-size: 200% 200%;
+    mask-size: 100% 200%;
     mask-repeat: no-repeat;
-    transition: mask-position 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+    transition: mask-position .5s ease-in-out;
 }
 
-// Hidden state: transparent half of mask covers the element
 .v-transition-mask-slide-enter-from {
   mask-position: 0 100%;
+}
+.v-transition-mask-slide-enter-to {
+    mask-position: 0 0;
+}
+
+.v-transition-mask-slide-leave-from {
+    mask-position: 0 0;
 }
 .v-transition-mask-slide-leave-to {
     mask-position: 0 -100%;
 }
 
-// Visible state: opaque half of mask covers the element
-.v-transition-mask-slide-enter-to,
-.v-transition-mask-slide-leave-from {
-    mask-position: 0 0;
-}
 
 // -----
 
 // page transition
 .page-enter-active,
 .page-leave-active {
-    mask-position: 0 50%;
-    mask-image: linear-gradient(90deg, #000 0%, #000 50%, #000 100%);
-    transition: mask-position 1s ease;
-    mask-size: 100% 200%;
-    mask-repeat: no-repeat;
-}
-.page-leave-active {
-    mask-image: linear-gradient(-90deg, #000 0%, #000 50%, #000 100%);
-}
-.page-enter-from {
-    mask-position: 0 200%;
+    &:after {
+        content: '';
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #fff;
+        transition: transform var(--page-transition-duration) cubic-bezier(0.76, 0, 0.24, 1);
+        z-index: 100000;
+    }
 }
 
+.page-enter-from {
+    &:after {
+        transform: translate3d(0, 0%, 0);
+    }
+}
+.page-enter-to {
+    &:after {
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+
+.page-leave-from {
+    &:after {
+        transform: translate3d(0, -100%, 0);
+    }
+}
 .page-leave-to {
-    mask-position: 0 -200%;
+    &:after {
+        transform: translate3d(0, 0%, 0);
+    }
 }

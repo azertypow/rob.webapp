@@ -53,7 +53,7 @@
                 </div>
                 <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g--sm__display-none">
                     <div class="v-menu__img-box">
-                      <transition name="v-transition-mask-slide" mode="out-in" >
+                      <transition name="v-transition-mask-slide">
                         <img class="v-menu__img-box__img"
                              alt="image cover of hover project in list"
                              v-if="getHoverProjectInfo"
@@ -275,6 +275,9 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     display: block;
     width: 100%;
     position: absolute;
+    aspect-ratio: 9/16;
+    object-fit: contain;
+    object-position: top;
 }
 
 @keyframes v-title-overflow-animation {

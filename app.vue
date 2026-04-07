@@ -13,7 +13,12 @@
             <Menu/>
         </div>
 
-        <NuxtPage/>
+        <Transition name="page" mode="out-in" :duration="pageTransitionDuration"
+                    :style="{
+                        '--page-transition-duration': `${pageTransitionDuration}ms`,
+                    }">
+            <NuxtPage/>
+        </Transition>
     </div>
 </template>
 
@@ -45,6 +50,8 @@ import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/pr
 import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
+
+const pageTransitionDuration = 1_000
 
 onMounted(async () => {
     const projectInfo = await fetchApiGetProjects()

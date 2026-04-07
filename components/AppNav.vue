@@ -75,7 +75,7 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     user-select: none;
     color: black;
     transition: background-position 1s ease-in-out, color 1s 1s ease-in-out, stroke 1s 1s ease-in-out;
-    background: linear-gradient(180deg, rgb(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0)) 0 0 no-repeat;
+    background: linear-gradient(180deg, rgb(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0)) 0 0 no-repeat;
 
     &.is-home {
         color: white;

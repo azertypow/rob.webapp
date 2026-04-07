@@ -1,6 +1,9 @@
 <template>
     <section
         class="v-contact"
+        :class="{
+            'with-map': content?.data?.mapImage,
+        }"
     >
         <div class="g-grid-box g-grid-box--with-gutter--sm"
         >
@@ -17,27 +20,17 @@
                 </div>
             </div>
         </div>
-        <div class="g-grid-box">
-            <div class= "
-                            g-grid-box__col-start--5        g-grid-box__col-end--span-14
-                            g-grid-box--reg__col-start--3  g-grid-box--reg__col-end--span-18
-                            g-grid-box--sm__col-start--1   g-grid-box--sm__col-end--span-24
-                        ">
-                <div
-                    class="v-contact__map"
-                >
-                    <a class="v-contact__map__link"
-                       target="_blank"
-                       href="https://www.google.com/maps/place/Rue+des+Vieux-Grenadiers+10,+1205+Gen%C3%A8ve/@46.1988881,6.1379562,17z/data=!4m6!3m5!1s0x478c64d53f755ff9:0x1ddd695830138867!8m2!3d46.1989327!4d6.1381708!16s%2Fg%2F11c5b46jtc?entry=ttu"
-                    >
-                        <img alt="image de carte pour représenter l\'emplacement de l\'atelier"
-                             :src="content?.data?.mapImage?.resize?.xxl"
-                        />
-                    </a>
-                </div>
-            </div>
+        <div
+            class="v-contact__map"
+            v-if="content?.data?.mapImage"
+        >
+            <img alt="image de l'atelier"
+                 :src="content.data.mapImage.resize?.xxl"
+                 :style="{
+                     objectPosition: content?.data?.mapImage.focus,
+                 }"
+            />
         </div>
-
     </section>
 </template>
 
@@ -65,7 +58,12 @@ onMounted(async () => {
 <style lang="scss" scoped >
 .v-contact {
     padding-top: var(--rb-nav-height);
+    background: white;
     padding-bottom: 1rem;
+
+    &.with-map {
+        margin-bottom: 66vh;
+    }
 
     @media (max-width: 900px) {
         padding-bottom: 0;
@@ -85,13 +83,18 @@ onMounted(async () => {
 
 .v-contact__map {
     box-sizing: border-box;
-    padding-top: 2rem;
-}
+    position: fixed;
+    top: var(--rb-nav-height);
+    left: 0;
+    width: 100%;
+    height: calc( 100vh - var(--rb-nav-height));
+    z-index: -1;
 
-.v-contact__map__link {
     > img {
         display: block;
         width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 </style>
