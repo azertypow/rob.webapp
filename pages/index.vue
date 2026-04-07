@@ -9,19 +9,36 @@
                 @click="previousGalleryItem"
                 @mouseleave="forceToHiddenNav = false"
             ></div>
+            <video class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
+                   :autoplay="false"
+                   muted
+                   playsinline
+                   v-if="allCarouselImages[previousGalleryIndex]?.image.url.endsWith('.mp4')"
+                   :src="allCarouselImages[previousGalleryIndex]?.image.url"
+            />
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
                  :src="allCarouselImages[previousGalleryIndex]?.image.resize?.xxl"
                  alt="preview of previous gallery image"
+                 v-else
             />
 
             <div class="v-index__carousel__nav-to-right"
                  @click="nextGalleryItem"
                  @mouseleave="forceToHiddenNav = false"
             ></div>
+            <video class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
+                   :autoplay="false"
+                   muted
+                   playsinline
+                   v-if="allCarouselImages[nextGalleryIndex]?.image.url.endsWith('.mp4')"
+                   :src="allCarouselImages[nextGalleryIndex]?.image.url"
+                   :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
+            />
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
                  :src="allCarouselImages[nextGalleryIndex]?.image.resize?.xxl"
                  alt="preview of next gallery image"
                  :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
+                 v-else
             />
 
             <div
