@@ -14,7 +14,7 @@
                                 v-for="project of projectsReverse"
                                 class="v-menu__list-box__item__wrapper"
                                 :href="`/project/${project.slug}`"
-                                @mouseover="projectSlugMouseOverInList = project.slug"
+                                @mouseover="setOverProject(project.slug)"
                             >
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
                                      ref="refProjectLineContainer"
@@ -91,6 +91,20 @@ const getHoverProjectInfo = computed(() => {
 
     return findProjectInfoBySlug(projectsInfo.value.projects, projectSlugMouseOverInList.value)
 })
+
+let lastUpdateTime = Date.now()
+let debounceTimer: number | null = null
+
+function setOverProject(projectOverSlug: string) {
+
+    if (debounceTimer) window.clearTimeout(debounceTimer)
+
+    debounceTimer = window.setTimeout(() => {
+        projectSlugMouseOverInList.value = projectOverSlug
+        debounceTimer = null
+    }, 200)
+
+}
 
 onMounted(() => {
     for(const line of refProjectLineContainer.value) {
