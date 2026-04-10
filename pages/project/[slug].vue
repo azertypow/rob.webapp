@@ -154,8 +154,8 @@ onUnmounted(() => {
 }
 
 .v-project-slug__content__list {
-    margin-top: .15rem;
-    margin-bottom: .15rem;
+    margin-top:     .25rem;
+    margin-bottom:  .25rem;
 
   @media (max-width: 900px) {
     margin: 0;
