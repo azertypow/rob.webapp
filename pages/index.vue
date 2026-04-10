@@ -196,7 +196,7 @@ function previousGalleryItem() {
     width: var(--rb-index__carousel-nav-width);
     height: 100%;
     z-index: 1000;
-    cursor: pointer;
+    cursor: url("data:image/svg+xml,%3Csvg width='50' height='60' viewBox='0 0 99 82' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40.5072L40.5072 0H59.4384L18.9312 40.5072L59.4384 81.0144H40.5072L0 40.5072ZM11.5536 33.5472H98.832V47.4672H11.5536V33.5472Z' fill='black'/%3E%3C/svg%3E") 0 60, pointer;
     user-select: none;
 
     &:hover+.v-index__carousel__image-preview-box--previous {
@@ -210,7 +210,7 @@ function previousGalleryItem() {
     width: var(--rb-index__carousel-nav-width);
     height: 100%;
     z-index: 1000;
-    cursor: pointer;
+    cursor: url("data:image/svg+xml,%3Csvg width='50' height='60' viewBox='0 0 99 82' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M79.9008 40.5072L39.3936 0H58.3248L98.832 40.5072L58.3248 81.0144H39.3936L79.9008 40.5072ZM0 33.5472H87.2784V47.4672H0V33.5472Z' fill='black'/%3E%3C/svg%3E") 50 50, pointer;
     user-select: none;
 
     &:hover+.v-index__carousel__image-preview-box--next {
