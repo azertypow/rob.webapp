@@ -1,13 +1,32 @@
 <template>
-    <section class="v-index" >
+    <section class="v-index"
+             :class="{
+                    'hide-arrow': arrowDirection === 0,
+             }"
+    >
         <div
             class="v-index__carousel"
             v-if="projectsInfo"
+            @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
         >
+
+            <svg width="99" height="82" viewBox="0 0 44.875 44.33203125" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 class="v-index__carousel__cursor"
+                 :style="{
+                        top: cursorPosition.y + 'px',
+                        left: cursorPosition.x + 'px',
+                    }"
+            >
+                <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M35.900390625,24.5458984375H0v-4.828125h35.83203125L16.1142578125,0h6.59521484375l22.16552734375,22.166015625-22.16552734375,22.166015625h-6.59521484375l19.7861328125-19.7861328125Z" style="fill: white"/>
+                </g>
+            </svg>
+
             <div
                 class="v-index__carousel__nav-to-left"
                 @click="previousGalleryItem"
-                @mouseleave="forceToHiddenNav = false"
+                @mouseleave="arrowDirection = 0"
+                @mouseenter="arrowDirection = -1"
             ></div>
             <video class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--previous"
                    :autoplay="false"
@@ -24,7 +43,8 @@
 
             <div class="v-index__carousel__nav-to-right"
                  @click="nextGalleryItem"
-                 @mouseleave="forceToHiddenNav = false"
+                 @mouseleave="arrowDirection = 0"
+                 @mouseenter="arrowDirection = 1"
             ></div>
             <video class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
                    :autoplay="false"
@@ -32,12 +52,10 @@
                    playsinline
                    v-if="allCarouselImages[nextGalleryIndex]?.image.url.endsWith('.mp4')"
                    :src="allCarouselImages[nextGalleryIndex]?.image.url"
-                   :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
             />
             <img class="v-index__carousel__image-preview-box v-index__carousel__image-preview-box--next"
                  :src="allCarouselImages[nextGalleryIndex]?.image.resize?.xxl"
                  alt="preview of next gallery image"
-                 :class="{'v-index__carousel--force-to-hidden': forceToHiddenNav}"
                  v-else
             />
 
@@ -106,11 +124,16 @@
 import type {ComputedRef} from "vue";
 import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
 
+const cursorPosition = ref({
+    x: 0,
+    y: 0,
+})
+
+const arrowDirection = ref<-1 | 1 | 0>(0)
+
 const colorForGallery = useColorForGallery()
 
 const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
-
-const forceToHiddenNav = ref(false)
 
 const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTitle: string, projectSlug: string}[]> = computed(() => {
 
@@ -155,8 +178,6 @@ function nextGalleryItem() {
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
-
-    forceToHiddenNav.value = true
 }
 
 // todo: code optimisation (click function for clearInterfvale and ducplication code)
@@ -164,8 +185,6 @@ function previousGalleryItem() {
     galleryIndex.value--
     if(galleryIndex.value < 0) galleryIndex.value = allCarouselImages.value.length - 1
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
-
-    forceToHiddenNav.value = true
 }
 
 </script>
@@ -197,7 +216,9 @@ function previousGalleryItem() {
     height: 100%;
     z-index: 1000;
     cursor: url("data:image/svg+xml,%3Csvg width='50' height='60' viewBox='0 0 99 82' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40.5072L40.5072 0H59.4384L18.9312 40.5072L59.4384 81.0144H40.5072L0 40.5072ZM11.5536 33.5472H98.832V47.4672H11.5536V33.5472Z' fill='black'/%3E%3C/svg%3E") 0 60, pointer;
+    cursor: none;
     user-select: none;
+    mix-blend-mode: difference;
 
     &:hover+.v-index__carousel__image-preview-box--previous {
         opacity: 1;
@@ -210,17 +231,12 @@ function previousGalleryItem() {
     width: var(--rb-index__carousel-nav-width);
     height: 100%;
     z-index: 1000;
-    cursor: url("data:image/svg+xml,%3Csvg width='50' height='60' viewBox='0 0 99 82' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M79.9008 40.5072L39.3936 0H58.3248L98.832 40.5072L58.3248 81.0144H39.3936L79.9008 40.5072ZM0 33.5472H87.2784V47.4672H0V33.5472Z' fill='black'/%3E%3C/svg%3E") 50 50, pointer;
+    cursor: none;
     user-select: none;
 
     &:hover+.v-index__carousel__image-preview-box--next {
         opacity: 1;
     }
-}
-
-.v-index__carousel--force-to-hidden {
-    //opacity: 0 !important;
-    //user-select: none;
 }
 
 .v-index__carousel__image-preview-box {
@@ -306,4 +322,24 @@ function previousGalleryItem() {
     //transform: translateX(-5%);
 }
 
+
+.v-index__carousel__cursor {
+    transform-origin: left center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+    mix-blend-mode: difference;
+    width: 55px;
+    height: auto;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate3d(0, 0, 0, 90deg);
+    opacity: 1;
+    transition: transform .25s ease-in-out, opacity .25s ease-in-out;
+
+    .hide-arrow & {
+        transform: translate(-50%, -50%) rotate3d(1, 0, 0, 90deg) !important;
+        transition: none !important;
+    }
+}
 </style>

@@ -68,7 +68,7 @@
                              :alt="itemOfGalleryProject.images[0]?.credit"
                         />
                         <div class="v-project-slug__gallery__info" >
-                            <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
+                            <div>©Raphaëlle Muller{{ itemOfGalleryProject.images[0]?.title }}</div>
                             <div v-if="itemOfGalleryProject.images[0]?.credit" >©{{itemOfGalleryProject.images[0].credit}}</div>
                         </div>
                     </template>
@@ -156,6 +156,7 @@ onUnmounted(() => {
 .v-project-slug__content__list {
     margin-top:     .25rem;
     margin-bottom:  .25rem;
+    //max-width: 45em;
 
   @media (max-width: 900px) {
     margin: 0;
@@ -163,6 +164,12 @@ onUnmounted(() => {
       margin-top: 1rem;
     }
   }
+}
+
+.v-project-slug__content__list__item {
+    &:nth-child(2) {
+        max-width: 27em;
+    }
 }
 
 .v-project-slug__details__item {
@@ -184,6 +191,12 @@ onUnmounted(() => {
 .v-project-slug__gallery__info {
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    font-size: .5rem;
+    right: .5em;
+    bottom: .5em;
+    line-height: 1.25ex;
+    color: white;
 
     .is-full & {
         box-sizing: border-box;

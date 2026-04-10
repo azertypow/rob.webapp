@@ -227,6 +227,10 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .g--reg__display-none {display: none}
+}
+
 @media (max-width: 900px) {
   .g--sm__display-none {display: none}
 }

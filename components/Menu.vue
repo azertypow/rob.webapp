@@ -17,9 +17,12 @@
                                 @mouseover="setOverProject(project.slug)"
                             >
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
+                                     :class="{
+                                        'is-current-project': useRoute().path.replace('/project', '') === '/' + project.slug
+                                     }"
                                      ref="refProjectLineContainer"
                                 >
-                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-7 g-grid-box--reg__order--2 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-24 g-grid-box--sm__order--1"
+                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-end--span-6"
                                     >
                                         <div class="v-menu__list-box__item__wrapper__date"
                                         >
@@ -27,15 +30,21 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-start--1 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--1 g-grid-box--sm__order--2">
+                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-end--span-18">
                                         <div class="v-menu__list-box__item__wrapper__title">
                                             <div class="v-menu__list-box__item__wrapper__title__text">
+                                                <span
+                                                    style="font-size: .5rem; position: relative; top: -.175em; margin-right: .25em"
+                                                    v-if="useRoute().path.replace('/project', '') === '/' + project.slug"
+                                                >
+                                                    ●
+                                                </span>
                                                 {{ project.title }}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-7 g-grid-box--reg__col-start--8 g-grid-box--reg__col-end--span-24 g-grid-box--reg__order--3 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-24 g-grid-box--sm__order--3">
+                                    <div class="g-grid-box__col-end--span-7 g--reg__display-none">
                                         <div class="v-menu__list-box__item__wrapper__tags"
                                         >
                                             <div class="v-menu__list-box__item__wrapper__tags__text">
@@ -53,14 +62,12 @@
                 </div>
                 <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g--sm__display-none">
                     <div class="v-menu__img-box">
-                      <transition name="v-transition-mask-slide">
                         <img class="v-menu__img-box__img"
                              alt="image cover of hover project in list"
                              v-if="getHoverProjectInfo"
-                             :src="getHoverProjectInfo?.imageCoverForIndex.resize?.small"
+                             :src="getHoverProjectInfo?.imageCoverForIndex.resize?.reg"
                              :key="getHoverProjectInfo?.imageCoverForIndex.url"
                         />
-                      </transition>
                     </div>
                 </div>
             </div>
@@ -113,11 +120,6 @@ onMounted(() => {
             containerSelector: '.v-menu__list-box__item__wrapper__title',
             textSelector: '.v-menu__list-box__item__wrapper__title__text',
         })
-        setClassForLongText({
-            line,
-            containerSelector: '.v-menu__list-box__item__wrapper__tags',
-            textSelector: '.v-menu__list-box__item__wrapper__tags__text',
-        })
     }
 
 })
@@ -133,7 +135,6 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
             titleContainer.classList.add('rb-has-long-text-child')
             titleContainer.style.setProperty('--rb-text-overflow-width', `${titleText.offsetWidth}`)
             titleContainer.style.setProperty('--rb-title-container-width', `${titleContainer.offsetWidth}`)
-            titleContainer.appendChild(titleText.cloneNode(true))
         }
 }
 
@@ -153,10 +154,6 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     overscroll-behavior: contain;
     overflow: scroll;
     --v-menu-gradient-overflow-width: 2rem;
-}
-
-.v-menu__content {
-    padding-bottom: calc(50vh);
 }
 
 .v-menu__list-box {
@@ -179,12 +176,9 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
 }
 
 .v-menu__list-box__item__wrapper__date {
-    @media (max-width: 1200px) {
-        padding-bottom: 1rem;
-    }
-
-    @media (max-width: 900px) {
-        padding-bottom: 0;
+    .is-current-project & {
+        cursor: default;
+        color: black;
     }
 }
 
@@ -194,17 +188,6 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     display: flex;
 
     &.rb-has-long-text-child {
-        &:before {
-            content: '';
-            position: absolute;
-            display: block;
-            height: 100%;
-            top: 0;
-            left: 0;
-            width: var(--v-menu-gradient-overflow-width);
-            background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-            z-index: 10;
-        }
         &:after {
             content: '';
             position: absolute;
@@ -216,18 +199,22 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
             background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
             z-index: 10;
         }
+
+        .v-menu__list-box__item__wrapper:hover & {
+            overflow: visible;
+            &:after {
+                content: none;
+            }
+        }
     }
 }
 
 .v-menu__list-box__item__wrapper__title__text {
     padding-right: 5rem;
 
-    .rb-has-long-text-child & {
-        animation-name: v-title-overflow-animation;
-        animation-timing-function: linear;
-        animation-duration: calc(var(--rb-text-overflow-width) / 25 * 1s);
-        animation-iteration-count: infinite;
-        animation-direction: normal;
+    .is-current-project & {
+        cursor: default;
+        color: black;
     }
 }
 
@@ -248,17 +235,6 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
             background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
             z-index: 10;
         }
-        .v-menu__list-box__item__wrapper:hover &:before {
-            content: '';
-            position: absolute;
-            display: block;
-            height: 100%;
-            top: 0;
-            left: 0;
-            width: var(--v-menu-gradient-overflow-width);
-            background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-            z-index: 10;
-        }
     }
 
 }
@@ -266,16 +242,16 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
 .v-menu__list-box__item__wrapper__tags__text {
     padding-right: 5rem;
 
-    .v-menu__list-box__item__wrapper:hover .rb-has-long-text-child & {
-        animation-name: v-title-overflow-animation;
-        animation-timing-function: linear;
-        animation-duration: calc(var(--rb-text-overflow-width) / 25 * 1s);
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+
+    .is-current-project & {
+        cursor: default;
+        color: black;
     }
 
-    @media (max-width: 1200px) {
-        padding-bottom: 1rem;
+    .v-menu__list-box__item__wrapper:hover * > .rb-has-long-text-child + & {
+        .v-menu__list-box__item__wrapper:hover & {
+            display: none;
+        }
     }
 }
 
