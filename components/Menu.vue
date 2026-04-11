@@ -90,6 +90,7 @@ const projectSlugMouseOverInList = ref('')
 const refProjectLineContainer: Ref<HTMLElement[]> = ref([])
 
 const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
+    setClassForLongTextForProjectLineContainer()
     return projectsInfo.value?.projects?.toReversed()
 })
 
@@ -120,6 +121,10 @@ function setOverProject(projectOverSlug: string) {
 }
 
 onMounted(() => {
+    setClassForLongTextForProjectLineContainer()
+})
+
+function setClassForLongTextForProjectLineContainer() {
     for(const line of refProjectLineContainer.value) {
         setClassForLongText({
             line,
@@ -134,8 +139,7 @@ onMounted(() => {
             classNameIfLongText: 'rb-has-long-tags-list',
         })
     }
-
-})
+}
 
 function setClassForLongText({line, containerSelector, textSelector, classNameIfLongText}: {
     line: HTMLElement
