@@ -99,17 +99,23 @@ const getHoverProjectInfo = computed(() => {
     return findProjectInfoBySlug(projectsInfo.value.projects, projectSlugMouseOverInList.value)
 })
 
-let lastUpdateTime = Date.now()
+let isFirstInteraction = true
 let debounceTimer: number | null = null
 
 function setOverProject(projectOverSlug: string) {
+
+    if(isFirstInteraction) {
+        projectSlugMouseOverInList.value = projectOverSlug
+        isFirstInteraction = false
+        return
+    }
 
     if (debounceTimer) window.clearTimeout(debounceTimer)
 
     debounceTimer = window.setTimeout(() => {
         projectSlugMouseOverInList.value = projectOverSlug
         debounceTimer = null
-    }, 200)
+    }, 100)
 
 }
 
@@ -119,12 +125,24 @@ onMounted(() => {
             line,
             containerSelector: '.v-menu__list-box__item__wrapper__title',
             textSelector: '.v-menu__list-box__item__wrapper__title__text',
+            classNameIfLongText: 'rb-has-long-title',
+        })
+        setClassForLongText({
+            line,
+            containerSelector: '.v-menu__list-box__item__wrapper__tags',
+            textSelector: '.v-menu__list-box__item__wrapper__tags__text',
+            classNameIfLongText: 'rb-has-long-tags-list',
         })
     }
 
 })
 
-function setClassForLongText({line, containerSelector, textSelector}: { line: HTMLElement, containerSelector: string, textSelector: string }) {
+function setClassForLongText({line, containerSelector, textSelector, classNameIfLongText}: {
+    line: HTMLElement
+    containerSelector: string
+    textSelector: string
+    classNameIfLongText: string
+}) {
 
         const titleContainer = line.querySelector(containerSelector)
         const titleText = titleContainer?.querySelector(textSelector)
@@ -132,7 +150,7 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
         if(!(titleText instanceof HTMLElement) || !( titleContainer instanceof HTMLElement ) ) return
 
         if(titleText.offsetWidth > titleContainer.offsetWidth) {
-            titleContainer.classList.add('rb-has-long-text-child')
+            line.classList.add(classNameIfLongText)
             titleContainer.style.setProperty('--rb-text-overflow-width', `${titleText.offsetWidth}`)
             titleContainer.style.setProperty('--rb-title-container-width', `${titleContainer.offsetWidth}`)
         }
@@ -187,7 +205,7 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     overflow: hidden;
     display: flex;
 
-    &.rb-has-long-text-child {
+    .rb-has-long-title & {
         &:after {
             content: '';
             position: absolute;
@@ -223,7 +241,7 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
     position: relative;
     overflow: hidden;
 
-    &.rb-has-long-text-child {
+    .rb-has-long-tags-list & {
         &:after {
             content: '';
             position: absolute;
@@ -248,10 +266,8 @@ function setClassForLongText({line, containerSelector, textSelector}: { line: HT
         color: black;
     }
 
-    .v-menu__list-box__item__wrapper:hover * > .rb-has-long-text-child + & {
-        .v-menu__list-box__item__wrapper:hover & {
-            display: none;
-        }
+    .v-menu__list-box__item__wrapper.rb-has-long-title:hover & {
+        display: none;
     }
 }
 
