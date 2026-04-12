@@ -345,13 +345,8 @@ function previousGalleryItem() {
     width: 55px;
     height: auto;
     pointer-events: none;
-    transform: translate(-50%, -50%) rotate3d(0, 0, 0, 90deg);
+    transform: translate(-50%, -50%);
     opacity: 1;
     transition: transform .25s ease-in-out, opacity .25s ease-in-out;
-
-    .hide-arrow & {
-        transform: translate(-50%, -50%) rotate3d(1, 0, 0, 90deg) !important;
-        transition: none !important;
-    }
 }
 </style>
