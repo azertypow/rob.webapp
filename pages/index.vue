@@ -358,7 +358,7 @@ function previousGalleryItem() {
     left: 0;
     z-index: 1000000;
     mix-blend-mode: difference;
-    width: 55px;
+    width: 25px;
     height: auto;
     pointer-events: none;
     transform: translate(-50%, -50%);
