@@ -9,16 +9,28 @@
             v-if="projectsInfo"
             @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
         >
-
-            <svg width="99" height="82" viewBox="0 0 44.875 44.33203125" fill="none" xmlns="http://www.w3.org/2000/svg"
+            <svg width="99" height="82" viewBox="0 0 44.9 44.3" fill="none" xmlns="http://www.w3.org/2000/svg"
                  class="v-index__carousel__cursor"
                  :style="{
                         top: cursorPosition.y + 'px',
                         left: cursorPosition.x + 'px',
                     }"
+                 v-if="arrowDirection === 1"
             >
-                <g id="Layer_1-2" data-name="Layer 1">
+                <g id="Layer_1-2">
                     <path d="M35.900390625,24.5458984375H0v-4.828125h35.83203125L16.1142578125,0h6.59521484375l22.16552734375,22.166015625-22.16552734375,22.166015625h-6.59521484375l19.7861328125-19.7861328125Z" style="fill: white"/>
+                </g>
+            </svg>
+            <svg width="99" height="82" viewBox="0 0 44.9 44.3" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 class="v-index__carousel__cursor"
+                 :style="{
+                        top: cursorPosition.y + 'px',
+                        left: cursorPosition.x + 'px',
+                    }"
+                 v-else-if="arrowDirection === -1"
+            >
+                <g id="Layer_1-2">
+                    <path d="M9,19.8h35.9v4.8H9l19.7,19.7h-6.6L0,22.2,22.2,0h6.6L9,19.8Z" style="fill: white"/>
                 </g>
             </svg>
 
