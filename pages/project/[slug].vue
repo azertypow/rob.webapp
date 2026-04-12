@@ -167,7 +167,7 @@ onMounted(async () => {
 .v-project-slug__gallery__image {
     display: block;
     width: 100%;
-    max-height: 80vh;
+    max-height: 100vh;
     object-fit: contain;
 }
 
