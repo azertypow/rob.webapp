@@ -68,8 +68,11 @@
                              :alt="itemOfGalleryProject.images[0]?.credit"
                         />
                         <div class="v-project-slug__gallery__info" >
-                            <div>©Raphaëlle Muller{{ itemOfGalleryProject.images[0]?.title }}</div>
-                            <div v-if="itemOfGalleryProject.images[0]?.credit" >©{{itemOfGalleryProject.images[0].credit}}</div>
+                            <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
+                            <div v-if="itemOfGalleryProject.images[0].credit" >
+                                <template v-if="itemOfGalleryProject.images[0]?.title"> | </template>
+                                ©{{itemOfGalleryProject.images[0].credit}}
+                            </div>
                         </div>
                     </template>
                     <template v-else-if="itemOfGalleryProject.type === 'video'">
