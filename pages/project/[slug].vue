@@ -42,11 +42,9 @@
                                  v-html="currentProject?.htmlContent"
                         ></article>
 
-                        <div class="v-project-slug__content__list g-grid-box"
-                             v-for="liste of currentProject?.listOfDetails" >
-                            <div class="g-grid-box__col-end--span-8     g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.name" ></div>
-                            <div class="g-grid-box__col-end--span-16    g-grid-box--sm__col-end--span-24   v-project-slug__content__list__item g-child-no-margin" v-html="liste.value" ></div>
-                        </div>
+                        <AppList v-if="currentProject?.listOfDetails"
+                                 :listOfDetails="currentProject.listOfDetails"
+                        />
                     </div>
                 </div>
             </div>
@@ -100,12 +98,10 @@
 
 <script setup lang="ts">
 import {type Ref} from 'vue'
-import type {IApiBlockImage, IApiImageOfProject} from "~/composables/api/projectsInfo";
-import type {IApiVideo, IProjectContent} from "~/composables/api/projectContentBySlug";
+import type {IProjectContent} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
-const router = useRouter()
 const showContent = ref(true)
 const coverLoaded = ref(false)
 
@@ -156,24 +152,6 @@ onUnmounted(() => {
     box-sizing: border-box;
 }
 
-.v-project-slug__content__list {
-    margin-top:     .25rem;
-    margin-bottom:  .25rem;
-    //max-width: 45em;
-
-  @media (max-width: 900px) {
-    margin: 0;
-    & + & {
-      margin-top: 1rem;
-    }
-  }
-}
-
-.v-project-slug__content__list__item {
-    &:nth-child(2) {
-        max-width: 27em;
-    }
-}
 
 .v-project-slug__details__item {
     display: flex;
