@@ -228,6 +228,15 @@ function setClassForLongText({line, containerSelector, textSelector, classNameIf
                 content: none;
             }
         }
+        @media (max-width: 1200px) {
+            .v-menu__list-box__item__wrapper & {
+                overflow: hidden !important;
+                &:after {
+                    content: "" !important;
+                }
+            }
+        }
+
     }
 }
 
