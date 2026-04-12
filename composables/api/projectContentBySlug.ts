@@ -26,6 +26,7 @@ export interface IApiAbout {
     "data": {
         "textabout": string
         mapImage_about: IApiImage
+        listOfDetails_about: {name: string, value: string}[]
     } | null
 }
 export interface IApiContact {
@@ -33,6 +34,7 @@ export interface IApiContact {
     "data": {
         "textcontact": string,
         "mapImage": IApiImage | null
+        listOfDetails_contact: {name: string, value: string}[]
     } | null
 
 }

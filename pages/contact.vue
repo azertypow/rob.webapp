@@ -19,6 +19,13 @@
                     ></article>
                 </div>
             </div>
+            <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-14
+                        g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-18
+                        g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
+            >
+                <AppList v-if="content?.data?.listOfDetails_contact"
+                         :listOfDetails="content.data.listOfDetails_contact"/>
+            </div>
         </div>
         <div
             class="v-contact__map"
