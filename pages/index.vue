@@ -241,6 +241,7 @@ function previousGalleryItem() {
     position: relative;
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .v-index__carousel__nav-to-left {
