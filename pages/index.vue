@@ -2,13 +2,14 @@
     <section class="v-index"
              :class="{
                     'hide-arrow': arrowDirection === 0,
+                    'has-touch-gesture': hasTouchGesture === true,
              }"
     >
         <div
             class="v-index__carousel"
             v-if="projectsInfo"
             @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
-            @touchstart.passive="touchGesture.onTouchStart"
+            @touchstart.passive="() => {touchGesture.onTouchStart; hasTouchGesture = true}"
             @touchend.passive="touchGesture.onTouchEnd"
         >
             <template v-if="useRouter().currentRoute.value.query.cursor === '1'">
@@ -162,6 +163,8 @@ const touchGesture = new TouchGesture(
   },
 )
 
+const hasTouchGesture = ref(false)
+
 const cursorPosition = ref({
     x: 0,
     y: 0,
@@ -260,6 +263,10 @@ function previousGalleryItem() {
     &:hover+.v-index__carousel__image-preview-box--previous {
         opacity: 1;
     }
+
+    .has-touch-gesture & {
+      display: none;
+    }
 }
 .v-index__carousel__nav-to-right {
     position: absolute;
@@ -273,6 +280,10 @@ function previousGalleryItem() {
 
     &:hover+.v-index__carousel__image-preview-box--next {
         opacity: 1;
+    }
+
+    .has-touch-gesture & {
+      display: none;
     }
 }
 
@@ -373,5 +384,9 @@ function previousGalleryItem() {
     transform: translate(-50%, -50%);
     opacity: 1;
     transition: transform .25s ease-in-out, opacity .25s ease-in-out;
+
+    .has-touch-gesture & {
+      display: none;
+    }
 }
 </style>
