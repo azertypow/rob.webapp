@@ -8,6 +8,8 @@
             class="v-index__carousel"
             v-if="projectsInfo"
             @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
+            @touchstart.passive="touchGesture.onTouchStart"
+            @touchend.passive="touchGesture.onTouchEnd"
         >
             <template v-if="useRouter().currentRoute.value.query.cursor === '1'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none"
@@ -151,6 +153,15 @@
 import type {ComputedRef} from "vue";
 import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
 
+const touchGesture = new TouchGesture(
+  () => {
+    previousGalleryItem()
+  },
+  () => {
+    nextGalleryItem()
+  },
+)
+
 const cursorPosition = ref({
     x: 0,
     y: 0,
@@ -183,10 +194,6 @@ const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTi
 })
 
 const galleryIndex = ref(0)
-
-onMounted(() => {
-})
-
 
 const previousGalleryIndex = computed(() => {
     const previousGalleryIndexToReturn = galleryIndex.value - 1
