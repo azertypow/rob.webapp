@@ -229,6 +229,19 @@ function previousGalleryItem() {
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 }
 
+// todo: clean 2
+
+// let interval = 5_000
+// let intervalCounter = 0
+//
+// const autoNext = () => window.setTimeout(() => {
+//     nextGalleryItem()
+//     intervalCounter++
+//     if (intervalCounter === 2) interval = 5_000
+//     autoNext()
+// }, interval)
+// autoNext()
+
 </script>
 
 

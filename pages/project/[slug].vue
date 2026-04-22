@@ -169,6 +169,18 @@ onUnmounted(() => {
             margin-bottom: 33vh;
         }
     }
+
+    /**
+    todo: test de largeur full en mobile
+    */
+    //@media (max-width: 900px) {
+    //    //width: calc(100%  + ((100% / 24 *   -1) * 2) );
+    //
+    //    &.is-full {
+    //        margin-left: calc(100% / 24 *   -1 - .25rem);
+    //        margin-right: calc(100% / 24 *  -1 - .25rem);
+    //    }
+    //}
 }
 
 .v-project-slug__gallery__info {
