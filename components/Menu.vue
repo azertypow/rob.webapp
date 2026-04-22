@@ -1,6 +1,10 @@
 <template>
     <section class="v-menu"
     >
+        <div class="v-menu__mobil_nav g-grid-box">
+            <nuxt-link href="/about"     >About</nuxt-link>
+            <nuxt-link href="/contact"   >Contact</nuxt-link>
+        </div>
         <div class="v-menu__content"
         >
             <div class="g-grid-box">
@@ -176,6 +180,26 @@ function setClassForLongText({line, containerSelector, textSelector, classNameIf
     overscroll-behavior: contain;
     overflow: scroll;
     --v-menu-gradient-overflow-width: 2rem;
+}
+
+.v-menu__mobil_nav {
+    display: none;
+    //justify-content: flex-end;
+    margin-top: -.5rem;
+    padding-bottom: 1.5rem;
+    //padding-bottom: 1rem;
+    //gap: var(--rb-gutter);
+    flex-direction: column;
+
+    > * {
+        color: inherit;
+        padding-top: .25rem;
+        padding-bottom: .25rem;
+    }
+
+    @media (max-width: 900px) {
+        display: flex;
+    }
 }
 
 .v-menu__list-box {

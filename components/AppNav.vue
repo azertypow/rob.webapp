@@ -142,6 +142,12 @@ const currentProjectsInfo = useCurrentProjectsInfo()
         color: inherit;
         text-decoration: none;
     }
+
+  @media (max-width: 900px) {
+    > *:not(.v-app-nav__nav) {
+      display: none;
+    }
+  }
 }
 
 .v-app-nav__left__site-title {
