@@ -100,6 +100,7 @@
 import {type Ref} from 'vue'
 import type {IProjectContent} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
+import {useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
 const showContent = ref(true)
@@ -109,6 +110,7 @@ function handleScroll() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight
     if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
         showContent.value = false
+        useNavigationIsShowingOnBottomOfPage().value = true
     }
 }
 

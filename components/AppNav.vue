@@ -29,8 +29,19 @@
         >
             <nuxt-link href="/about"     >About</nuxt-link>
             <nuxt-link href="/contact"   >Contact</nuxt-link>
+
             <button class="v-app-nav__nav"
-                @click="menuIsOpen = !menuIsOpen"
+                    v-if="useNavigationIsShowingOnBottomOfPage().value"
+                    @click="useRouter().push('/')"
+            >
+                <img alt="close menu"
+                     src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
+                />
+            </button>
+
+            <button class="v-app-nav__nav"
+                    @click="menuIsOpen = !menuIsOpen"
+                    v-else
             >
                     <img alt="close menu"
                          v-if="menuIsOpen"
@@ -50,7 +61,7 @@
 
 
 <script setup lang="ts">
-import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
+import {useCurrentProjectsInfo, useMenuIsOpen, useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
 
 const menuIsOpen = useMenuIsOpen()
 const colorForGallery = useColorForGallery()

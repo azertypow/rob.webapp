@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
-import {useCurrentProjectsInfo, useMenuIsOpen} from "~/composables/useState";
+import {useCurrentProjectsInfo, useMenuIsOpen, useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
 const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
 
@@ -64,6 +64,7 @@ onMounted(async () => {
 useRouter().beforeEach((to, from, next) => {
     useMenuIsOpen().value = false
     useCurrentProjectsInfo().value = null
+    useNavigationIsShowingOnBottomOfPage().value = false
     next()
 })
 
