@@ -26,7 +26,7 @@
                                      }"
                                      ref="refProjectLineContainer"
                                 >
-                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-end--span-6"
+                                    <div class="g-grid-box__col-end--span-5 g-grid-box--reg__col-end--span-7"
                                     >
                                         <div class="v-menu__list-box__item__wrapper__date"
                                         >
@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-end--span-18">
+                                    <div class="g-grid-box__col-end--span-12 g-grid-box--reg__col-end--span-17">
                                         <div class="v-menu__list-box__item__wrapper__title">
                                             <div class="v-menu__list-box__item__wrapper__title__text">
                                                 <span
