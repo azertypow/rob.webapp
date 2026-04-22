@@ -52,7 +52,7 @@
                 <div class="v-project-slug__gallery"
                      v-for="itemOfGalleryProject of currentProject?.galleryProject"
                      :class="{
-                         'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': itemOfGalleryProject.content.isfullwidth === 'false',
+                         'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--1 g-grid-box--sm__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'false',
                          'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'true',
                          'is-full': itemOfGalleryProject.content.isfullwidth === 'true',
                      }"
