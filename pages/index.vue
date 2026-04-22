@@ -9,7 +9,7 @@
             class="v-index__carousel"
             v-if="projectsInfo"
             @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
-            @touchstart.passive="() => {touchGesture.onTouchStart; hasTouchGesture = true}"
+            @touchstart.passive="(e) => {touchGesture.onTouchStart(e); hasTouchGesture = true}"
             @touchend.passive="touchGesture.onTouchEnd"
         >
             <template v-if="useRouter().currentRoute.value.query.cursor === '1'">
@@ -157,9 +157,14 @@ import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api
 const touchGesture = new TouchGesture(
   () => {
     previousGalleryItem()
+    console.log('previous!')
   },
   () => {
     nextGalleryItem()
+    console.log('next!')
+  },
+  () => {
+    console.log('clicked!')
   },
 )
 
