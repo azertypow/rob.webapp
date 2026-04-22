@@ -329,6 +329,7 @@ function previousGalleryItem() {
     z-index: 1000;
     pointer-events: none;
     font-weight: 400;
+    width: calc(100% - var(--rb-gutter) * 2 - 4rem);
 
     .v-index__carousel__title__value {
         position: absolute;
