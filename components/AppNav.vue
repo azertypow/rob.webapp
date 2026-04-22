@@ -3,6 +3,7 @@
         :class="{
             'color-for-image-is-black': colorForGallery === 'black',
             'is-home': useRouter().currentRoute.value.path === '/',
+            'menu-is-open': useMenuIsOpen().value,
         }"
     >
         <div class="v-app-nav__left"
@@ -93,6 +94,11 @@ const currentProjectsInfo = useCurrentProjectsInfo()
                 fill: black !important;
             }
         }
+    }
+
+    &.menu-is-open {
+        color: black;
+        transition: none;
     }
 
 
