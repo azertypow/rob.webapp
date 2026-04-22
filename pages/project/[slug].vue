@@ -51,7 +51,7 @@
             <div class="g-grid-box g-grid-box--with-gutter--sm">
                 <div class="v-project-slug__gallery"
                      v-for="itemOfGalleryProject of currentProject?.galleryProject"
-                    :class="{
+                     :class="{
                          'g-grid-box__col-start--5 g-grid-box__col-end--span-16 g-grid-box--reg__col-start--3 g-grid-box--reg__col-end--span-20 g-grid-box--sm__col-start--2 g-grid-box--sm__col-end--span-22': itemOfGalleryProject.content.isfullwidth === 'false',
                          'g-grid-box__col-start--0 g-grid-box__col-end--span-24': itemOfGalleryProject.content.isfullwidth === 'true',
                          'is-full': itemOfGalleryProject.content.isfullwidth === 'true',
@@ -67,8 +67,8 @@
                         />
                         <div class="v-project-slug__gallery__info" >
                             <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
-                            <div v-if="itemOfGalleryProject.images[0].credit" >
-                                <template v-if="itemOfGalleryProject.images[0]?.title"> | </template>
+                            <div v-if="itemOfGalleryProject.images[0]?.credit" >
+                                <template v-if="itemOfGalleryProject.images[0]?.title">&nbsp;| </template>
                                 ©{{itemOfGalleryProject.images[0].credit}}
                             </div>
                         </div>
@@ -176,7 +176,7 @@ onUnmounted(() => {
     justify-content: space-between;
     position: absolute;
     font-size: .5rem;
-    right: .5em;
+    left: .5em;
     bottom: .5em;
     line-height: 1.25ex;
     color: white;
