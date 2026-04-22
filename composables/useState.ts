@@ -11,3 +11,7 @@ export const useColorForGallery = () => {
 export const useCurrentProjectsInfo = () => {
     return useState('currentProjectsInfo', () => null as IApiProjectInfo | null)
 }
+
+export const useNavigationIsShowingOnBottomOfPage = () => {
+  return useState('navigationIsShowingOnBottomOfPage', () => false)
+}
