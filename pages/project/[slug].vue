@@ -203,7 +203,12 @@ onUnmounted(() => {
   &.is-verticale {
     width: 50%;
     object-position: top left;
+
+    @media (max-width: 650px) {
+        width: 100%;
+    }
   }
+
 }
 
 .v-project-slug__header__cover {
