@@ -164,6 +164,14 @@ const touchGesture = new TouchGesture(
     console.log('next!')
   },
   () => {
+      previousGalleryItem()
+      console.log('toTop')
+  },
+  () => {
+      nextGalleryItem()
+      console.log('toBottom')
+  },
+  () => {
     console.log('clicked!')
   },
 )
