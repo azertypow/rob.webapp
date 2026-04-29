@@ -154,6 +154,14 @@
 import type {ComputedRef} from "vue";
 import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
 
+onMounted(() => {
+  setScreenRatioInfo()
+  window.addEventListener('resize', setScreenRatioInfo)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', setScreenRatioInfo)
+})
+
 const touchGesture = new TouchGesture(
   () => {
     previousGalleryItem()
@@ -184,6 +192,8 @@ const colorForGallery = useColorForGallery()
 
 const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
 
+const screenIsSquare = ref(false)
+
 const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTitle: string, projectSlug: string}[]> = computed(() => {
 
     const toReturn: {image: IApiImageOfProject, parentProjectTitle: string, projectSlug: string}[] = []
@@ -192,7 +202,9 @@ const allCarouselImages: ComputedRef<{image: IApiImageOfProject, parentProjectTi
 
     projectsInfo.value.projects.map((value) => {
 
-        value.arrayOfImagesCarousel?.map(value1 => {
+      const carrouselToMap = screenIsSquare.value ? value.arrayOfImagesCarousel_mobil : value.arrayOfImagesCarousel
+
+      carrouselToMap?.map(value1 => {
             toReturn.push({
                 image: value1,
                 parentProjectTitle: value.title,
@@ -223,6 +235,10 @@ function nextGalleryItem() {
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
+}
+
+function setScreenRatioInfo() {
+  screenIsSquare.value = window.innerWidth < window.innerHeight;
 }
 
 // todo: code optimisation (click function for clearInterfvale and ducplication code)

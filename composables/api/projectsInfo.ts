@@ -6,6 +6,7 @@ export interface IApiListOfProjectsInfo {
 export interface IApiProjectInfo {
     imageCoverForIndex:     IApiImageOfProject  // image for index on mouse over
     arrayOfImagesCarousel:  IApiImageOfProject[] // image for home
+    arrayOfImagesCarousel_mobil:  IApiImageOfProject[] // image for home for mobil
     title: string
     slug: string
     tags: IApiTag[]
