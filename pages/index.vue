@@ -157,22 +157,17 @@ import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api
 const touchGesture = new TouchGesture(
   () => {
     previousGalleryItem()
-    console.log('previous!')
   },
   () => {
     nextGalleryItem()
-    console.log('next!')
   },
   () => {
       previousGalleryItem()
-      console.log('toTop')
   },
   () => {
       nextGalleryItem()
-      console.log('toBottom')
   },
   () => {
-    console.log('clicked!')
   },
 )
 
