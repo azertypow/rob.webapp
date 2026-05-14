@@ -24,10 +24,6 @@ export class TouchGesture {
 
     const isVertical = Math.abs(deltaY) > Math.abs(deltaX)
 
-    console.log('isVerticale: ', isVertical)
-    console.log('deltaX: ', deltaX)
-    console.log('deltaY: ', deltaY)
-
     if (isVertical) {
       if (Math.abs(deltaY) < this.deltaThreshold) {
         this.clicked()
