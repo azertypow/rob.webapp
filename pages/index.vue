@@ -181,7 +181,7 @@ const touchGesture = new TouchGesture(
   },
 )
 
-const hasTouchGesture = ref(false)
+const hasTouchGesture = ref(navigator.maxTouchPoints > 0)
 
 const cursorPosition = ref({
     x: 0,
