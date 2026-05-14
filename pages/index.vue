@@ -126,6 +126,8 @@
                                    muted
                                    playsinline
                                    :src="carouselImage.image.url"
+                                   onloadstart="this.currentTime = 1"
+                                   oncanplaythrough="this.play()"
                             />
                         </template>
                         <template v-else>
