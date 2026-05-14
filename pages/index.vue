@@ -155,10 +155,12 @@
 
 import type {ComputedRef} from "vue";
 import type {IApiImageOfProject, IApiListOfProjectsInfo} from "~/composables/api/projectsInfo";
+import type {Timeout} from "unenv/node/internal/timers/timeout";
 
 onMounted(() => {
   setScreenRatioInfo()
   window.addEventListener('resize', setScreenRatioInfo)
+  if( navigator.maxTouchPoints > 0 ) startGalleryAuto()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('resize', setScreenRatioInfo)
@@ -167,15 +169,19 @@ onBeforeUnmount(() => {
 const touchGesture = new TouchGesture(
   () => {
     previousGalleryItem()
+    startGalleryAuto()
   },
   () => {
     nextGalleryItem()
+    startGalleryAuto()
   },
   () => {
       previousGalleryItem()
+      startGalleryAuto()
   },
   () => {
       nextGalleryItem()
+      startGalleryAuto()
   },
   () => {
   },
@@ -250,18 +256,25 @@ function previousGalleryItem() {
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 }
 
-// todo: clean 2
+let galleryAutoPlay_Interval = 3_000
+let galleryAutoPLay_autoCounter = 0
+let galleryAutoPlay_counterToChangeTimingInterval = 2
+let autoNext: number | undefined = undefined
 
-// let interval = 5_000
-// let intervalCounter = 0
-//
-// const autoNext = () => window.setTimeout(() => {
-//     nextGalleryItem()
-//     intervalCounter++
-//     if (intervalCounter === 2) interval = 5_000
-//     autoNext()
-// }, interval)
-// autoNext()
+function startGalleryAuto() {
+
+  if(autoNext) window.clearTimeout(autoNext)
+
+   autoNext = window.setTimeout(() => {
+      nextGalleryItem()
+      galleryAutoPLay_autoCounter++
+
+     if (galleryAutoPLay_autoCounter > galleryAutoPlay_counterToChangeTimingInterval) galleryAutoPlay_Interval = 5_000
+
+     startGalleryAuto()
+  }, galleryAutoPlay_Interval)
+}
+
 
 </script>
 
