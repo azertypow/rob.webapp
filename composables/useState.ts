@@ -15,3 +15,10 @@ export const useCurrentProjectsInfo = () => {
 export const useNavigationIsShowingOnBottomOfPage = () => {
   return useState('navigationIsShowingOnBottomOfPage', () => false)
 }
+
+export const useProjectsInfo = () => {
+  return useState<IApiListOfProjectsInfo>('projectsInfo', () => {
+    return {projects: []}
+  })
+
+}

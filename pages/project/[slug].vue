@@ -1,5 +1,62 @@
 <template>
     <div class="v-project-slug">
+
+      <div class="v-project-slug__project-navigation" v-if="previousProject || nextProject">
+        <nuxt-link
+          class="v-project-slug__project-navigation__link v-project-slug__project-navigation__link--next"
+          :href="nextProject ? `/project/${nextProject.slug}` : ''"
+          v-if="nextProject"
+          @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
+          @mouseleave="arrowDirection = 0"
+          @mouseenter="arrowDirection = -1"
+        >
+          <div>
+<!--            <span>← </span>-->
+            {{ nextProject.title }}
+          </div>
+        </nuxt-link>
+
+        <nuxt-link
+          class="v-project-slug__project-navigation__link v-project-slug__project-navigation__link--before"
+          :href="previousProject ? `/project/${previousProject.slug}` : ''"
+          v-if="previousProject"
+          @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
+          @mouseleave="arrowDirection = 0"
+          @mouseenter="arrowDirection = 1"
+        >
+          <div>
+            {{ previousProject.title }}
+<!--            <span> →</span>-->
+          </div>
+        </nuxt-link>
+
+
+        <svg width="99" height="82" viewBox="0 0 44.9 44.3" fill="none" xmlns="http://www.w3.org/2000/svg"
+             class="v-project-slug__project-navigation__cursor"
+             :style="{
+                            top: cursorPosition.y + 'px',
+                            left: cursorPosition.x + 'px',
+                        }"
+             v-if="arrowDirection === 1"
+        >
+          <g id="Layer_1-2">
+            <path d="M35.900390625,24.5458984375H0v-4.828125h35.83203125L16.1142578125,0h6.59521484375l22.16552734375,22.166015625-22.16552734375,22.166015625h-6.59521484375l19.7861328125-19.7861328125Z" style="fill: white"/>
+          </g>
+        </svg>
+        <svg width="99" height="82" viewBox="0 0 44.9 44.3" fill="none" xmlns="http://www.w3.org/2000/svg"
+             class="v-project-slug__project-navigation__cursor"
+             :style="{
+                            top: cursorPosition.y + 'px',
+                            left: cursorPosition.x + 'px',
+                        }"
+             v-else-if="arrowDirection === -1"
+        >
+          <g id="Layer_1-2">
+            <path d="M9,19.8h35.9v4.8H9l19.7,19.7h-6.6L0,22.2,22.2,0h6.6L9,19.8Z" style="fill: white"/>
+          </g>
+        </svg>
+      </div>
+
         <section class="v-project-slug__wrap" v-if="showContent">
             <div class="g-grid-box"
             >
@@ -105,6 +162,32 @@ import {useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
 const currentProject: Ref<null | IProjectContent> = ref(null)
 const showContent = ref(true)
 const coverLoaded = ref(false)
+
+const projectsInfo = useProjectsInfo()
+const currentSlug = useRoute().params.slug as string
+
+const cursorPosition = ref({
+  x: 0,
+  y: 0,
+})
+
+const arrowDirection: Ref<-1 | 1 | 0> = ref(0)
+
+const currentProjectIndex = computed(() => {
+  if (!projectsInfo.value) return 0
+  return projectsInfo.value.projects.findIndex(p => p.slug === currentSlug)
+})
+
+const previousProject = computed(() => {
+  if (!projectsInfo.value || currentProjectIndex.value < 1) return null
+  return projectsInfo.value.projects[currentProjectIndex.value - 1]
+})
+
+const nextProject = computed(() => {
+  if (!projectsInfo.value) return null
+  if (currentProjectIndex.value >= projectsInfo.value.projects.length - 1) return null
+  return projectsInfo.value.projects[currentProjectIndex.value + 1]
+})
 
 function handleScroll() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight
@@ -262,5 +345,62 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.v-project-slug__project-navigation__link {
+  height: 100%;
+  width: calc(100% / 24 * 4);
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+
+  div {
+    white-space: nowrap;
+    padding: 0 var(--rb-gutter);
+    display: none;
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: var(--rb-nav-blue);
+
+    div {
+      display: block;
+    }
+  }
+
+}
+
+.v-project-slug__project-navigation__link--before {
+  right: 0;
+  justify-content: flex-end;
+  cursor: none;
+}
+
+.v-project-slug__project-navigation__link--next {
+  left: 0;
+  justify-content: flex-start;
+  cursor: none;
+}
+
+.v-project-slug__project-navigation__cursor {
+  transform-origin: left center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000000;
+  mix-blend-mode: difference;
+  width: 25px;
+  height: auto;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: transform .25s ease-in-out, opacity .25s ease-in-out;
+
+  .has-touch-gesture & {
+    display: none;
+  }
 }
 </style>

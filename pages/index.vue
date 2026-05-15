@@ -198,7 +198,7 @@ const arrowDirection = ref<-1 | 1 | 0>(0)
 
 const colorForGallery = useColorForGallery()
 
-const projectsInfo = useState<IApiListOfProjectsInfo | null>('projectsInfo')
+const projectsInfo = useProjectsInfo()
 
 const screenIsSquare = ref(false)
 
@@ -307,7 +307,6 @@ function startGalleryAuto() {
     width: var(--rb-index__carousel-nav-width);
     height: 100%;
     z-index: 1000;
-    cursor: url("data:image/svg+xml,%3Csvg width='50' height='60' viewBox='0 0 99 82' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40.5072L40.5072 0H59.4384L18.9312 40.5072L59.4384 81.0144H40.5072L0 40.5072ZM11.5536 33.5472H98.832V47.4672H11.5536V33.5472Z' fill='black'/%3E%3C/svg%3E") 0 60, pointer;
     cursor: none;
     user-select: none;
     mix-blend-mode: difference;

@@ -88,7 +88,7 @@ import {type ComputedRef, defineProps} from 'vue'
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
 import {formatDateFromString, formatDateWithAndStart} from "~/utils/formatDateFromString";
 
-const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
+const projectsInfo = useProjectsInfo()
 const projectSlugMouseOverInList = ref('')
 
 const refProjectLineContainer: Ref<HTMLElement[]> = ref([])

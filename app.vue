@@ -46,19 +46,19 @@
 
 
 <script lang="ts" setup>
-import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
-import {useCurrentProjectsInfo, useMenuIsOpen, useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
+import {
+  useCurrentProjectsInfo,
+  useMenuIsOpen,
+  useNavigationIsShowingOnBottomOfPage,
+  useProjectsInfo
+} from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
-const projectsInfo = useState<IApiListOfProjectsInfo>('projectsInfo')
+const projectsInfo = useProjectsInfo()
 
 const pageTransitionDuration = 1_000
 
 onMounted(async () => {
-    const projectInfo = await fetchApiGetProjects()
-
-    useState<IApiListOfProjectsInfo>('projectsInfo', () => {
-        return projectInfo || {projects: []}
-    })
+  projectsInfo.value =  await fetchApiGetProjects()
 })
 
 useRouter().beforeEach((to, from, next) => {
