@@ -10,10 +10,6 @@
           @mouseleave="arrowDirection = 0"
           @mouseenter="arrowDirection = -1"
         >
-          <div>
-<!--            <span>← </span>-->
-            {{ nextProject.title }}
-          </div>
         </nuxt-link>
 
         <nuxt-link
@@ -24,10 +20,6 @@
           @mouseleave="arrowDirection = 0"
           @mouseenter="arrowDirection = 1"
         >
-          <div>
-            {{ previousProject.title }}
-<!--            <span> →</span>-->
-          </div>
         </nuxt-link>
 
 
@@ -77,7 +69,7 @@
                         <div class="v-project-slug__header__cover v-project-slug__header__cover--loader"
                              :class="{'is-loaded': coverLoaded}"
                         />
-                        <div class="v-project-slug__header__info">
+                        <div class="v-project-slug__header__info rb-font-size--small">
                             <div>{{ currentProject?.imageCover[0].title }}</div>
                             <div v-if="currentProject?.imageCover[0].credit" >©{{currentProject?.imageCover[0].credit}}</div>
                         </div>
@@ -122,7 +114,7 @@
                              :src="itemOfGalleryProject.images[0]?.resize?.xxl"
                              :alt="itemOfGalleryProject.images[0]?.credit"
                         />
-                        <div class="v-project-slug__gallery__info" >
+                        <div class="v-project-slug__gallery__info rb-font-size--small" >
                             <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
                             <div v-if="itemOfGalleryProject.images[0]?.credit" >
                                 <template v-if="itemOfGalleryProject.images[0]?.title">&nbsp;| </template>
@@ -231,6 +223,10 @@ onUnmounted(() => {
 .v-project-slug__header__info {
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    color: white;
 }
 
 .v-project-slug__content {
@@ -270,10 +266,9 @@ onUnmounted(() => {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    font-size: .5rem;
+
     left: .5em;
     bottom: .5em;
-    line-height: 1.25ex;
     color: white;
 
     .is-full & {
@@ -313,6 +308,7 @@ onUnmounted(() => {
     transition: opacity .5s .5s ease-in-out;
     top: 0;
     left: 0;
+  position: relative;
 
     &:not(.is-loaded) {
         opacity: 0;
@@ -404,3 +400,7 @@ onUnmounted(() => {
   }
 }
 </style>
+
+
+
+

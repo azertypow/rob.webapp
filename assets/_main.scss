@@ -60,3 +60,12 @@ a {
   color: var(--rb-nav-blue);
   text-decoration: none;
 }
+
+.rb-font-size--small {
+  font-size: .5rem;
+  line-height: 1.25ex;
+
+  @media (max-width: 900px) {
+    font-size: .35rem;
+  }
+}
