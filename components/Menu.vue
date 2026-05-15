@@ -6,6 +6,8 @@
             <nuxt-link href="/contact"   >Contact</nuxt-link>
         </div>
         <div class="v-menu__content"
+             @mousemove="cursorPosition = {x: $event.clientX, y: $event.clientY}"
+             @mouseleave="cursorPosition = {x: 0, y: 0}"
         >
             <div class="g-grid-box">
                 <div class="g-grid-box__col-end--span-18 g-grid-box--reg__col-end--span-16 g-grid-box--sm__col-end--span-24"
@@ -71,6 +73,9 @@
                              v-if="getHoverProjectInfo"
                              :src="getHoverProjectInfo?.imageCoverForIndex.resize?.reg"
                              :key="getHoverProjectInfo?.imageCoverForIndex.url"
+                             :style="{
+                                transform: `translateY(${cursorPosition.y - 80}px)`,
+                             }"
                         />
                     </div>
                 </div>
@@ -92,6 +97,11 @@ const projectsInfo = useProjectsInfo()
 const projectSlugMouseOverInList = ref('')
 
 const refProjectLineContainer: Ref<HTMLElement[]> = ref([])
+
+const cursorPosition = ref({
+  x: 0,
+  y: 0,
+})
 
 const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
     setClassForLongTextForProjectLineContainer()
@@ -120,7 +130,7 @@ function setOverProject(projectOverSlug: string) {
     debounceTimer = window.setTimeout(() => {
         projectSlugMouseOverInList.value = projectOverSlug
         debounceTimer = null
-    }, 100)
+    }, 0)
 
 }
 
