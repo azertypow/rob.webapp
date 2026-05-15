@@ -68,6 +68,10 @@ export interface IApiBlockVideo {
     "id": "03274bd7-15c1-46ce-bf21-2b0f6645cd33",
     "isHidden": false,
     "type": "video"
+    video: {
+        url: string,
+        mediaUrl: string,
+    }[]
 }
 
 

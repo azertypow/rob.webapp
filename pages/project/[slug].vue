@@ -123,7 +123,15 @@
                         </div>
                     </template>
                     <template v-else-if="itemOfGalleryProject.type === 'video'">
+                        <video class="v-project-slug__gallery__image"
+                               :autoplay="true"
+                               muted
+                               playsinline
+                               v-if="itemOfGalleryProject.video.length > 0"
+                               :src="itemOfGalleryProject.video[0].url"
+                        />
                         <vimeo
+                            v-else
                             :video-i-d="itemOfGalleryProject.content.url"
                         />
                     </template>
