@@ -240,8 +240,6 @@ function setClassForLongText({line, containerSelector, textSelector, classNameIf
 
 .v-menu__list-box__item__wrapper__title {
     position: relative;
-    overflow: hidden;
-    display: flex;
 
     .rb-has-long-title & {
         &:after {
