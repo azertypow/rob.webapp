@@ -14,9 +14,12 @@
         </div>
 
         <Transition name="page" mode="out-in" :duration="pageTransitionDuration"
+
                     :style="{
                         '--page-transition-duration': `${pageTransitionDuration}ms`,
-                    }">
+                    }"
+
+        >
             <NuxtPage/>
         </Transition>
     </div>
@@ -66,6 +69,14 @@ useRouter().beforeEach((to, from, next) => {
     useCurrentProjectsInfo().value = null
     useNavigationIsShowingOnBottomOfPage().value = false
     next()
+})
+
+useRouter().beforeEach(() => {
+    window.setTimeout(() => {
+        window.scroll({
+            top: 0,
+        })
+    }, pageTransitionDuration)
 })
 
 useHead({
