@@ -86,7 +86,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
     align-items: center;
     user-select: none;
     color: black;
-    transition: background-position 1s ease-in-out, color 1s 1s ease-in-out, stroke 1s 1s ease-in-out;
     background: linear-gradient(180deg, rgb(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0)) 0 0 no-repeat;
 
     &.is-home {
@@ -94,7 +93,6 @@ const currentProjectsInfo = useCurrentProjectsInfo()
         background-position: 0 calc(-1 * var(--rb-nav-height));
 
         svg * {
-            transition: fill 1s 1s ease-in-out;
             fill: white !important;
         }
 
