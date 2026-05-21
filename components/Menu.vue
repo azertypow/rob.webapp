@@ -273,7 +273,21 @@ function setClassForLongText({line, containerSelector, textSelector, classNameIf
 }
 
 .v-menu__list-box__item__wrapper__title__text {
+    position: relative;
     padding-right: 5rem;
+    overflow: hidden;
+
+    &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 100%;
+        top: 0;
+        right: 0;
+        width: var(--v-menu-gradient-overflow-width);
+        background: linear-gradient(-90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        z-index: 10;
+    }
 
     .is-current-project & {
         cursor: default;
