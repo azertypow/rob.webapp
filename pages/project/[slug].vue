@@ -127,6 +127,7 @@
                                :autoplay="true"
                                muted
                                playsinline
+                               loop
                                v-if="itemOfGalleryProject.video.length > 0"
                                :src="itemOfGalleryProject.video[0].url"
                         />
