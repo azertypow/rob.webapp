@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </template>
-                    <template v-else-if="itemOfGalleryProject.type === 'video'">
+                    <template v-else-if="itemOfGalleryProject.type === '1217-video'">
                         <video class="v-project-slug__gallery__image"
                                :autoplay="true"
                                muted
