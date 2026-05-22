@@ -1,9 +1,11 @@
 import {
-    type IApiBlockImage,
-    type IApiBlockVideo,
-    type IApiImage,
-    type IApiImageOfProject,
-    type IApiProjectInfo
+  type IApiBlockArrayList,
+  type IApiBlockText,
+  type IApiBlockImage,
+  type IApiBlockVideo,
+  type IApiImage,
+  type IApiImageOfProject,
+  type IApiProjectInfo
 } from "~/composables/api/projectsInfo";
 
 export interface IProjectContent extends IApiProjectInfo {
@@ -11,6 +13,7 @@ export interface IProjectContent extends IApiProjectInfo {
     galleryProject:   (IApiBlockImage | IApiBlockVideo)[]
     htmlContent: string
     listOfDetails: {name: string, value: string}[]
+    page_content: (IApiBlockArrayList | IApiBlockText)[]
 }
 
 export interface IApiVideo {
@@ -27,6 +30,7 @@ export interface IApiAbout {
         "textabout": string
         mapImage_about: IApiImage
         listOfDetails_about: {name: string, value: string}[]
+        page_content_about: (IApiBlockArrayList | IApiBlockText)[]
     } | null
 }
 export interface IApiContact {
@@ -35,6 +39,7 @@ export interface IApiContact {
         "textcontact": string,
         "mapImage": IApiImage | null
         listOfDetails_contact: {name: string, value: string}[]
+        page_content_contact: (IApiBlockArrayList | IApiBlockText)[]
     } | null
 
 }

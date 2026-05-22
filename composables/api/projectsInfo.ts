@@ -48,6 +48,28 @@ export interface IApiImageOfProject extends IApiImage {
     isFullWidth: boolean  //todo: isFullWidth is not used in the template
 }
 
+export interface IApiBlockArrayList {
+  content: {
+    listofdetails:       {
+      name: string,
+      value: string
+    }[]
+  },
+  id: string,
+  isHidden: boolean,
+  type: "array-list"
+}
+
+export interface IApiBlockText {
+  content: {
+    text: string
+  },
+  id: string,
+  isHidden: boolean,
+  type: "text"
+}
+
+
 export interface IApiBlockImage {
     "content": {
         "isfullwidth": "true" | "false"

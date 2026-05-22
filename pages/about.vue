@@ -24,8 +24,10 @@
                         g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-18
                         g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
             >
-                <AppList v-if="content?.data?.listOfDetails_about"
-                         :listOfDetails="content.data.listOfDetails_about"/>
+                <AppBlocks
+                    v-if="content?.data?.page_content_about"
+                    :blocks="content?.data.page_content_about"
+                />
             </div>
         </div>
 
@@ -54,6 +56,7 @@
 import {fetchApiGetAbout} from "~/fetchApi/fetchApiGET";
 import type {IApiAbout} from "~/composables/api/projectContentBySlug";
 import type {Ref} from "vue";
+import AppBlocks from "~/components/AppBlocks.vue";
 
 const content: Ref<null |IApiAbout> = ref(null)
 

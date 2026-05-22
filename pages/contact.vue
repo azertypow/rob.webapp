@@ -23,8 +23,10 @@
                         g-grid-box--reg__col-start--3   g-grid-box--reg__col-end--span-18
                         g-grid-box--sm__col-start--1    g-grid-box--sm__col-end--span-24"
             >
-                <AppList v-if="content?.data?.listOfDetails_contact"
-                         :listOfDetails="content.data.listOfDetails_contact"/>
+                <AppBlocks
+                    v-if="content?.data?.page_content_contact"
+                    :blocks="content?.data.page_content_contact"
+                />
             </div>
         </div>
         <div
@@ -49,6 +51,7 @@
 import type {IApiContact} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetContact} from "~/fetchApi/fetchApiGET";
 import type {Ref} from "vue";
+import AppBlocks from "~/components/AppBlocks.vue";
 
 const content: Ref<null |IApiContact> = ref(null)
 

@@ -91,8 +91,9 @@
                                  v-html="currentProject?.htmlContent"
                         ></article>
 
-                        <AppList v-if="currentProject?.listOfDetails"
-                                 :listOfDetails="currentProject.listOfDetails"
+                        <AppBlocks
+                            v-if="currentProject?.page_content"
+                            :blocks="currentProject.page_content"
                         />
                     </div>
                 </div>
@@ -159,6 +160,7 @@ import {type Ref} from 'vue'
 import type {IProjectContent} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
 import {useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
+import AppBlocks from "~/components/AppBlocks.vue";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
 const showContent = ref(true)
