@@ -14,7 +14,7 @@
                 <div
                     class="v-about__content"
                 >
-                    <article class="v-about__content__article"
+                    <article class="v-about__content__article g-child-no-margin"
                              v-if="content"
                              v-html="content.data?.textabout"
                     ></article>

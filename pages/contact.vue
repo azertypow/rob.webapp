@@ -14,7 +14,7 @@
                 <div
                     class="v-contact__content"
                 >
-                    <article class="v-contact__content__article"
+                    <article class="v-contact__content__article g-child-no-margin"
                              v-html="content?.data?.textcontact"
                     ></article>
                 </div>
