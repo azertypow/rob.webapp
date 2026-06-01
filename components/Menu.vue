@@ -69,12 +69,13 @@
                 <div class="g-grid-box__col-start--20 g-grid-box__col-end--span-5 g-grid-box--reg__col-start--18 g-grid-box--reg__col-end--span-7 g--sm__display-none">
                     <div class="v-menu__img-box">
                         <img class="v-menu__img-box__img"
+                             ref="imageElementForHoverProjectInList"
                              alt="image cover of hover project in list"
                              v-if="getHoverProjectInfo"
                              :src="getHoverProjectInfo?.imageCoverForIndex.resize?.reg"
                              :key="getHoverProjectInfo?.imageCoverForIndex.url"
                              :style="{
-                                transform: `translateY(${cursorPosition.y - 80}px)`,
+                                transform: `translateY(${imagePosition.y}px)`,
                              }"
                         />
                     </div>
@@ -102,6 +103,29 @@ const cursorPosition = ref({
   x: 0,
   y: 0,
 })
+
+const imageElementForHoverProjectInList = useTemplateRef<HTMLImageElement>('imageElementForHoverProjectInList')
+
+const imagePosition = computed(() => {
+    const imageInfo = imageElementForHoverProjectInList.value?.getBoundingClientRect()
+    const headerHeight = 69
+    const bottomMargin = 20
+
+    const correction = {
+        x: 0,
+        y: !imageInfo ? 0 : (() => {
+            const imageBottomOverFlow = window.innerHeight - (bottomMargin + cursorPosition.value.y + imageInfo?.height)
+
+            return imageBottomOverFlow < 0 ? imageBottomOverFlow : 0
+        })() ,
+    }
+
+    return {
+        x: cursorPosition.value.x + correction.x,
+        y: cursorPosition.value.y + correction.y - headerHeight,
+    }
+})
+
 
 const projectsReverse: ComputedRef<IApiProjectInfo[]> = computed(() => {
     setClassForLongTextForProjectLineContainer()
@@ -340,9 +364,6 @@ function setClassForLongText({line, containerSelector, textSelector, classNameIf
     display: block;
     width: 100%;
     position: absolute;
-    aspect-ratio: 9/16;
-    object-fit: contain;
-    object-position: top;
 }
 
 @keyframes v-title-overflow-animation {
