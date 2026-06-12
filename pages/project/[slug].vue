@@ -315,7 +315,7 @@ onUnmounted(() => {
 .v-project-slug__header__cover {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     transition: opacity .5s .5s ease-in-out;
     top: 0;
     left: 0;
