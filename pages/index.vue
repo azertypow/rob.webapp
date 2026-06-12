@@ -160,7 +160,7 @@ import type {Timeout} from "unenv/node/internal/timers/timeout";
 onMounted(() => {
   setScreenRatioInfo()
   window.addEventListener('resize', setScreenRatioInfo)
-  if( navigator.maxTouchPoints > 0 ) startGalleryAuto()
+  startGalleryAuto()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('resize', setScreenRatioInfo)
@@ -256,7 +256,7 @@ function previousGalleryItem() {
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 }
 
-let galleryAutoPlay_Interval = 3_000
+let galleryAutoPlay_Interval = 6_000
 let galleryAutoPLay_autoCounter = 0
 let galleryAutoPlay_counterToChangeTimingInterval = 2
 let autoNext: number | undefined = undefined
@@ -269,7 +269,7 @@ function startGalleryAuto() {
       nextGalleryItem()
       galleryAutoPLay_autoCounter++
 
-     if (galleryAutoPLay_autoCounter > galleryAutoPlay_counterToChangeTimingInterval) galleryAutoPlay_Interval = 5_000
+     if (galleryAutoPLay_autoCounter > galleryAutoPlay_counterToChangeTimingInterval) galleryAutoPlay_Interval = 6_000
 
      startGalleryAuto()
   }, galleryAutoPlay_Interval)
