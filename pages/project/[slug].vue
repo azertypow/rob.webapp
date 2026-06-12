@@ -313,7 +313,11 @@ onUnmounted(() => {
         width: 100%;
     }
   }
-
+}
+video.v-project-slug__gallery__image {
+  max-height: calc(100vh - 4rem);
+  object-fit: contain;
+  object-position: left;
 }
 
 .v-project-slug__header__cover {
