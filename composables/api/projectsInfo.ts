@@ -26,6 +26,7 @@ export interface IApiImage {
     url: string
     credit?: string
     title: string
+    textColor?: 'black' | 'white'
     focus: string,
     caption?: null,
     alt?: string,

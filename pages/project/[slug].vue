@@ -115,7 +115,11 @@
                              :src="itemOfGalleryProject.images[0]?.resize?.xxl"
                              :alt="itemOfGalleryProject.images[0]?.credit"
                         />
-                        <div class="v-project-slug__gallery__info rb-font-size--small" >
+                        <div class="v-project-slug__gallery__info rb-font-size--small"
+                             :style="{
+                                color: itemOfGalleryProject.images[0]?.textColor === 'black' ? 'black' : 'white'
+                             }"
+                        >
                             <div>{{ itemOfGalleryProject.images[0]?.title }}</div>
                             <div v-if="itemOfGalleryProject.images[0]?.credit" >
                                 <template v-if="itemOfGalleryProject.images[0]?.title">&nbsp;| </template>
