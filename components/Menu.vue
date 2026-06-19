@@ -1,5 +1,7 @@
 <template>
     <section class="v-menu"
+             ref="ref_menuContainer"
+             @scroll.passive="handleScroll"
     >
         <div class="v-menu__mobil_nav g-grid-box">
             <nuxt-link href="/about"     >About</nuxt-link>
@@ -93,6 +95,7 @@
 import {type ComputedRef, defineProps} from 'vue'
 import type {IApiListOfProjectsInfo, IApiProjectInfo} from "~/composables/api/projectsInfo";
 import {formatDateFromString, formatDateWithAndStart} from "~/utils/formatDateFromString";
+import {backToCurrentProject} from "~/utils/menuNavigationLogic";
 
 const projectsInfo = useProjectsInfo()
 const projectSlugMouseOverInList = ref('')
@@ -103,6 +106,8 @@ const cursorPosition = ref({
   x: 0,
   y: 0,
 })
+
+const ref_menuContainer: Ref<HTMLElement | null> = ref(null)
 
 const imageElementForHoverProjectInList = useTemplateRef<HTMLImageElement>('imageElementForHoverProjectInList')
 
@@ -157,6 +162,15 @@ function setOverProject(projectOverSlug: string) {
     }, 0)
 
 }
+
+function handleScroll() {
+  if( ! ref_menuContainer.value ) return
+
+  if (ref_menuContainer.value.scrollTop === 0) {
+    backToCurrentProject()
+  }
+}
+
 
 onMounted(() => {
     setClassForLongTextForProjectLineContainer()

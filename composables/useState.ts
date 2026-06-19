@@ -12,13 +12,18 @@ export const useCurrentProjectsInfo = () => {
     return useState('currentProjectsInfo', () => null as IApiProjectInfo | null)
 }
 
-export const useNavigationIsShowingOnBottomOfPage = () => {
-  return useState('navigationIsShowingOnBottomOfPage', () => false)
+export const useNavigationIsShowingOnBottomOfProjectPage = () => {
+  return useState('navigationIsShowingOnBottomOfProjectPage', () => false)
 }
 
 export const useProjectsInfo = () => {
   return useState<IApiListOfProjectsInfo>('projectsInfo', () => {
     return {projects: []}
   })
+}
 
+export const useShowProjectContent = () => {
+  return useState<boolean>('showProjectContent', () => {
+    return true
+  })
 }

@@ -52,10 +52,11 @@
 import {
   useCurrentProjectsInfo,
   useMenuIsOpen,
-  useNavigationIsShowingOnBottomOfPage,
+  useNavigationIsShowingOnBottomOfProjectPage,
   useProjectsInfo
 } from "~/composables/useState";
 import {fetchApiGetProjects} from "~/fetchApi/fetchApiGET";
+import {setMenuStatusInteraction} from "./utils/menuNavigationLogic";
 const projectsInfo = useProjectsInfo()
 
 const pageTransitionDuration = 1_000
@@ -67,7 +68,7 @@ onMounted(async () => {
 useRouter().beforeEach((to, from, next) => {
     useMenuIsOpen().value = false
     useCurrentProjectsInfo().value = null
-    useNavigationIsShowingOnBottomOfPage().value = false
+    setMenuStatusInteraction('navigation')
     next()
 })
 

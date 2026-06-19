@@ -49,7 +49,7 @@
         </svg>
       </div>
 
-        <section class="v-project-slug__wrap" v-if="showContent">
+        <section class="v-project-slug__wrap">
             <div class="g-grid-box"
             >
                 <div class="g-grid-box__col-start--5        g-grid-box__col-end--span-16
@@ -163,11 +163,12 @@
 import {type Ref} from 'vue'
 import type {IProjectContent} from "~/composables/api/projectContentBySlug";
 import {fetchApiGetProjectByUID} from "~/fetchApi/fetchApiGET";
-import {useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
 import AppBlocks from "~/components/AppBlocks.vue";
+import {setMenuStatusInteraction} from '~/utils/menuNavigationLogic'
+import {useShowProjectContent} from "~/composables/useState";
 
 const currentProject: Ref<null | IProjectContent> = ref(null)
-const showContent = ref(true)
+const showContent = useShowProjectContent()
 const coverLoaded = ref(false)
 
 const projectsInfo = useProjectsInfo()
@@ -196,11 +197,16 @@ const nextProject = computed(() => {
   return projectsInfo.value.projects[currentProjectIndex.value + 1]
 })
 
+let hasScrollBackToTop = true
+
 function handleScroll() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-    if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
-        showContent.value = false
-        useNavigationIsShowingOnBottomOfPage().value = true
+    if (maxScroll > 0 && window.scrollY >= maxScroll - 2 && hasScrollBackToTop) {
+      hasScrollBackToTop = false
+      setMenuStatusInteraction('bottomProject')
+    }
+    if( !hasScrollBackToTop ) {
+      if(window.scrollY <= maxScroll - 10) hasScrollBackToTop = true
     }
 }
 

@@ -31,8 +31,8 @@
             <nuxt-link href="/contact"   >Contact</nuxt-link>
 
             <button class="v-app-nav__nav"
-                    v-if="useNavigationIsShowingOnBottomOfPage().value"
-                    @click="useRouter().push('/')"
+                    v-if="useNavigationIsShowingOnBottomOfProjectPage().value"
+                    @click="backToCurrentProject"
             >
                 <img alt="close menu"
                      src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
@@ -61,13 +61,14 @@
 
 
 <script setup lang="ts">
-import {useCurrentProjectsInfo, useMenuIsOpen, useNavigationIsShowingOnBottomOfPage} from "~/composables/useState";
+import {useCurrentProjectsInfo, useMenuIsOpen, useNavigationIsShowingOnBottomOfProjectPage} from "~/composables/useState";
+import {backToCurrentProject} from "~/utils/menuNavigationLogic";
 
 const menuIsOpen = useMenuIsOpen()
 const colorForGallery = useColorForGallery()
 const currentProjectsInfo = useCurrentProjectsInfo()
 
-
+backToCurrentProject()
 
 </script>
 
