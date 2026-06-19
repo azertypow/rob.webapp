@@ -313,6 +313,10 @@ onUnmounted(() => {
         width: 100%;
     }
   }
+
+  .is-full & {
+    object-fit: cover;
+  }
 }
 video.v-project-slug__gallery__image {
   max-height: calc(100vh - 4rem);
