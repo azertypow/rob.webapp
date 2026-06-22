@@ -22,6 +22,7 @@
                                 class="v-menu__list-box__item__wrapper"
                                 :href="`/project/${project.slug}`"
                                 @mouseover="setOverProject(project.slug)"
+                                @click.prevent="() => {if( useRoute().path.replace('/project', '') === '/' + project.slug ) backToCurrentProject()}"
                             >
                                 <div class="g-grid-box v-menu__list-box__item__wrapper"
                                      :class="{
