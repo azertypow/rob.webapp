@@ -266,7 +266,7 @@ onUnmounted(() => {
     &:not(.is-full) {
 
         &:last-child {
-            margin-bottom: 33vh;
+            margin-bottom: 2rem;
         }
     }
 

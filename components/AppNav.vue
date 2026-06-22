@@ -35,7 +35,7 @@
                     @click="backToCurrentProject"
             >
                 <img alt="close menu"
-                     src="../assets/ui/close_FILL0_wght400_GRAD0_opsz24.svg"
+                     :src="useRoute().query.custom ? '/ui/arrow_back_to_project-custom.svg' : '/ui/arrow_back_to_project.svg'"
                 />
             </button>
 
