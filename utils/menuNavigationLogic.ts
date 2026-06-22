@@ -15,7 +15,7 @@ export function setMenuStatusInteraction(menuIsActiveFor: 'bottomProject' | 'nav
 }
 
 export function scrollOnTopOfMenu() {
-  const scrollPosition = document.body.scrollHeight - window.innerHeight / 2
+  const scrollPosition = document.body.scrollHeight - window.innerHeight
   document.documentElement.scroll({
     top: scrollPosition,
     behavior: 'smooth'
