@@ -35,6 +35,8 @@ export interface IApiImage {
     "mediaUrl"?: string,
     "width"?: number,
     "height"?: number,
+    showTitle?: 'true' | 'false',
+    customCarrouselTiming?: number | null,
     "resize"?: {
         "tiny": string,
         "small": string,

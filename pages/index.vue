@@ -243,6 +243,7 @@ function nextGalleryItem() {
     galleryIndex.value++
     if(galleryIndex.value >= allCarouselImages.value.length) galleryIndex.value = 0
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
+    setTimingCarrousel(galleryIndex.value)
 }
 
 function setScreenRatioInfo() {
@@ -256,10 +257,17 @@ function previousGalleryItem() {
     colorForGallery.value = allCarouselImages.value[galleryIndex.value].image.textColor
 }
 
-let galleryAutoPlay_Interval = 6_000
+const defautTiming = 6_000
+let galleryAutoPlay_Interval = defautTiming
 let galleryAutoPLay_autoCounter = 0
 let galleryAutoPlay_counterToChangeTimingInterval = 2
 let autoNext: number | undefined = undefined
+
+function setTimingCarrousel(imageGalleryIndex: number) {
+  const customTiming = allCarouselImages.value[imageGalleryIndex].image.customCarrouselTiming
+    galleryAutoPlay_Interval
+      = customTiming ? customTiming * 1_000 : defautTiming
+}
 
 function startGalleryAuto() {
 
