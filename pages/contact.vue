@@ -15,7 +15,7 @@
                     class="v-contact__content"
                 >
                     <article class="v-contact__content__article g-child-no-margin"
-                             v-html="content?.data?.textcontact"
+                             v-html="obfuscatedTextContact"
                     ></article>
                 </div>
             </div>
@@ -54,9 +54,14 @@ import type {Ref} from "vue";
 import AppBlocks from "~/components/AppBlocks.vue";
 
 const content: Ref<null |IApiContact> = ref(null)
+const obfuscatedTextContact = ref('')
 
 onMounted(async () => {
     content.value = await fetchApiGetContact()
+    if(content?.value?.data?.textcontact) {
+      obfuscatedTextContact.value = content?.value?.data?.textcontact
+      decodeObfuscatedHTML(content?.value?.data?.textcontact, obfuscatedTextContact)
+    }
 })
 
 </script>
