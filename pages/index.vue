@@ -260,7 +260,6 @@ function previousGalleryItem() {
 const defautTiming = 6_000
 let galleryAutoPlay_Interval = defautTiming
 let galleryAutoPLay_autoCounter = 0
-let galleryAutoPlay_counterToChangeTimingInterval = 2
 let autoNext: number | undefined = undefined
 
 function setTimingCarrousel(imageGalleryIndex: number) {
@@ -276,8 +275,6 @@ function startGalleryAuto() {
    autoNext = window.setTimeout(() => {
       nextGalleryItem()
       galleryAutoPLay_autoCounter++
-
-     if (galleryAutoPLay_autoCounter > galleryAutoPlay_counterToChangeTimingInterval) galleryAutoPlay_Interval = 6_000
 
      startGalleryAuto()
   }, galleryAutoPlay_Interval)
